@@ -176,7 +176,8 @@ var App = function() {
             }
 
         },
-        themeToggle: function (layoutName) {
+        // Begin Theme Toggle
+        /**themeToggle: function (layoutName) {
 
             var togglethemeEl = document.querySelector('.theme-toggle');
             var getBodyEl = document.body;
@@ -240,7 +241,8 @@ var App = function() {
                 // localStorage.clear()
             })
 
-        }
+        }**/
+        // End Theme Toggle
     }
 
     var inBuiltfunctionality = {
@@ -440,7 +442,7 @@ var App = function() {
         init: function(Layout) {
             toggleFunction.overlay();
             toggleFunction.search();
-            toggleFunction.themeToggle(Layout);
+            // toggleFunction.themeToggle(Layout);
 
             /*
                 Desktop Resoltion fn
