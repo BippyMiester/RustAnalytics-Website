@@ -59,4 +59,8 @@ class Server extends Model
     public function placedstructuresdata() {
         return $this->hasMany(ServerPlacedStructuresData::class);
     }
+
+    public function placeddeployablesdata() {
+        return $this->hasMany(ServerPlacedDeployablesData::class);
+    }
 }

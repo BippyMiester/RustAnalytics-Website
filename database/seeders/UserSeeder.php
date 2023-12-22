@@ -10,6 +10,7 @@ use App\Models\ServerData;
 use App\Models\ServerDestroyedBuildingsData;
 use App\Models\ServerDestroyedContainersData;
 use App\Models\ServerKillsData;
+use App\Models\ServerPlacedDeployablesData;
 use App\Models\ServerPlacedStructuresData;
 use App\Models\ServerPlayerData;
 use App\Models\ServerPlayerDeathData;
@@ -96,6 +97,12 @@ class UserSeeder extends Seeder
                         ServerPlacedStructuresData::factory()
                             ->count(rand(10,20)),
                         'placedstructuresdata'
+                    )
+                    // Place some deployables down
+                    ->has(
+                        ServerPlacedDeployablesData::factory()
+                            ->count(rand(10,20)),
+                        'placeddeployablesdata'
                     )
             )
             ->create();
