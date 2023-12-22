@@ -6,12 +6,12 @@
         <div class="navbar-nav theme-brand flex-row  text-center">
             <div class="nav-logo">
                 <div class="nav-item theme-logo">
-                    <a href="./index.html">
-                        <img src="https://dummyimage.com/50x50/000/fff" class="navbar-logo" alt="logo">
+                    <a href="{{ route('index') }}">
+                        <img src="{{ asset('imgs/logo.png') }}" class="navbar-logo" alt="logo">
                     </a>
                 </div>
                 <div class="nav-item theme-text">
-                    <a href="./index.html" class="nav-link"> CORK </a>
+                    <a href="{{ route('index') }}" class="nav-link"> RSM </a>
                 </div>
             </div>
             <div class="nav-item sidebar-toggle">
@@ -20,20 +20,11 @@
                 </div>
             </div>
         </div>
-        <div class="profile-info">
-            <div class="user-info">
-                <div class="profile-img">
-                    <img src="{{ asset('imgs/placeholders/profile-30.png') }}" alt="avatar">
-                </div>
-                <div class="profile-content">
-                    <h6 class="">Shaun Park</h6>
-                    <p class="">Project Leader</p>
-                </div>
-            </div>
-        </div>
+
 
         <div class="shadow-bottom"></div>
         <ul class="list-unstyled menu-categories" id="accordionExample">
+            <!-- Dashboard Links -->
             <li class="menu active">
                 <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                     <div class="">
@@ -46,19 +37,20 @@
                 </a>
                 <ul class="collapse submenu list-unstyled show" id="dashboard" data-bs-parent="#accordionExample">
                     <li class="active">
-                        <a href="./index.html"> Analytics </a>
+                        <a href="{{ route('index') }}"> Analytics </a>
                     </li>
                     <li>
                         <a href="./index2.html"> Sales </a>
                     </li>
                 </ul>
             </li>
+            <!-- End Dashboard Links -->
 
             <li class="menu menu-heading">
                 <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>APPLICATIONS</span></div>
             </li>
 
-            <li class="menu">
+            <li class="menu active">
                 <a href="./app-calendar.html" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
