@@ -11,6 +11,7 @@ use App\Models\ServerDestroyedBuildingsData;
 use App\Models\ServerDestroyedContainersData;
 use App\Models\ServerPlayerData;
 use App\Models\ServerPlayerDeathData;
+use App\Models\ServerPlayerGatherData;
 use App\Models\ServerWeaponFireData;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -75,6 +76,12 @@ class UserSeeder extends Seeder
                         ServerWeaponFireData::factory()
                             ->count(rand(10,20)),
                             'weaponfiredata'
+                    )
+                    // All that shooting and stuff drained out resources
+                    ->has(
+                        ServerPlayerGatherData::factory()
+                            ->count(rand(10,20)),
+                            'playergatherdata'
                     )
             )
             ->create();

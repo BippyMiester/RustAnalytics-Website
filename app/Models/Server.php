@@ -47,4 +47,8 @@ class Server extends Model
     public function weaponfiredata() {
         return $this->hasMany(ServerWeaponFireData::class);
     }
+
+    public function playergatherdata() {
+        return $this->hasMany(ServerPlayerGatherData::class);
+    }
 }
