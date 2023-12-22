@@ -31,4 +31,8 @@ class Server extends Model
     public function craftingdata() {
         return $this->hasMany(ServerCraftingData::class);
     }
+
+    public function playerdeathdata() {
+        return $this->hasMany(ServerPlayerDeathData::class);
+    }
 }

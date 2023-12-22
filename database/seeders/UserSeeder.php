@@ -8,6 +8,7 @@ use App\Models\ServerAnimalKillData;
 use App\Models\ServerCraftingData;
 use App\Models\ServerData;
 use App\Models\ServerPlayerData;
+use App\Models\ServerPlayerDeathData;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -47,6 +48,12 @@ class UserSeeder extends Seeder
                         ServerCraftingData::factory()
                             ->count(rand(10,25)),
                         'craftingdata'
+                    )
+                    // Have them die a few times for shits and giggles
+                    ->has(
+                        ServerPlayerDeathData::factory()
+                            ->count(rand(10,25)),
+                            'playerdeathdata'
                     )
             )
             ->create();
