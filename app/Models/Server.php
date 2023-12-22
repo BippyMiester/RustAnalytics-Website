@@ -35,4 +35,8 @@ class Server extends Model
     public function playerdeathdata() {
         return $this->hasMany(ServerPlayerDeathData::class);
     }
+
+    public function destroyedbuildingsdata() {
+        return $this->hasMany(ServerDestroyedBuildingsData::class);
+    }
 }

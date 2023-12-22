@@ -7,6 +7,7 @@ use App\Models\Server;
 use App\Models\ServerAnimalKillData;
 use App\Models\ServerCraftingData;
 use App\Models\ServerData;
+use App\Models\ServerDestroyedBuildingsData;
 use App\Models\ServerPlayerData;
 use App\Models\ServerPlayerDeathData;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -54,6 +55,12 @@ class UserSeeder extends Seeder
                         ServerPlayerDeathData::factory()
                             ->count(rand(10,25)),
                             'playerdeathdata'
+                    )
+                    // Let em blow some shit up
+                    ->has(
+                        ServerDestroyedBuildingsData::factory()
+                            ->count(rand(5,15)),
+                        'destroyedbuildingsdata'
                     )
             )
             ->create();
