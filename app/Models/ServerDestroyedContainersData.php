@@ -14,4 +14,8 @@ class ServerDestroyedContainersData extends Model
     public function server() {
         return $this->belongsTo(Server::class);
     }
+
+    public function player() {
+        return $this->belongsTo(ServerPlayerData::class,'steam_id', 'steam_id');
+    }
 }
