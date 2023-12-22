@@ -27,4 +27,8 @@ class Server extends Model
     public function animalkilldata() {
         return $this->hasMany(ServerAnimalKillData::class);
     }
+
+    public function craftingdata() {
+        return $this->hasMany(ServerCraftingData::class);
+    }
 }
