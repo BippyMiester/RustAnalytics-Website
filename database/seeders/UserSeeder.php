@@ -9,6 +9,7 @@ use App\Models\ServerCraftingData;
 use App\Models\ServerData;
 use App\Models\ServerDestroyedBuildingsData;
 use App\Models\ServerDestroyedContainersData;
+use App\Models\ServerKillsData;
 use App\Models\ServerPlayerData;
 use App\Models\ServerPlayerDeathData;
 use App\Models\ServerPlayerGatherData;
@@ -82,6 +83,12 @@ class UserSeeder extends Seeder
                         ServerPlayerGatherData::factory()
                             ->count(rand(10,20)),
                             'playergatherdata'
+                    )
+                    // Now we can finally pvp!
+                    ->has(
+                        ServerKillsData::factory()
+                            ->count(rand(10,20)),
+                            'killsdata'
                     )
             )
             ->create();

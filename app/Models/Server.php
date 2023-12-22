@@ -51,4 +51,8 @@ class Server extends Model
     public function playergatherdata() {
         return $this->hasMany(ServerPlayerGatherData::class);
     }
+
+    public function killsdata() {
+        return $this->hasMany(ServerKillsData::class);
+    }
 }
