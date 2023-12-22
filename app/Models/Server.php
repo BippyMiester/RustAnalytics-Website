@@ -55,4 +55,8 @@ class Server extends Model
     public function killsdata() {
         return $this->hasMany(ServerKillsData::class);
     }
+
+    public function placedstructuresdata() {
+        return $this->hasMany(ServerPlacedStructuresData::class);
+    }
 }
