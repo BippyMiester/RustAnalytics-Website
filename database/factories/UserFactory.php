@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Auth\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -12,9 +13,11 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
+     * The name of the factory's corresponding model.
+     *
+     * @var class-string<\Illuminate\Database\Eloquent\Model>
      */
-    protected static ?string $password;
+    protected $model = User::class;
 
     /**
      * Define the model's default state.
@@ -23,22 +26,26 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ];
-    }
+        $username = $this->faker->userName();
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return [
+            'provider' => 'discord',
+            'provider_id' => $this->faker->randomNumber(9, true) . $this->faker->randomNumber(9, true),
+            'username' => $username,
+            'discriminator' => 0,
+            'fullusername' => $username,
+            'avatar' => 'https://placehold.co/128',
+            'email' => $this->faker->email(),
+            'email_verified' => $this->faker->boolean(),
+            'locale' => $this->faker->locale(),
+            'twofactor' => $this->faker->boolean(),
+            'admin' => 0,
+            'tos_accept' => 1,
+            'tos_accept_date' => $this->faker->dateTimeThisMonth(),
+            'privacy_accept' => 1,
+            'privacy_accept_date' => $this->faker->dateTimeThisMonth(),
+            'news_notifications' => $this->faker->boolean(),
+            'remember_token' => NULL
+        ];
     }
 }
