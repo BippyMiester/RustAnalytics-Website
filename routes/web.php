@@ -29,5 +29,4 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-
 });
