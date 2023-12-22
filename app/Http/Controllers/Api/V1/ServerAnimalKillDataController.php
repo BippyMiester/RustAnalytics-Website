@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\ApiTest;
 use App\Models\Server;
 use Illuminate\Http\Request;
 
-class ServerPlayerDataController extends Controller
+class ServerAnimalKillDataController extends Controller
 {
     public function checkServerAPIToken(Request $request) {
         $server = Server::where('api_key', $request->api_key)->first();
@@ -20,13 +19,5 @@ class ServerPlayerDataController extends Controller
 
     private function sendResponseCode(int $code, string $msg) {
         return response()->json(['message' => $msg], $code);
-    }
-
-    public function create(Request $request) {
-        $data = $request->data;
-        $test = new ApiTest;
-        $test->data = $data;
-        $test->save();
-        print($data);
     }
 }

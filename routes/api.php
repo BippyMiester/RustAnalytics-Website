@@ -1,16 +1,16 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ServerAnimalKillDataController;
+use App\Http\Controllers\Api\V1\ServerCraftingDataController;
+use App\Http\Controllers\Api\V1\ServerDestroyedBuildingsDataController;
+use App\Http\Controllers\Api\V1\ServerDestroyedContainersDataController;
+use App\Http\Controllers\Api\V1\ServerKillsDataController;
+use App\Http\Controllers\Api\V1\ServerPlacedDeployablesDataController;
+use App\Http\Controllers\Api\V1\ServerPlacedStructuresDataController;
 use App\Http\Controllers\Api\V1\ServerPlayerDataController;
-use App\Models\ServerAnimalKillData;
-use App\Models\ServerCraftingData;
-use App\Models\ServerDestroyedBuildingsData;
-use App\Models\ServerDestroyedContainersData;
-use App\Models\ServerKillsData;
-use App\Models\ServerPlacedDeployablesData;
-use App\Models\ServerPlacedStructuresData;
-use App\Models\ServerPlayerDeathData;
-use App\Models\ServerPlayerGatherData;
-use App\Models\ServerWeaponFireData;
+use App\Http\Controllers\Api\V1\ServerPlayerDeathDataController;
+use App\Http\Controllers\Api\V1\ServerPlayerGatherDataController;
+use App\Http\Controllers\Api\V1\ServerWeaponFireDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,37 +34,37 @@ Route::prefix('v1')->group(function () {
     Route::prefix('server')->group(function () {
         // Animal Kill Data
         Route::prefix('animalkills')->group(function () {
-            Route::post('create', [ServerAnimalKillData::class, 'create']);
+            Route::post('create', [ServerAnimalKillDataController::class, 'create']);
         });
 
         // Crafting
         Route::prefix('crafting')->group(function () {
-            Route::post('create', [ServerCraftingData::class, 'create']);
+            Route::post('create', [ServerCraftingDataController::class, 'create']);
         });
 
         // Destroyed Buildings
         Route::prefix('destroyedbuildings')->group(function () {
-            Route::post('create', [ServerDestroyedBuildingsData::class, 'create']);
+            Route::post('create', [ServerDestroyedBuildingsDataController::class, 'create']);
         });
 
         // Destroyed Containers
         Route::prefix('destroyedcontainers')->group(function () {
-            Route::post('create', [ServerDestroyedContainersData::class, 'create']);
+            Route::post('create', [ServerDestroyedContainersDataController::class, 'create']);
         });
 
         // Kills
         Route::prefix('kills')->group(function () {
-            Route::post('create', [ServerKillsData::class, 'create']);
+            Route::post('create', [ServerKillsDataController::class, 'create']);
         });
 
         // Placed Deployables
         Route::prefix('placeddeployables')->group(function () {
-            Route::post('create', [ServerPlacedDeployablesData::class, 'create']);
+            Route::post('create', [ServerPlacedDeployablesDataController::class, 'create']);
         });
 
         // Placed Structures
         Route::prefix('placedstructures')->group(function () {
-            Route::post('create', [ServerPlacedStructuresData::class, 'create']);
+            Route::post('create', [ServerPlacedStructuresDataController::class, 'create']);
         });
 
         // Player Data
@@ -74,17 +74,17 @@ Route::prefix('v1')->group(function () {
 
         // Deaths
         Route::prefix('deaths')->group(function () {
-            Route::post('create', [ServerPlayerDeathData::class, 'create']);
+            Route::post('create', [ServerPlayerDeathDataController::class, 'create']);
         });
 
         // Gathering
         Route::prefix('gathering')->group(function () {
-            Route::post('create', [ServerPlayerGatherData::class, 'create']);
+            Route::post('create', [ServerPlayerGatherDataController::class, 'create']);
         });
 
         // Weapon Fire
         Route::prefix('weaponfire')->group(function () {
-            Route::post('create', [ServerWeaponFireData::class, 'create']);
+            Route::post('create', [ServerWeaponFireDataController::class, 'create']);
         });
     });
 });
