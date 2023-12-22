@@ -39,4 +39,8 @@ class Server extends Model
     public function destroyedbuildingsdata() {
         return $this->hasMany(ServerDestroyedBuildingsData::class);
     }
+
+    public function destroyedcontainersdata() {
+        return $this->hasMany(ServerDestroyedContainersData::class);
+    }
 }
