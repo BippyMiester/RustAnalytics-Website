@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\ServerDestroyedContainersDataController;
 use App\Http\Controllers\Api\V1\ServerKillsDataController;
 use App\Http\Controllers\Api\V1\ServerPlacedDeployablesDataController;
 use App\Http\Controllers\Api\V1\ServerPlacedStructuresDataController;
+use App\Http\Controllers\Api\V1\ServerPlayerConnectionDataController;
 use App\Http\Controllers\Api\V1\ServerPlayerDataController;
 use App\Http\Controllers\Api\V1\ServerPlayerDeathDataController;
 use App\Http\Controllers\Api\V1\ServerPlayerGatherDataController;
@@ -69,7 +70,12 @@ Route::prefix('v1')->group(function () {
 
         // Player Data
         Route::prefix('players')->group(function () {
-            Route::post('create', [ServerPlayerDataController::class, 'create']);
+            Route::prefix('data')->group(function () {
+
+            });
+            Route::prefix('connection')->group(function () {
+                Route::post('create', [ServerPlayerConnectionDataController::class, 'create']);
+            });
         });
 
         // Deaths

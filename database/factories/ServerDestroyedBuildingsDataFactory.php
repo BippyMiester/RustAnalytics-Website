@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Server;
+use App\Models\ServerPlayerConnectionData;
 use App\Models\ServerPlayerData;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,11 +19,11 @@ class ServerDestroyedBuildingsDataFactory extends Factory
      */
     public function definition(): array
     {
-        $randomPlayer = ServerPlayerData::inRandomOrder()
+        $randomPlayer = ServerPlayerConnectionData::inRandomOrder()
             ->select('username', 'steam_id')
             ->first();
 
-        $ownerPlayer = ServerPlayerData::inRandomOrder()
+        $ownerPlayer = ServerPlayerConnectionData::inRandomOrder()
             ->select('username', 'steam_id')
             ->first();
 

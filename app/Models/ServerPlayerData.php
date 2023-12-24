@@ -14,6 +14,10 @@ class ServerPlayerData extends Model
     }
 
     // Link to all server data models that have to do with player data
+    public function playerconnectiondata() {
+        return $this->belongsTo(ServerPlayerConnectionData::class,'steam_id', 'steam_id');
+    }
+
     public function animalkillsdata() {
         return $this->hasMany(ServerAnimalKillData::class,'steam_id', 'steam_id');
     }

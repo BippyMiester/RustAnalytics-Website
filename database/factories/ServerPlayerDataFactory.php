@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Server;
+use App\Models\ServerPlayerConnectionData;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,15 +18,17 @@ class ServerPlayerDataFactory extends Factory
      */
     public function definition(): array
     {
+        $randomPlayer = ServerPlayerConnectionData::inRandomOrder()
+            ->select('steam_id')
+            ->first();
+
         return [
             'server_id' => Server::factory(),
             'frame_rate' => $this->faker->numberBetween(16, 240),
             'packet_loss' => $this->faker->numberBetween(1, 1000),
             'online_seconds' => $this->faker->numberBetween(60, 64000),
             'afk_seconds' => $this->faker->numberBetween(60, 64000),
-            'steam_id' => $this->faker->randomNumber(8, true) . $this->faker->randomNumber(8, true),
-            'ip_address' => $this->faker->ipv4(),
-            'username' => $this->faker->userName()
+            'steam_id' => $randomPlayer->steam_id
         ];
     }
 }

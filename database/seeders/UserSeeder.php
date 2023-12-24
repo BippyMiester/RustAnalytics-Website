@@ -12,6 +12,7 @@ use App\Models\ServerDestroyedContainersData;
 use App\Models\ServerKillsData;
 use App\Models\ServerPlacedDeployablesData;
 use App\Models\ServerPlacedStructuresData;
+use App\Models\ServerPlayerConnectionData;
 use App\Models\ServerPlayerData;
 use App\Models\ServerPlayerDeathData;
 use App\Models\ServerPlayerGatherData;
@@ -40,9 +41,15 @@ class UserSeeder extends Seeder
                     )
                     ->has(
                         // Put some players in the server
-                        ServerPlayerData::factory()
-                            ->count(rand(2,25)),
-                        'playerdata'
+                        ServerPlayerConnectionData::factory()
+                            ->count(rand(50,60))
+                            ->has(
+                            // Put some player data in
+                                ServerPlayerData::factory()
+                                    ->count(rand(2,25)),
+                                'playerdata'
+                            ),
+                        'playerconnectiondata'
                     )
                     ->has(
                         // Have em kill some animals

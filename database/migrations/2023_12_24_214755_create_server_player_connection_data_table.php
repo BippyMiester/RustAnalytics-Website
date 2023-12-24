@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('server_player_data', function (Blueprint $table) {
+        Schema::create('server_player_connection_data', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('server_id');
+            $table->string('ip_address');
+            $table->string('username');
             $table->unsignedBigInteger('steam_id');
-            $table->unsignedBigInteger('frame_rate');
-            $table->unsignedBigInteger('packet_loss');
-            $table->unsignedBigInteger('online_seconds');
-            $table->unsignedBigInteger('afk_seconds');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('server_player_data');
+        Schema::dropIfExists('server_player_connection_data');
     }
 };

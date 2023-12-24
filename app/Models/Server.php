@@ -24,6 +24,10 @@ class Server extends Model
         return $this->hasMany(ServerPlayerData::class);
     }
 
+    public function playerconnectiondata() {
+        return $this->hasMany(ServerPlayerConnectionData::class);
+    }
+
     public function animalkilldata() {
         return $this->hasMany(ServerAnimalKillData::class);
     }
