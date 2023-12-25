@@ -21,7 +21,9 @@ class ServerPlayerConnectionDataFactory extends Factory
             'server_id' => Server::factory(),
             'steam_id' => $this->faker->randomNumber(8, true) . $this->faker->randomNumber(8, true),
             'ip_address' => $this->faker->ipv4(),
-            'username' => $this->faker->userName()
+            'username' => $this->faker->userName(),
+            'online_seconds' => $this->faker->numberBetween(60, 64000),
+            'afk_seconds' => $this->faker->numberBetween(60, 64000),
         ];
     }
 }

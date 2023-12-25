@@ -29,86 +29,86 @@ class UserSeeder extends Seeder
     {
         // Create a user
         User::factory()
-            ->count(rand(5,10))
+            ->count(25)
             ->has(
                 // Give the user some servers
                 Server::factory()
-                    ->count(5)
+                    ->count(1)
                     ->has(
                         // Populate some server data
                         ServerData::factory()
-                            ->count(rand(5,20))
+                            ->count(1)
                     )
                     ->has(
                         // Put some players in the server
                         ServerPlayerConnectionData::factory()
-                            ->count(rand(50,60))
-                            ->has(
-                            // Put some player data in
-                                ServerPlayerData::factory()
-                                    ->count(rand(2,25)),
-                                'playerdata'
-                            ),
+                            ->count(5),
                         'playerconnectiondata'
+                    )
+                    ->has(
+                        // Put some player data in
+                        ServerPlayerData::factory()
+                            ->count(5),
+                        'playerdata'
                     )
                     ->has(
                         // Have em kill some animals
                         ServerAnimalKillData::factory()
-                            ->count(rand(5,20)),
+                            ->count(10),
                         'animalkilldata'
                     )
                     // Have the craft some things
                     ->has(
                         ServerCraftingData::factory()
-                            ->count(rand(10,25)),
+                            ->count(25),
                         'craftingdata'
                     )
                     // Have them die a few times for shits and giggles
                     ->has(
                         ServerPlayerDeathData::factory()
-                            ->count(rand(10,25)),
+                            ->count(35),
                             'playerdeathdata'
                     )
                     // Let em blow some shit up
                     ->has(
                         ServerDestroyedBuildingsData::factory()
-                            ->count(rand(5,15)),
+                            ->count(100),
                         'destroyedbuildingsdata'
                     )
                     // Maybe destroy some boxes?
                     ->has(
                         ServerDestroyedContainersData::factory()
-                            ->count(rand(5,15)),
+                            ->count(50),
                         'destroyedcontainersdata'
                     )
                     // This whole time and they haven't fired their weapon? WTF!
                     ->has(
                         ServerWeaponFireData::factory()
-                            ->count(rand(10,20)),
+                            ->count(500),
                             'weaponfiredata'
                     )
                     // All that shooting and stuff drained out resources
                     ->has(
                         ServerPlayerGatherData::factory()
-                            ->count(rand(10,20)),
+                            ->count(250),
                             'playergatherdata'
                     )
                     // Now we can finally pvp!
                     ->has(
                         ServerKillsData::factory()
-                            ->count(rand(10,20)),
+                            ->count(50),
                             'killsdata'
                     )
                     // Lets build some stuff
                     ->has(
                         ServerPlacedStructuresData::factory()
-                            ->count(rand(10,20)),
+                            ->count(150),
                         'placedstructuresdata'
                     )
                     // Place some deployables down
                     ->has(
                         ServerPlacedDeployablesData::factory()
-                            ->count(rand(10,20)),
+                            ->count(75),
                         'placeddeployablesdata'
                     )
             )

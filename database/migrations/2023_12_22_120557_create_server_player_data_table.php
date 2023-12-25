@@ -17,8 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('steam_id');
             $table->unsignedBigInteger('frame_rate');
             $table->unsignedBigInteger('packet_loss');
-            $table->unsignedBigInteger('online_seconds');
-            $table->unsignedBigInteger('afk_seconds');
             $table->timestamps();
         });
     }

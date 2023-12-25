@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('ip_address');
             $table->string('username');
             $table->unsignedBigInteger('steam_id');
+            $table->unsignedBigInteger('online_seconds');
+            $table->unsignedBigInteger('afk_seconds');
             $table->timestamps();
         });
     }
