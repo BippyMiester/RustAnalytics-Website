@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Api\V1\ServerAnimalKillDataController;
-use App\Http\Controllers\Api\V1\ServerCraftingDataController;
-use App\Http\Controllers\Api\V1\ServerDestroyedBuildingsDataController;
-use App\Http\Controllers\Api\V1\ServerDestroyedContainersDataController;
-use App\Http\Controllers\Api\V1\ServerKillsDataController;
-use App\Http\Controllers\Api\V1\ServerPlacedDeployablesDataController;
-use App\Http\Controllers\Api\V1\ServerPlacedStructuresDataController;
-use App\Http\Controllers\Api\V1\ServerPlayerConnectionDataController;
-use App\Http\Controllers\Api\V1\ServerPlayerDataController;
-use App\Http\Controllers\Api\V1\ServerPlayerDeathDataController;
-use App\Http\Controllers\Api\V1\ServerPlayerGatherDataController;
-use App\Http\Controllers\Api\V1\ServerWeaponFireDataController;
+use App\Http\Controllers\Api\V1\AnimalKillsController;
+use App\Http\Controllers\Api\V1\PlayerCraftingController;
+use App\Http\Controllers\Api\V1\DestroyedBuildingsController;
+use App\Http\Controllers\Api\V1\DestroyedContainersController;
+use App\Http\Controllers\Api\V1\PlayerKillsController;
+use App\Http\Controllers\Api\V1\PlacedDeployablesController;
+use App\Http\Controllers\Api\V1\PlacedStructuresController;
+use App\Http\Controllers\Api\V1\PlayerConnectionsController;
+use App\Http\Controllers\Api\V1\PlayerDataController;
+use App\Http\Controllers\Api\V1\PlayerDeathsController;
+use App\Http\Controllers\Api\V1\PlayerGatherController;
+use App\Http\Controllers\Api\V1\PlayerTimeController;
+use App\Http\Controllers\Api\V1\WeaponFireController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,62 +36,65 @@ Route::prefix('v1')->group(function () {
     Route::prefix('server')->group(function () {
         // Animal Kill Data
         Route::prefix('animalkills')->group(function () {
-            Route::post('create', [ServerAnimalKillDataController::class, 'create']);
+            Route::post('create', [AnimalKillsController::class, 'create']);
         });
 
         // Crafting
         Route::prefix('crafting')->group(function () {
-            Route::post('create', [ServerCraftingDataController::class, 'create']);
+            Route::post('create', [PlayerCraftingController::class, 'create']);
         });
 
         // Destroyed Buildings
         Route::prefix('destroyedbuildings')->group(function () {
-            Route::post('create', [ServerDestroyedBuildingsDataController::class, 'create']);
+            Route::post('create', [DestroyedBuildingsController::class, 'create']);
         });
 
         // Destroyed Containers
         Route::prefix('destroyedcontainers')->group(function () {
-            Route::post('create', [ServerDestroyedContainersDataController::class, 'create']);
+            Route::post('create', [DestroyedContainersController::class, 'create']);
         });
 
         // Kills
         Route::prefix('kills')->group(function () {
-            Route::post('create', [ServerKillsDataController::class, 'create']);
+            Route::post('create', [PlayerKillsController::class, 'create']);
         });
 
         // Placed Deployables
         Route::prefix('placeddeployables')->group(function () {
-            Route::post('create', [ServerPlacedDeployablesDataController::class, 'create']);
+            Route::post('create', [PlacedDeployablesController::class, 'create']);
         });
 
         // Placed Structures
         Route::prefix('placedstructures')->group(function () {
-            Route::post('create', [ServerPlacedStructuresDataController::class, 'create']);
+            Route::post('create', [PlacedStructuresController::class, 'create']);
         });
 
         // Player Data
         Route::prefix('players')->group(function () {
             Route::prefix('data')->group(function () {
-
+                Route::post('create', [PlayerDataController::class, 'create']);
             });
             Route::prefix('connection')->group(function () {
-                Route::post('create', [ServerPlayerConnectionDataController::class, 'create']);
+                Route::post('create', [PlayerConnectionsController::class, 'create']);
+            });
+            Route::prefix('time')->group(function () {
+                Route::post('create', [PlayerTimeController::class, 'create']);
             });
         });
 
         // Deaths
         Route::prefix('deaths')->group(function () {
-            Route::post('create', [ServerPlayerDeathDataController::class, 'create']);
+            Route::post('create', [PlayerDeathsController::class, 'create']);
         });
 
         // Gathering
         Route::prefix('gathering')->group(function () {
-            Route::post('create', [ServerPlayerGatherDataController::class, 'create']);
+            Route::post('create', [PlayerGatherController::class, 'create']);
         });
 
         // Weapon Fire
         Route::prefix('weaponfire')->group(function () {
-            Route::post('create', [ServerWeaponFireDataController::class, 'create']);
+            Route::post('create', [WeaponFireController::class, 'create']);
         });
     });
 });

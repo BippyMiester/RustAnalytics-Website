@@ -17,54 +17,58 @@ class Server extends Model
     }
 
     public function serverdata() {
-        return $this->hasMany(ServerData::class);
+        return $this->hasMany(ServerData::class, 'server_id', 'id');
     }
 
     public function playerdata() {
-        return $this->hasMany(ServerPlayerData::class);
+        return $this->hasMany(PlayerData::class, 'server_id', 'id');
     }
 
-    public function playerconnectiondata() {
-        return $this->hasMany(ServerPlayerConnectionData::class);
+    public function playerconnections() {
+        return $this->hasMany(PlayerConnections::class, 'server_id', 'id');
     }
 
-    public function animalkilldata() {
-        return $this->hasMany(ServerAnimalKillData::class);
+    public function playertime() {
+        return $this->hasMany(PlayerTime::class, 'server_id', 'id');
     }
 
-    public function craftingdata() {
-        return $this->hasMany(ServerCraftingData::class);
+    public function animalkills() {
+        return $this->hasMany(AnimalKills::class, 'server_id', 'id');
     }
 
-    public function playerdeathdata() {
-        return $this->hasMany(ServerPlayerDeathData::class);
+    public function playercrafting() {
+        return $this->hasMany(PlayerCrafting::class, 'server_id', 'id');
     }
 
-    public function destroyedbuildingsdata() {
-        return $this->hasMany(ServerDestroyedBuildingsData::class);
+    public function playerdeaths() {
+        return $this->hasMany(PlayerDeaths::class, 'server_id', 'id');
     }
 
-    public function destroyedcontainersdata() {
-        return $this->hasMany(ServerDestroyedContainersData::class);
+    public function destroyedbuildings() {
+        return $this->hasMany(DestroyedBuildings::class, 'server_id', 'id');
     }
 
-    public function weaponfiredata() {
-        return $this->hasMany(ServerWeaponFireData::class);
+    public function destroyedcontainers() {
+        return $this->hasMany(DestroyedContainers::class, 'server_id', 'id');
     }
 
-    public function playergatherdata() {
-        return $this->hasMany(ServerPlayerGatherData::class);
+    public function weaponfire() {
+        return $this->hasMany(WeaponFire::class, 'server_id', 'id');
     }
 
-    public function killsdata() {
-        return $this->hasMany(ServerKillsData::class);
+    public function playergather() {
+        return $this->hasMany(PlayerGather::class, 'server_id', 'id');
     }
 
-    public function placedstructuresdata() {
-        return $this->hasMany(ServerPlacedStructuresData::class);
+    public function playerkills() {
+        return $this->hasMany(PlayerKills::class, 'server_id', 'id');
     }
 
-    public function placeddeployablesdata() {
-        return $this->hasMany(ServerPlacedDeployablesData::class);
+    public function placedstructures() {
+        return $this->hasMany(PlacedStructures::class, 'server_id', 'id');
+    }
+
+    public function placeddeployables() {
+        return $this->hasMany(PlacedDeployables::class, 'server_id', 'id');
     }
 }

@@ -2,21 +2,25 @@
 
 namespace Database\Seeders;
 
+use App\Models\AnimalKills;
 use App\Models\Auth\User;
+use App\Models\DestroyedBuildings;
+use App\Models\PlayerCrafting;
+use App\Models\PlayerTime;
 use App\Models\Server;
 use App\Models\ServerAnimalKillData;
 use App\Models\ServerCraftingData;
 use App\Models\ServerData;
 use App\Models\ServerDestroyedBuildingsData;
-use App\Models\ServerDestroyedContainersData;
-use App\Models\ServerKillsData;
-use App\Models\ServerPlacedDeployablesData;
-use App\Models\ServerPlacedStructuresData;
-use App\Models\ServerPlayerConnectionData;
-use App\Models\ServerPlayerData;
-use App\Models\ServerPlayerDeathData;
-use App\Models\ServerPlayerGatherData;
-use App\Models\ServerWeaponFireData;
+use App\Models\DestroyedContainers;
+use App\Models\PlayerKills;
+use App\Models\PlacedDeployables;
+use App\Models\PlacedStructures;
+use App\Models\PlayerConnections;
+use App\Models\PlayerData;
+use App\Models\PlayerDeaths;
+use App\Models\PlayerGather;
+use App\Models\WeaponFire;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -41,75 +45,81 @@ class UserSeeder extends Seeder
                     )
                     ->has(
                         // Put some players in the server
-                        ServerPlayerConnectionData::factory()
-                            ->count(5),
-                        'playerconnectiondata'
+                        PlayerConnections::factory()
+                            ->count(5)
+                            ->has(
+                            // Put some player data in
+                                PlayerTime::factory()
+                                    ->count(5),
+                                'playertime'
+                            ),
+                        'playerconnections'
                     )
                     ->has(
                         // Put some player data in
-                        ServerPlayerData::factory()
+                        PlayerData::factory()
                             ->count(5),
                         'playerdata'
                     )
                     ->has(
                         // Have em kill some animals
-                        ServerAnimalKillData::factory()
+                        AnimalKills::factory()
                             ->count(10),
-                        'animalkilldata'
+                        'animalkills'
                     )
                     // Have the craft some things
                     ->has(
-                        ServerCraftingData::factory()
+                        PlayerCrafting::factory()
                             ->count(25),
-                        'craftingdata'
+                        'playercrafting'
                     )
                     // Have them die a few times for shits and giggles
                     ->has(
-                        ServerPlayerDeathData::factory()
+                        PlayerDeaths::factory()
                             ->count(35),
-                            'playerdeathdata'
+                            'playerdeaths'
                     )
                     // Let em blow some shit up
                     ->has(
-                        ServerDestroyedBuildingsData::factory()
+                        DestroyedBuildings::factory()
                             ->count(100),
-                        'destroyedbuildingsdata'
+                        'destroyedbuildings'
                     )
                     // Maybe destroy some boxes?
                     ->has(
-                        ServerDestroyedContainersData::factory()
+                        DestroyedContainers::factory()
                             ->count(50),
-                        'destroyedcontainersdata'
+                        'destroyedcontainers'
                     )
                     // This whole time and they haven't fired their weapon? WTF!
                     ->has(
-                        ServerWeaponFireData::factory()
+                        WeaponFire::factory()
                             ->count(500),
-                            'weaponfiredata'
+                            'weaponfire'
                     )
                     // All that shooting and stuff drained out resources
                     ->has(
-                        ServerPlayerGatherData::factory()
+                        PlayerGather::factory()
                             ->count(250),
-                            'playergatherdata'
+                            'playergather'
                     )
                     // Now we can finally pvp!
                     ->has(
-                        ServerKillsData::factory()
+                        PlayerKills::factory()
                             ->count(50),
-                            'killsdata'
+                            'playerkills'
                     )
                     // Lets build some stuff
                     ->has(
-                        ServerPlacedStructuresData::factory()
+                        PlacedStructures::factory()
                             ->count(150),
-                        'placedstructuresdata'
+                        'placedstructures'
                     )
                     // Place some deployables down
                     ->has(
-                        ServerPlacedDeployablesData::factory()
+                        PlacedDeployables::factory()
                             ->count(75),
-                        'placeddeployablesdata'
+                        'placeddeployables'
                     )
             )
             ->create();
