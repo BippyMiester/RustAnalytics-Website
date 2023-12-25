@@ -10,7 +10,7 @@ class ServerPlayerData extends Model
     use HasFactory;
 
     public function server() {
-        return $this->belongsTo(Server::class);
+        return $this->belongsTo(Server::class, 'id', 'server_id');
     }
 
     // Link to all server data models that have to do with player data
