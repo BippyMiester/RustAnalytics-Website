@@ -31,6 +31,9 @@ class ServerPlayerConnectionDataController extends Controller
         $player->username = $request->username;
         $player->ip_address = $request->ip_address;
         $player->steam_id = $request->steam_id;
+        $player->online_seconds = $request->online_seconds;
+        $player->afk_seconds = $request->afk_seconds;
+        $player->type = $request->type;
         $player->save();
 
         print($player);
