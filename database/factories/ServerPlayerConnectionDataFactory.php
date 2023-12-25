@@ -24,6 +24,7 @@ class ServerPlayerConnectionDataFactory extends Factory
             'username' => $this->faker->userName(),
             'online_seconds' => $this->faker->numberBetween(60, 64000),
             'afk_seconds' => $this->faker->numberBetween(60, 64000),
+            'type' => $this->faker->randomElement(['connect', 'quit'])
         ];
     }
 }

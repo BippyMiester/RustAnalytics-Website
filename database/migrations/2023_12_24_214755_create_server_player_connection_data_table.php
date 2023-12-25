@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('server_player_connection_data', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('server_id');
-            $table->string('ip_address');
-            $table->string('username');
             $table->unsignedBigInteger('steam_id');
+            $table->string('username');
+            $table->string('ip_address');
+            $table->string('type');
             $table->unsignedBigInteger('online_seconds');
             $table->unsignedBigInteger('afk_seconds');
             $table->timestamps();
