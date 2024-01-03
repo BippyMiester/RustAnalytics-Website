@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\V1\PlayerDataController;
 use App\Http\Controllers\Api\V1\PlayerDeathsController;
 use App\Http\Controllers\Api\V1\PlayerGatherController;
 use App\Http\Controllers\Api\V1\PlayerTimeController;
+use App\Http\Controllers\Api\V1\ServerDataController;
 use App\Http\Controllers\Api\V1\WeaponFireController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     // Server
     Route::prefix('server')->group(function () {
+        // Server Data
+        Route::prefix('data')->group(function () {
+           Route::post('create', [ServerDataController::class, 'create']);
+        });
+
         // Animal Kill Data
         Route::prefix('animalkills')->group(function () {
             Route::post('create', [AnimalKillsController::class, 'create']);
