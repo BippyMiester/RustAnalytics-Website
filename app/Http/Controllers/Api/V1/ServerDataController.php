@@ -33,7 +33,12 @@ class ServerDataController extends Controller
         $serverData->world_name = $request->world_name;
         $serverData->players_online = $request->players_online;
         $serverData->players_max = $request->players_max;
-        $serverData->in_game_time = $request->in_game_time;
+
+        $dateString = "06/02/2024 12:13:51";
+        $inGameTimeRaw = new DateTime($request->in_game_time);
+        $inGameTime = $inGameTimeRaw->format('H:i');
+        
+        $serverData->in_game_time = $inGameTime;
         $serverData->server_fps = $request->server_fps;
         $serverData->map_size = $request->map_size;
         $serverData->protocol = $request->protocol;
