@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AnimalKillsController;
+use App\Http\Controllers\Api\V1\PlayerBansController;
 use App\Http\Controllers\Api\V1\PlayerCraftingController;
 use App\Http\Controllers\Api\V1\DestroyedBuildingsController;
 use App\Http\Controllers\Api\V1\DestroyedContainersController;
@@ -77,6 +78,9 @@ Route::prefix('v1')->group(function () {
 
         // Player Data
         Route::prefix('players')->group(function () {
+            Route::prefix('bans')->group(function () {
+               Route::post('create', [PlayerBansController::class, 'create']);
+            });
             Route::prefix('data')->group(function () {
                 Route::post('create', [PlayerDataController::class, 'create']);
             });

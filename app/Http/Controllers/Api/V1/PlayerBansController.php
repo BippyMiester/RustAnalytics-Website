@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\PlayerBan;
 use App\Models\PlayerData;
 use App\Models\Server;
 use Illuminate\Http\Request;
 
-class PlayerDataController extends Controller
+class PlayerBansController extends Controller
 {
     private function sendResponseCode(int $code, string $msg) {
         return response()->json(['Response Message' => $msg], $code);
@@ -25,14 +26,14 @@ class PlayerDataController extends Controller
             return $this->sendResponseCode(400, 'Server API Key Invalid. Check your API key and try again.');
         }
 
-        $playerData = new PlayerData;
-        $playerData->server_id = $server->id;
-        $playerData->steam_id = $request->steam_id;
-        $playerData->frame_rate = $request->frame_rate;
-        $playerData->ping = $request->ping;
-        $playerData->save();
+        $playerBanData = new PlayerBan;
+        $playerBanData->server_id = $server->id;
+        $playerBanData->steam_id = $request->steam_id;
+        $playerBanData->username = $request->username;
+        $playerBanData->ip_address = $request->ip_address;
+        $playerBanData->reason = $request->reason;
+        $playerBanData->save();
 
-        print($playerData);
+        print($playerBanData);
     }
-
 }

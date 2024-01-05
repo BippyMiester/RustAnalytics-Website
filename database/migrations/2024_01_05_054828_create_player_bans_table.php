@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('player_data', function (Blueprint $table) {
+        Schema::create('player_bans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('server_id');
             $table->unsignedBigInteger('steam_id');
-            $table->unsignedBigInteger('frame_rate');
-            $table->unsignedBigInteger('ping');
+            $table->string('username');
+            $table->string('ip_address');
+            $table->text('reason');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('server_player_data');
+        Schema::dropIfExists('player_bans');
     }
 };

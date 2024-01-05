@@ -71,4 +71,8 @@ class Server extends Model
     public function placeddeployables() {
         return $this->hasMany(PlacedDeployables::class, 'server_id', 'id');
     }
+
+    public function bans() {
+        return $this->hasMany(PlayerBan::class, 'server_id', 'id');
+    }
 }
