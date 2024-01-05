@@ -80,6 +80,7 @@ Route::prefix('v1')->group(function () {
         Route::prefix('players')->group(function () {
             Route::prefix('bans')->group(function () {
                Route::post('create', [PlayerBansController::class, 'create']);
+               Route::post('destroy', [PlayerBansController::class, 'destroy']);
             });
             Route::prefix('data')->group(function () {
                 Route::post('create', [PlayerDataController::class, 'create']);
