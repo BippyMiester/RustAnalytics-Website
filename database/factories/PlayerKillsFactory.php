@@ -44,7 +44,7 @@ class PlayerKillsFactory extends Factory
             'server_id' => Server::factory(),
             'username' => $randomPlayer->username,
             'steam_id' => $randomPlayer->steam_id,
-            'kill_id' => $this->faker->randomNumber(8, true),
+            'kill_id' => $this->faker->uuid(),
             'victim' => $victimPlayer->username,
             'weapon' => $this->faker->randomElement($rustWeapons),
             'body_part' => $this->faker->randomElement(['arm', 'head', 'torso', 'leg']),

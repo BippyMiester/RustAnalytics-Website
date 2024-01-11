@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('server_id');
             $table->string('username');
             $table->unsignedBigInteger('steam_id');
-            $table->unsignedBigInteger('kill_id');
+            $table->uuid('kill_id');
             $table->string('victim');
             $table->string('weapon');
             $table->string('body_part');
