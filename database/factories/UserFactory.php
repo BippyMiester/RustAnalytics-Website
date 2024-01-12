@@ -32,8 +32,6 @@ class UserFactory extends Factory
             'provider' => 'discord',
             'provider_id' => $this->faker->randomNumber(9, true) . $this->faker->randomNumber(9, true),
             'username' => $username,
-            'discriminator' => 0,
-            'fullusername' => $username,
             'avatar' => 'https://placehold.co/128',
             'email' => $this->faker->email(),
             'email_verified' => $this->faker->boolean(),

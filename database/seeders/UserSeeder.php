@@ -135,8 +135,6 @@ class UserSeeder extends Seeder
                 'provider' => 'discord',
                 'provider_id' => '575805961315287061',
                 'username' => 'bippymiester',
-                'discriminator' => '0',
-                'fullusername' => 'bippymiester',
                 'avatar' => 'https://cdn.discordapp.com/avatars/575805961315287061/efe4041d46b910595c7459f9a7c485e2.png',
                 'email' => 'admin@jdswebservice.com',
                 'email_verified' => true,
