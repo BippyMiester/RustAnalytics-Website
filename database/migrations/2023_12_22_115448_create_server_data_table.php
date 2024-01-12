@@ -15,20 +15,14 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('server_id');
             $table->unsignedBigInteger('entities');
-            $table->bigInteger('world_seed');
-            $table->text('world_name');
             $table->unsignedBigInteger('players_online');
             $table->unsignedBigInteger('players_max');
             $table->string('in_game_time');
             $table->unsignedBigInteger('server_fps');
-            $table->unsignedBigInteger('map_size');
-            $table->string('protocol');
             $table->unsignedFloat('used_memory');
             $table->unsignedFloat('max_memory');
             $table->unsignedFloat('network_in');
             $table->unsignedFloat('network_out');
-            $table->dateTime('last_wiped');
-            $table->dateTime('blueprint_last_wiped');
             $table->timestamps();
         });
     }

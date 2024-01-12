@@ -25,12 +25,20 @@ class ServerFactory extends Factory
      */
     public function definition(): array
     {
+        $wipeDate = $this->faker->dateTimeThisMonth();
+
         return [
             'user_id' => User::factory(),
             'api_key' => $this->faker->uuid(),
             'name' => $this->faker->company(),
             'ip_address' => $this->faker->ipv4(),
             'port' => $this->faker->randomNumber(4, true),
+            'world_seed' => $this->faker->randomNumber(8),
+            'world_name' => "Procedural Map",
+            'map_size' => $this->faker->randomFloat(2,1, 6),
+            'protocol' => $this->faker->semver(),
+            'last_wiped' => $wipeDate,
+            'blueprint_last_wiped' => $wipeDate,
             'description' => $this->faker->paragraph()
         ];
     }

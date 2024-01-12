@@ -20,25 +20,18 @@ class ServerDataFactory extends Factory
         $maxPlayers = $this->faker->numberBetween(0,400);
         $minMemory = 4;
         $maxMemory = $this->faker->randomFloat(2, $minMemory, 128);
-        $wipeDate = $this->faker->dateTimeThisMonth();
 
         return [
             'server_id' => Server::factory(),
             'entities' => $this->faker->numberBetween(30000, 1000000),
-            'world_seed' => $this->faker->randomNumber(8),
-            'world_name' => "Procedural Map",
             'players_online' => $this->faker->numberBetween(0,$maxPlayers),
             'players_max' => $maxPlayers,
             'in_game_time' => $this->faker->time(),
             'server_fps' => $this->faker->numberBetween(24,400),
-            'map_size' => $this->faker->randomFloat(2,1, 6),
-            'protocol' => $this->faker->semver(),
             'used_memory' => $this->faker->randomFloat(2, $minMemory, $maxMemory),
             'max_memory' => $maxMemory,
             'network_in' => $this->faker->randomFloat(2,1, 50),
             'network_out' => $this->faker->randomFloat(2,1, 50),
-            'last_wiped' => $wipeDate,
-            'blueprint_last_wiped' => $wipeDate
         ];
     }
 }

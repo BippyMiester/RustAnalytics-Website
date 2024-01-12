@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('ip_address');
             $table->integer('port');
+            $table->string('protocol');
+            $table->bigInteger('world_seed');
+            $table->text('world_name');
+            $table->unsignedBigInteger('map_size');
+            $table->dateTime('last_wiped');
+            $table->dateTime('blueprint_last_wiped');
             $table->text('description')->nullable();
             $table->timestamps();
         });
