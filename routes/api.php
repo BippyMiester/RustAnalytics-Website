@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\V1\PlayerDataController;
 use App\Http\Controllers\Api\V1\PlayerDeathsController;
 use App\Http\Controllers\Api\V1\PlayerGatherController;
 use App\Http\Controllers\Api\V1\PlayerTimeController;
+use App\Http\Controllers\Api\V1\ServerController;
 use App\Http\Controllers\Api\V1\ServerDataController;
 use App\Http\Controllers\Api\V1\WeaponFireController;
 use Illuminate\Http\Request;
@@ -36,6 +37,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     // Server
     Route::prefix('server')->group(function () {
+        Route::post('update', [ServerController::class, 'update']);
+
         // Server Data
         Route::prefix('data')->group(function () {
            Route::post('create', [ServerDataController::class, 'create']);
