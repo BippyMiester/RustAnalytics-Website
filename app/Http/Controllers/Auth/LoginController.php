@@ -85,8 +85,6 @@ class LoginController extends Controller
         $user->provider = 'discord';
         $user->provider_id = $discordUser->user['id'];
         $user->username = $discordUser->user['username'];
-        $user->discriminator = $discordUser->user['discriminator'];
-        $user->fullusername = $discordUser->nickname;
         $user->avatar = $discordUser->avatar;
         $user->email = $discordUser->user['email'];
         $user->email_verified = $discordUser->user['verified'];
