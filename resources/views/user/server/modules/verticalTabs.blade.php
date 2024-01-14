@@ -17,6 +17,8 @@
 
         @include('user.server.modules.information')
 
+        @include('user.server.modules.players')
+
     </div>
 
 </div>
