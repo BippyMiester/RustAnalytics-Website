@@ -14,10 +14,10 @@
 
     @include('modules.app.pricing')
 
-    @include('modules.app.faq')
+{{--    @include('modules.app.faq')--}}
 
-    @include('modules.app.reviews')
+{{--    @include('modules.app.reviews')--}}
 
-    @include('modules.app.contact')
+{{--    @include('modules.app.contact')--}}
 
 @endsection
