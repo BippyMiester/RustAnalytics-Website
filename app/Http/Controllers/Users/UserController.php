@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Server;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,9 +22,12 @@ class UserController extends Controller
     // User Dashboard
     public function dashboard() {
         $user = Auth::user();
+        $servers = Server::where('user_id', Auth::id())->get();
 
+//        dd($servers);
         // return view('pages.404');
         return view('user.dashboard')
-            ->withUser($user);
+            ->withUser($user)
+            ->withServers($servers);
     }
 }

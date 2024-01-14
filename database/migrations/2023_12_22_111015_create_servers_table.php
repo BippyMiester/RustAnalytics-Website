@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('api_key');
-            $table->string('name')->nullable();
+            $table->string('name')->default("New Server");
             $table->string('ip_address')->nullable();
             $table->integer('port')->nullable();
             $table->string('protocol')->nullable();
