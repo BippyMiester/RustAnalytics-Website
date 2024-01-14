@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\Auth\User;
 use App\Http\Controllers\Controller;
+use App\Models\Server;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -41,6 +43,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->isNewUser = false;
     }
 
     /**
@@ -79,6 +82,8 @@ class LoginController extends Controller
         if ($user === null) {
             // Generate New User Instance
             $user = new User;
+
+            $this->isNewUser = true;
         }
 
         // Get Data from Discord Provider
@@ -98,6 +103,11 @@ class LoginController extends Controller
 
         // Save User
         $user->save();
+
+        // Create a server for the user if the user is new
+        if($this->isNewUser) {
+            $this->createNewServer($user);
+        }
 
         Auth::login($user, false);
 
@@ -137,6 +147,14 @@ class LoginController extends Controller
         Auth::logout();
         Session::flush();
         return redirect()->route('index');
+    }
+
+    private function createNewServer(User $user)
+    {
+        $server = new Server;
+        $server->user_id = $user->id;
+        $server->api_key = Str::uuid();
+        $server->save();
     }
 
 
