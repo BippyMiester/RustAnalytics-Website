@@ -1,47 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     @include('partials.dashboard.head')
 
+    @yield('stylesheets')
 </head>
-<body class="layout-boxed">
+<body class="page-body  page-fade" data-url="http://neon.dev">
 
-@include('partials.dashboard.preloader')
+<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
-@include('partials.dashboard.navbar')
+    @include('partials.dashboard.sidebar')
 
-<!--  BEGIN MAIN CONTAINER  -->
-<div class="main-container" id="container">
+    <div class="main-content">
 
-    <div class="overlay"></div>
-    <div class="search-overlay"></div>
+        @include('partials.dashboard.navbar')
 
-@include('partials.dashboard.sidebar')
+        <hr />
 
-<!--  BEGIN CONTENT AREA  -->
-    <div id="content" class="main-content">
-        <div class="layout-px-spacing">
+        @yield('content')
 
-            <div class="middle-content container-xxl p-0">
-
-                <div class="row layout-top-spacing">
-
-                    @yield('content')
-
-                </div>
-
-            </div>
-
-        </div>
         @include('partials.dashboard.footer')
     </div>
-    <!--  END CONTENT AREA  -->
 
 </div>
-<!-- END MAIN CONTAINER -->
 
 @include('partials.dashboard.scripts')
+
+@yield('scripts')
 
 </body>
 </html>

@@ -4,22 +4,24 @@
 <title>RustServerMetrics - @yield('title')</title>
 
 
-<link href="{{ asset('css/dashboard/light/loader.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/dashboard/dark/loader.css') }}" rel="stylesheet" type="text/css" />
-<script src="{{ asset('js/dashboard/loader.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('js/dashboard/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dashboard/font-icons/entypo/css/entypo.css') }}">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
+<link rel="stylesheet" href="{{ asset('css/dashboard/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dashboard/neon-core.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dashboard/neon-theme.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dashboard/neon-forms.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dashboard/custom.css') }}">
 
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-<link href="{{ asset('css/dashboard/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/dashboard/light/plugins.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/dashboard/dark/plugins.css') }}" rel="stylesheet" type="text/css" />
-<!-- END GLOBAL MANDATORY STYLES -->
+<script src="{{ asset('js/dashboard/jquery-1.11.3.min.js') }}"></script>
 
-<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-<link href="{{ asset('src/dashboard/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('css/dashboard/light/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/dashboard/dark/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
-<!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+<!--[if lt IE 9]><script src="{{ asset('js/dashboard/ie8-responsive-file-warning.js') }}"></script><![endif]-->
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 <!-- FAVICON LINKS -->
 <link rel="apple-touch-icon" sizes="180x180" href="/imgs/favicon/apple-touch-icon.png">
