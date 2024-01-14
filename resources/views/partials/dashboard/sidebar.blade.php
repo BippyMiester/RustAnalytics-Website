@@ -7,7 +7,7 @@
             <!-- logo -->
             <div class="logo">
                 <a href="index.html">
-                    <img src="/imgs/dashboard/placeholders/logo@2x.png" width="120" alt="" />
+                    <img src="/imgs/logo.png" style="height: 30px;" alt="" />
                 </a>
             </div>
 
@@ -34,84 +34,17 @@
             <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
             <li class="active opened active has-sub">
                 <a href="index.html">
-                    <i class="entypo-gauge"></i>
-                    <span class="title">Dashboard</span>
+                    <i class="fa-solid fa-gauge"></i>
+                    <span class="title">Server Dashboards</span>
                 </a>
                 <ul class="visible">
-                    <li class="active">
-                        <a href="index.html">
-                            <span class="title">Dashboard 1</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="dashboard-2.html">
-                            <span class="title">Dashboard 2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="dashboard-3.html">
-                            <span class="title">Dashboard 3</span>
-                        </a>
-                    </li>
-                    <li class="has-sub">
-                        <a href="skin-black.html">
-                            <span class="title">Skins</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="skin-black.html">
-                                    <span class="title">Black Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-white.html">
-                                    <span class="title">White Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-purple.html">
-                                    <span class="title">Purple Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-cafe.html">
-                                    <span class="title">Cafe Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-red.html">
-                                    <span class="title">Red Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-green.html">
-                                    <span class="title">Green Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-yellow.html">
-                                    <span class="title">Yellow Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-blue.html">
-                                    <span class="title">Blue Skin</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="skin-facebook.html">
-                                    <span class="title">Facebook Skin</span>
-                                    <span class="badge badge-secondary badge-roundless">New</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="highlights.html">
-                            <span class="title">What's New</span>
-                            <span class="badge badge-success badge-roundless">v2.0</span>
-                        </a>
-                    </li>
+                    @foreach($servers as $server)
+                        <li class="active">
+                            <a href="#">
+                                <span class="title">{{ $server->name }}</span>
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </li>
             <li class="has-sub">

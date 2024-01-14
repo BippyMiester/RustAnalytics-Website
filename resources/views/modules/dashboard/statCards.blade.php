@@ -3,10 +3,10 @@
 
         <div class="tile-stats tile-red">
             <div class="icon"><i class="entypo-users"></i></div>
-            <div class="num" data-start="0" data-end="83" data-postfix="" data-duration="1500" data-delay="0">0</div>
+            <div class="num" data-start="0" data-end="{{ $servers->count() }}" data-postfix="" data-duration="1500" data-delay="0">0</div>
 
-            <h3>Registered users</h3>
-            <p>so far in our blog, and our website.</p>
+            <h3>Servers</h3>
+            <p>in your network</p>
         </div>
 
     </div>
@@ -17,8 +17,8 @@
             <div class="icon"><i class="entypo-chart-bar"></i></div>
             <div class="num" data-start="0" data-end="135" data-postfix="" data-duration="1500" data-delay="600">0</div>
 
-            <h3>Daily Visitors</h3>
-            <p>this is the average value.</p>
+            <h3>Players</h3>
+            <p>have connected to your server</p>
         </div>
 
     </div>
@@ -31,8 +31,8 @@
             <div class="icon"><i class="entypo-mail"></i></div>
             <div class="num" data-start="0" data-end="23" data-postfix="" data-duration="1500" data-delay="1200">0</div>
 
-            <h3>New Messages</h3>
-            <p>messages per day.</p>
+            <h3>Animals</h3>
+            <p>have been killed</p>
         </div>
 
     </div>
