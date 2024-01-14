@@ -4,9 +4,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-10">
                 <div class="section-heading text-center">
-                    <h4 class="h5 text-primary">Pricing</h4>
-                    <h2>Check Our Valuable Price</h2>
-                    <p>Conveniently mesh cooperative services via magnetic outsourcing. Dynamically grow value whereas accurate e-commerce vectors. </p>
+                    <h2>Pricing</h2>
+                    <p>Affordable Plans for Every Need: Choose from a range of budget-friendly pricing options designed to provide maximum value and enhance your Rust gaming experience.</p>
                 </div>
             </div>
         </div>
@@ -30,7 +29,7 @@
                             <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Life Time Support</li>
                         </ul>
                     </div>
-                    <a href="#" class="btn btn-outline-primary mt-2">Buy Now</a>
+                    <a href="#" class="btn btn-outline-primary mt-2">Join Today</a>
 
                     <!--pattern start-->
                     <div class="dot-shape-bg position-absolute z--1 left--40 bottom--40">
