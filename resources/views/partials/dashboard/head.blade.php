@@ -4,21 +4,21 @@
 <title>RustServerMetrics - @yield('title')</title>
 
 
-<link href="{{ asset('css/light/loader.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/dark/loader.css') }}" rel="stylesheet" type="text/css" />
-<script src="{{ asset('js/loader.js') }}"></script>
+<link href="{{ asset('css/dashboard/light/loader.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/dashboard/dark/loader.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('js/dashboard/loader.js') }}"></script>
 
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/light/plugins.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/dark/plugins.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/dashboard/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/dashboard/light/plugins.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/dashboard/dark/plugins.css') }}" rel="stylesheet" type="text/css" />
 <!-- END GLOBAL MANDATORY STYLES -->
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-<link href="{{ asset('src/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('css/light/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('css/dark/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('src/dashboard/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/dashboard/light/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('css/dashboard/dark/dashboard/dash_1.css') }}" rel="stylesheet" type="text/css" />
 <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
 <!-- FAVICON LINKS -->

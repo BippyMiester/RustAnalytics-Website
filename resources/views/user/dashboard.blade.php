@@ -100,7 +100,7 @@
                     <div class="info-box">
                         <div class="icon">
                                                 <span>
-                                                    <img src="{{ asset('imgs/placeholders/money-bag.png') }}" alt="money-bag">
+                                                    <img src="{{ asset('imgs/dashboard/placeholders/money-bag.png') }}" alt="money-bag">
                                                 </span>
                         </div>
 
@@ -483,13 +483,13 @@
                             <span class="avatar-title">+6</span>
                         </div>
                         <div class="avatar translateY-axis">
-                            <img alt="avatar" src="{{ asset('imgs/placeholders/profile-8.jpeg') }}"/>
+                            <img alt="avatar" src="{{ asset('imgs/dashboard/placeholders/profile-8.jpeg') }}"/>
                         </div>
                         <div class="avatar translateY-axis">
-                            <img alt="avatar" src="{{ asset('imgs/placeholders/profile-12.jpeg') }}"/>
+                            <img alt="avatar" src="{{ asset('imgs/dashboard/placeholders/profile-12.jpeg') }}"/>
                         </div>
                         <div class="avatar translateY-axis">
-                            <img alt="avatar" src="{{ asset('imgs/placeholders/profile-19.jpeg') }}"/>
+                            <img alt="avatar" src="{{ asset('imgs/dashboard/placeholders/profile-19.jpeg') }}"/>
                         </div>
 
                     </div>
@@ -509,7 +509,7 @@
 
                 <div class="media">
                     <div class="w-img">
-                        <img src="{{ asset('imgs/placeholders/profile-19.jpeg') }}" alt="avatar">
+                        <img src="{{ asset('imgs/dashboard/placeholders/profile-19.jpeg') }}" alt="avatar">
                     </div>
                     <div class="media-body">
                         <h6>Jimmy Turner</h6>
@@ -539,7 +539,7 @@
 
                 <div class="media">
                     <div class="w-img">
-                        <img src="{{ asset('imgs/placeholders/g-8.png') }}" alt="avatar">
+                        <img src="{{ asset('imgs/dashboard/placeholders/g-8.png') }}" alt="avatar">
                     </div>
                     <div class="media-body">
                         <h6>Dev Summit - New York</h6>
@@ -550,10 +550,10 @@
                 <div class="card-bottom-section">
                     <h5>4 Members Going</h5>
                     <div class="img-group">
-                        <img src="{{ asset('imgs/placeholders/profile-19.jpeg') }}" alt="avatar">
-                        <img src="{{ asset('imgs/placeholders/profile-6.jpeg') }}" alt="avatar">
-                        <img src="{{ asset('imgs/placeholders/profile-8.jpeg') }}" alt="avatar">
-                        <img src="{{ asset('imgs/placeholders/profile-3.jpeg') }}" alt="avatar">
+                        <img src="{{ asset('imgs/dashboard/placeholders/profile-19.jpeg') }}" alt="avatar">
+                        <img src="{{ asset('imgs/dashboard/placeholders/profile-6.jpeg') }}" alt="avatar">
+                        <img src="{{ asset('imgs/dashboard/placeholders/profile-8.jpeg') }}" alt="avatar">
+                        <img src="{{ asset('imgs/dashboard/placeholders/profile-3.jpeg') }}" alt="avatar">
                     </div>
                     <a href="javascript:void(0);" class="btn">View Details</a>
                 </div>
