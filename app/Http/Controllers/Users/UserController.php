@@ -21,13 +21,7 @@ class UserController extends Controller
 
     // User Dashboard
     public function dashboard() {
-        $user = Auth::user();
-        $servers = Server::where('user_id', Auth::id())->get();
-
-//        dd($servers);
         // return view('pages.404');
-        return view('user.dashboard')
-            ->withUser($user)
-            ->withServers($servers);
+        return view('user.dashboard');
     }
 }

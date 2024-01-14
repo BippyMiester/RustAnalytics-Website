@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
                                     ->count(5),
                                 'playertime'
                             ),
-                        'playerconnections'
+                        'players'
                     )
                     ->has(
                         // Put some player data in
@@ -166,7 +166,7 @@ class UserSeeder extends Seeder
                             ->count(5),
                         'playertime'
                     ),
-                'playerconnections'
+                'players'
             )
             ->has(
             // Put some player data in

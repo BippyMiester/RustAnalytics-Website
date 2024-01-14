@@ -40,7 +40,7 @@
                 <ul class="visible">
                     @foreach($servers as $server)
                         <li class="active">
-                            <a href="#">
+                            <a href="{{ route('user.server.show', $server->slug) }}">
                                 <span class="title">{{ $server->name }}</span>
                             </a>
                         </li>

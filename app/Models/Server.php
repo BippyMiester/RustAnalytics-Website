@@ -24,7 +24,7 @@ class Server extends Model
         return $this->hasMany(PlayerData::class, 'server_id', 'id');
     }
 
-    public function playerconnections() {
+    public function players() {
         return $this->hasMany(PlayerConnections::class, 'server_id', 'id');
     }
 

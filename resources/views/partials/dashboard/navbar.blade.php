@@ -9,8 +9,8 @@
             <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="/imgs/dashboard/placeholders/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                    John Henderson
+                    <img src="{{ Auth::user()->avatar }}" alt="" class="img-circle" width="44" />
+                    {{ Auth::user()->username }}
                 </a>
 
                 <ul class="dropdown-menu">

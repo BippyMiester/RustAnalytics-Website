@@ -30,6 +30,7 @@ class ServerFactory extends Factory
         return [
             'user_id' => User::factory(),
             'api_key' => $this->faker->uuid(),
+            'slug' => $this->faker->slug(),
             'name' => $this->faker->company(),
             'ip_address' => $this->faker->ipv4(),
             'port' => $this->faker->randomNumber(4, true),

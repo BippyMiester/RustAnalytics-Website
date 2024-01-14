@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ServerController;
 use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,9 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
+    // Server Routes
+    Route::prefix('server')->name('server.')->group(function () {
+       Route::get('{slug}', [ServerController::class, 'show'])->name('show');
+    });
 });

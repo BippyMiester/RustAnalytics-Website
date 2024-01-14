@@ -154,6 +154,7 @@ class LoginController extends Controller
         $server = new Server;
         $server->user_id = $user->id;
         $server->api_key = Str::uuid();
+        $server->slug = Str::uuid();
         $server->save();
     }
 

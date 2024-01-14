@@ -160,6 +160,7 @@ return [
          * Package Service Providers...
          */
         \SocialiteProviders\Manager\ServiceProvider::class,
+        App\Providers\UserDashboardViewComposerServiceProvider::class,
         /*
          * Application Service Providers...
          */
