@@ -28,7 +28,7 @@
                 @auth
                     <a href="{{ route('user.dashboard') }}" class="btn btn-link text-decoration-none me-2">Dashboard</a>
                 @endauth
-                    
+
                 <a href="request-demo.html" class="btn btn-primary">Documentation</a>
             </div>
 
