@@ -1,65 +1,85 @@
 <!--pricing section start-->
-<section class="pricing-section position-relative overflow-hidden bg-dark text-white pt-120" style="background: url('imgs/app/placeholders/page-header-bg.svg')no-repeat center center">
+<section class="pricing-section ptb-120 position-relative z-2">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-12">
-                <div class="section-heading text-center z-5 position-relative" data-aos="fade-up">
-                    <h4 class="h5 text-warning">Plans &amp; Pricing</h4>
+            <div class="col-lg-6 col-md-10">
+                <div class="section-heading text-center">
+                    <h4 class="h5 text-primary">Pricing</h4>
                     <h2>Check Our Valuable Price</h2>
-                    <p>Objectively market-driven intellectual capital rather than covalent best practices facilitate strategic information before innovation. </p>
+                    <p>Conveniently mesh cooperative services via magnetic outsourcing. Dynamically grow value whereas accurate e-commerce vectors. </p>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
-                <div class="pricing-content-wrap mb--100 bg-white rounded-custom shadow-lg border d-fle z-10 position-relative">
-                    <div class="price-feature-col pricing-feature-info left-radius bg-primary-soft p-5">
-                        <ul class="list-unstyled pricing-feature-list pricing-included-list mb-0" data-aos="fade-left">
-                            <li class="py-1"><i class="fas fa-check-circle text-primary me-2"></i> Unlimited domains</li>
-                            <li class="py-1"><i class="fas fa-check-circle text-primary me-2"></i>Unlimited notifications</li>
-                            <li class="py-1"><i class="fas fa-check-circle text-primary me-2"></i> 10,000 unique visitors</li>
-                            <li class="py-1"><i class="fas fa-check-circle text-primary me-2"></i> Conversion analytics</li>
-                            <li class="py-1"><i class="fas fa-check-circle text-primary me-2"></i> Conversion analytics</li>
-                            <li class="py-1"><i class="fas fa-check-circle text-primary me-2"></i> Live chat support</li>
-                            <li class="py-1"><i class="fas fa-check-circle text-primary me-2"></i> Recent activity notification</li>
-                            <li class="py-1"><i class="fas fa-check-circle text-primary me-2"></i> Live visitor count notification</li>
-                            <li class="py-1"><i class="fas fa-check-circle text-primary me-2"></i> Send data to analytics tools</li>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="position-relative single-pricing-wrap rounded-custom bg-white custom-shadow p-5 mb-4 mb-lg-0">
+                    <div class="pricing-header mb-32">
+                        <h3 class="package-name text-primary d-block">Wood Tier</h3>
+                        <h4 class="display-6 fw-semi-bold">free</span></h4>
+                    </div>
+                    <div class="pricing-info mb-4">
+                        <ul class="pricing-feature-list list-unstyled">
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> 1 Server</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> 300 Second Timer Data Delay</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Player Connections</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Player Crafting</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Player Kills & Deaths</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Player FPS & Latency</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Server FPS, Entities, and More</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Player Ban Management</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Life Time Support</li>
                         </ul>
                     </div>
-                    <div class="price-feature-col pricing-action-info p-5" data-aos="fade-right">
-                        <ul class="nav nav-pills mb-4 pricing-tab-list" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Monthly</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" class="">Yearly</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade active show" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                <h3 class="h5">Pro Monthly</h3>
-                                <p>Professionally integrate principle-centered intellectual capital whereas equity.</p>
-                                <div class="pricing-price mt-5">
-                                    <h4 class="h1 fw-bold">$49 <span>/Month</span></h4>
-                                </div>
-                                <a href="request-demo.html" class="btn btn-primary mt-3">Start 14-Days Trial</a>
-                            </div>
-                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                <h3 class="h5">Pro Yearly</h3>
-                                <p>Uniquely engineer prospective alignments without clicks-and-mortar innovation.</p>
-                                <div class="pricing-price mt-5">
-                                    <h4 class="h1 fw-bold">$89 <span>/Year</span></h4>
-                                </div>
-                                <a href="request-demo.html" class="btn btn-primary mt-3">Start 14-Days Trial</a>
-                            </div>
-                        </div>
+                    <a href="#" class="btn btn-outline-primary mt-2">Buy Now</a>
 
+                    <!--pattern start-->
+                    <div class="dot-shape-bg position-absolute z--1 left--40 bottom--40">
+                        <img src="imgs/app/placeholders/shape/dot-big-square.svg" alt="shape">
                     </div>
+                    <!--pattern end-->
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="position-relative single-pricing-wrap rounded-custom bg-dark text-white p-5 mb-4 mb-lg-0 h-100">
+                    <div class="pricing-header mb-32">
+                        <h3 class="package-name text-warning d-block">Stone Tier</h3>
+                        <h4 class="display-6 fw-semi-bold">$10<span>/month</span></h4>
+                    </div>
+                    <div class="pricing-info mb-4">
+                        <ul class="pricing-feature-list list-unstyled">
+                            <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> 3 Servers</li>
+                            <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Everything in Wood Tier</li>
+                            <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> 120 Second Timer Data Delay</li>
+                            <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> API Access</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-primary mt-2">Buy Now</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="position-relative single-pricing-wrap rounded-custom bg-white custom-shadow p-5 mb-4 mb-lg-0 h-100">
+                    <div class="pricing-header mb-32">
+                        <h3 class="package-name text-primary d-block">Metal Tier</h3>
+                        <h4 class="display-6 fw-semi-bold">$20<span>/month</span></h4>
+                    </div>
+                    <div class="pricing-info mb-4">
+                        <ul class="pricing-feature-list list-unstyled">
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Unlimited Servers</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Everything In Previous Tiers</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> 45 Second Timer Data Delay</li>
+                            <li><i class="fas fa-circle fa-2xs text-primary me-2"></i> Higher Ticket Priority</li>
+                        </ul>
+                    </div>
+                    <a href="request-demo.html" class="btn btn-outline-primary mt-2">Buy Now</a>
+
+                    <!--pattern start-->
+                    <div class="dot-shape-bg position-absolute z--1 right--40 top--40">
+                        <img src="imgs/app/placeholders/shape/dot-big-square.svg" alt="shape">
+                    </div>
+                    <!--pattern end-->
                 </div>
             </div>
         </div>
     </div>
-    <div class="bg-circle rounded-circle circle-shape-1 position-absolute bg-warning left-5"></div>
-    <div class="white-space-100 bg-white w-100"></div>
 </section>
 <!--pricing section end-->
