@@ -8,9 +8,9 @@
 
     @include('modules.app.promo')
 
-    @include('modules.app.features')
+{{--    @include('modules.app.features')--}}
 
-    @include('modules.app.ourWork')
+    @include('modules.app.installProcess')
 
     @include('modules.app.pricing')
 
