@@ -35,7 +35,7 @@ class ServerController extends Controller
             $players = $this->getPlayersList($server);
 
             // Get the player Gather Data
-            $playerGatherAll = PlayerGather::where('server_id', $server->id)->get();
+            $playerGatherAll = $server->playergather()->get();
 
             // Get The Player Raw Gather Data
             $playerGather = $this->getPlayerGatherData($request, $playerGatherAll);
