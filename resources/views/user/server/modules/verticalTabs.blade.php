@@ -21,6 +21,8 @@
 
         @include('user.server.modules.playerGather')
 
+        @include('user.server.modules.playerKills')
+
     </div>
 
 </div>

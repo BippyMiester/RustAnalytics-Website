@@ -13,7 +13,7 @@
                         <p>{{ $resource }}: {{ $amount }}</p>
                     @endforeach
                     <div class="text-center">
-                        <span class="pie-large"></span>
+                        <span class="pie-total-collected-resources"></span>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
             </table>
             <div class="text-center">
                 <!-- Pagination Links -->
-                {{ $playerGather->appends(['gatherPage' => $playerGather->currentPage(), 'killsPage' => Request::get('killsPage')])->links('pagination::bootstrap-4') }}
+                {{ $playerGather->appends(['gatherPage' => $playerGather->currentPage(), 'killsPage' => Request::get('killsPage'), 'deathsPage' => Request::input('deathsPage')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
@@ -92,7 +92,7 @@
         // Generate random colors for each slice
         var sliceColors = data.map(() => getRandomColor());
 
-        $(".pie-large").sparkline(data, {
+        $(".pie-total-collected-resources").sparkline(data, {
             type: 'pie',
             width: '150px',
             height: '150px',
