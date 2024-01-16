@@ -12,5 +12,4 @@
 
     @include('user.server.modules.verticalTabs')
 
-
 @endsection
