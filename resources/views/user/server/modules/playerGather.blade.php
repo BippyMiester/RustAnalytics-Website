@@ -1,7 +1,7 @@
 <div class="tab-pane" id="v-playerGather">
     <div class="row">
         <div class="col-sm-3">
-            <div class="panel panel-default" data-collapsed="0"><!-- to apply shadow add class "panel-shadow" -->
+            <div class="panel panel-default panel-shadow" data-collapsed="0"><!-- to apply shadow add class "panel-shadow" -->
                 <!-- panel head -->
                 <div class="panel-heading">
                     <div class="panel-title">Total Collected Resources</div>
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="panel panel-default" data-collapsed="0"><!-- to apply shadow add class "panel-shadow" -->
+            <div class="panel panel-default panel-shadow" data-collapsed="0"><!-- to apply shadow add class "panel-shadow" -->
                 <!-- panel head -->
                 <div class="panel-heading">
                     <div class="panel-title">Top Collectors</div>
@@ -64,7 +64,7 @@
             </table>
             <div class="text-center">
                 <!-- Pagination Links -->
-                {{ $playerGather->appends(['gatherPage' => $playerGather->currentPage()])->links('pagination::bootstrap-4') }}
+                {{ $playerGather->appends(['gatherPage' => $playerGather->currentPage(), 'killsPage' => Request::get('killsPage')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
