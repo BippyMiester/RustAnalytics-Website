@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Events\ServerDataUpdateEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Server;
 use App\Models\ServerData;
@@ -37,11 +38,13 @@ class ServerDataController extends Controller
         $serverData->in_game_time = $inGameTime;
 
         $serverData->server_fps = $request->server_fps;
-        $serverData->used_memory = $request->used_memory;
-        $serverData->max_memory = $request->max_memory;
+        $serverData->used_memory = round($request->used_memory, 2);
+        $serverData->max_memory = round($request->max_memory, 2);
         $serverData->network_in = $request->network_in;
         $serverData->network_out = $request->network_out;
         $serverData->save();
+
+        event(new ServerDataUpdateEvent($server));
 
         print($serverData);
     }

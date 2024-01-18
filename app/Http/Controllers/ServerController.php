@@ -159,6 +159,9 @@ class ServerController extends Controller
                 });
 
 
+
+
+
             return view('user.server.show')
                 ->withServer($server)
                 ->withPlayerCount($uniquePlayerCount)
