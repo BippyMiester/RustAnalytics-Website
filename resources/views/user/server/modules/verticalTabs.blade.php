@@ -23,6 +23,8 @@
 
         @include('user.server.modules.playerKills')
 
+        @include('user.server.modules.playerWeaponFire')
+
     </div>
 
 </div>

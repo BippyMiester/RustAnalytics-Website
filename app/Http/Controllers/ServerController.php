@@ -31,6 +31,7 @@ class ServerController extends Controller
             $killsPage = $request->input('killsPage', 1);
             $gatherPage = $request->input('gatherPage', 1);
             $deathsPage = $request->input('deathsPage', 1);
+            $weaponFirePage = $request->input('weaponFirePage', 1);
 
             // Get the player count total for the server
             $uniquePlayerCount = $server->players()
@@ -147,7 +148,7 @@ class ServerController extends Controller
                     ];
                 })->values()->toArray();
 
-            // get the top player kill distances
+            // Get the top player kill distances
             $topPlayerKillDistances = $playerKillsAll
                 ->sortByDesc('distance')
                 ->take(10)
@@ -158,8 +159,32 @@ class ServerController extends Controller
                     ];
                 });
 
+            // Set up pagination for Weapon Fire
+            Paginator::currentPageResolver(function () use ($weaponFirePage) {
+                return $weaponFirePage;
+            });
 
+            // Get the player weapon Fire
+            $weaponFireAll = $server->weaponfire()->get();
+            $weaponFire = $server->weaponfire()->paginate(10, ['*'], 'weaponFirePage');
 
+            // Get the top players base on number of bullets fired
+            $topBulletsFired = $server->weaponfire()
+                ->select('username', 'steam_id')
+                ->selectRaw('SUM(amount) as total_bullets')
+                ->groupBy('username', 'steam_id')
+                ->orderByDesc('total_bullets')
+                ->take(10)
+                ->get();
+
+            // get the top weapons based on the number of bullets fired
+            $topWeaponBulletsFired = $server->weaponfire()
+                ->select('weapon')
+                ->selectRaw('SUM(amount) as total_bullets')
+                ->groupBy('weapon')
+                ->orderByDesc('total_bullets')
+                ->take(10)
+                ->get();
 
 
             return view('user.server.show')
@@ -177,7 +202,10 @@ class ServerController extends Controller
                 ->withTopPlayerDeathsCause($topPlayerDeathsCause)
                 ->withTopPlayerDeathGrid($topPlayerDeathGrid)
                 ->withKillsBodyPartChart($killsBodyPartChart)
-                ->withTopPlayerKillDistances($topPlayerKillDistances);
+                ->withTopPlayerKillDistances($topPlayerKillDistances)
+                ->withWeaponFire($weaponFire)
+                ->withTopBulletsFired($topBulletsFired)
+                ->withTopWeaponBulletsFired($topWeaponBulletsFired);
         }
 
         return abort(404);
