@@ -25,6 +25,16 @@
 
         @include('user.server.modules.playerWeaponFire')
 
+        @include('user.server.modules.destroyedBuildings')
+
+        @include('user.server.modules.destroyedContainers')
+
+        @include('user.server.modules.placedBuildings')
+
+        @include('user.server.modules.placedDeployables')
+
+        @include('user.server.modules.animalKills')
+
     </div>
 
 </div>
