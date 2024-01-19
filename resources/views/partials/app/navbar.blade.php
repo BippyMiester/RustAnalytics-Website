@@ -15,8 +15,8 @@
             <div class="collapse navbar-collapse justify-content-center">
                 <ul class="nav col-12 col-md-auto justify-content-center main-menu">
                     <li><a href="{{ route('index') }}" class="nav-link">Home</a></li>
-                    <li><a href="#" class="nav-link">Pricing</a></li>
-                    <li><a href="#" target="_blank" class="nav-link">FAQ</a></li>
+{{--                    <li><a href="#" class="nav-link">Pricing</a></li>--}}
+{{--                    <li><a href="#" target="_blank" class="nav-link">FAQ</a></li>--}}
                     <li><a href="https://discord.gg/CUH3vADmMp" target="_blank" class="nav-link">Discord</a></li>
                 </ul>
             </div>
@@ -29,7 +29,7 @@
                     <a href="{{ route('user.dashboard') }}" class="btn btn-link text-decoration-none me-2">Dashboard</a>
                 @endauth
 
-                <a href="request-demo.html" class="btn btn-primary">Documentation</a>
+{{--                <a href="request-demo.html" class="btn btn-primary">Documentation</a>--}}
             </div>
 
 

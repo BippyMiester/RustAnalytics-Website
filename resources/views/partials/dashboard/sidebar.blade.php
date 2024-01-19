@@ -6,7 +6,7 @@
 
             <!-- logo -->
             <div class="logo">
-                <a href="index.html">
+                <a href="{{ route('index') }}">
                     <img src="/imgs/logo.png" style="height: 30px;" alt="" />
                 </a>
             </div>
