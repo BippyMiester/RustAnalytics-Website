@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-<title>RustServerMetrics - @yield('title')</title>
+<title>Rust Analytics - @yield('title')</title>
 
 
 <link rel="stylesheet" href="{{ asset('js/dashboard/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css') }}">

@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-<title>RustServerMetrics - @yield('title')</title>
+<title>Rust Analytics - @yield('title')</title>
 
 <!-- FAVICON LINKS -->
 <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('imgs/favicon/apple-touch-icon.png') }}">
