@@ -16,7 +16,7 @@ class PlacedStructuresController extends Controller
     public function create(Request $request) {
         // Check if request is null
         if($request->all() == null) {
-            return $this->sendResponseCode(400, 'Data is null!');
+            return $this->sendResponseCode(400, 'RA_ERROR_NULL: (PlacedStructuresController) Placed Structures Data is Null!');
         }
 
         // Grab the Server via the api Key
