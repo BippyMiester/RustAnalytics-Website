@@ -34,9 +34,7 @@ class ServerController extends Controller
             $weaponFirePage = $request->input('weaponFirePage', 1);
 
             // Get the player count total for the server
-            $uniquePlayerCount = $server->players()
-                ->distinct('steam_id')
-                ->count('steam_id');
+            $uniquePlayerCount = $this->getUniquePlayerCount($server);
 
             // Get the list of players for the server
             $players = $this->getPlayersList($server);
@@ -53,10 +51,7 @@ class ServerController extends Controller
             $playerGather = $this->getPlayerGatherData($request, $playerGatherAll);
 
             // Get the total amount of collected resources across all players
-            $totalAmountsByResource = $playerGatherAll->groupBy('resource')
-                ->map(function ($items, $resource) {
-                    return $items->sum('amount');
-                })->toArray();
+            $totalAmountsByResource = $this->getTotalAmountsByResource($playerGatherAll);
 
             // Get the top collectors for each resource
             $topCollectors = $this->getTopCollectors($playerGatherAll);
@@ -71,28 +66,10 @@ class ServerController extends Controller
             $playerKills = $server->playerkills()->paginate(15, ['*'], 'killsPage');
 
             // Top Player Kills
-            $topPlayerKills = $playerKillsAll
-                ->groupBy('username')
-                ->map(function ($kills, $username) {
-                    return [
-                        'username' => $username,
-                        'kill_count' => $kills->count(),
-                    ];
-                })
-                ->sortByDesc('kill_count')
-                ->take(10);
+            $topPlayerKills = $this->getTopPlayerKills($playerKillsAll);
 
             // Get Top Player Kills Weapon Count
-            $topPlayerKillsWeapons = $playerKillsAll
-                ->groupBy('weapon')
-                ->map(function ($kills, $weapon) {
-                    return [
-                        'weapon' => $weapon,
-                        'count' => $kills->count(),
-                    ];
-                })
-                ->sortByDesc('count')
-                ->take(10);
+            $topPlayerKillsWeapons = $this->getTopPlayerKillsWeapons($playerKillsAll);
 
             // Set up pagination for PlayerDeaths
             Paginator::currentPageResolver(function () use ($deathsPage) {
@@ -104,60 +81,19 @@ class ServerController extends Controller
             $playerDeaths = $server->playerdeaths()->paginate(15, ['*'], 'deathsPage');
 
             // Get the top player deaths
-            $topPlayerDeaths = $playerDeathsAll
-                ->groupBy('steam_id')
-                ->map(function ($deaths, $steam_id) {
-                    return [
-                        'username' => $deaths->first()->username, // Assuming the username is consistent for each steam_id
-                        'death_count' => $deaths->count(),
-                    ];
-                })
-                ->sortByDesc('death_count')
-                ->take(10);
+            $topPlayerDeaths = $this->getTopPlayerDeaths($playerDeathsAll);
 
             // Get Top Player Deaths Cause Count
-            $topPlayerDeathsCause = $playerDeathsAll
-                ->groupBy('cause')
-                ->map(function ($deaths, $cause) {
-                    return [
-                        'cause' => $cause,
-                        'count' => $deaths->count(),
-                    ];
-                })
-                ->sortByDesc('count')
-                ->take(10);
+            $topPlayerDeathsCause = $this->getTopPlayerDeathsCause($playerDeathsAll);
 
             // Get Player Death Top 10 Most Common Grid Locations
-            $topPlayerDeathGrid = $playerDeathsAll
-                ->groupBy('grid')
-                ->map(function ($deaths, $grid) {
-                    return [
-                        'grid' => $grid,
-                        'count' => $deaths->count(),
-                    ];
-                })
-                ->sortByDesc('count')
-                ->take(10);
+            $topPlayerDeathGrid = $this->getTopPlayerDeathGrid($playerDeathsAll);
 
             // Get the array of data to be used by the body part chart
-            $killsBodyPartChart = $playerKillsAll->groupBy('body_part')
-                ->map(function ($items, $bodyPart) {
-                    return [
-                        'body_part' => $bodyPart,
-                        'count' => $items->count(),
-                    ];
-                })->values()->toArray();
+            $killsBodyPartChart = $this->getKillsBodyPartChart($playerKillsAll);
 
             // Get the top player kill distances
-            $topPlayerKillDistances = $playerKillsAll
-                ->sortByDesc('distance')
-                ->take(10)
-                ->map(function ($kill) {
-                    return [
-                        'username' => $kill->username,
-                        'distance' => $kill->distance,
-                    ];
-                });
+            $topPlayerKillDistances = $this->getTopPlayerKillDistances($playerKillsAll);
 
             // Set up pagination for Weapon Fire
             Paginator::currentPageResolver(function () use ($weaponFirePage) {
@@ -169,22 +105,10 @@ class ServerController extends Controller
             $weaponFire = $server->weaponfire()->paginate(10, ['*'], 'weaponFirePage');
 
             // Get the top players base on number of bullets fired
-            $topBulletsFired = $server->weaponfire()
-                ->select('username', 'steam_id')
-                ->selectRaw('SUM(amount) as total_bullets')
-                ->groupBy('username', 'steam_id')
-                ->orderByDesc('total_bullets')
-                ->take(10)
-                ->get();
+            $topBulletsFired = $this->getTopBulletsFired($server);
 
             // get the top weapons based on the number of bullets fired
-            $topWeaponBulletsFired = $server->weaponfire()
-                ->select('weapon')
-                ->selectRaw('SUM(amount) as total_bullets')
-                ->groupBy('weapon')
-                ->orderByDesc('total_bullets')
-                ->take(10)
-                ->get();
+            $topWeaponBulletsFired = $this->getTopWeaponBulletsFired($server);
 
 
             return view('user.server.show')
@@ -277,5 +201,136 @@ class ServerController extends Controller
                     })
                     ->first();
             });
+    }
+
+    private function getUniquePlayerCount($server)
+    {
+        return $server->players()
+            ->distinct('steam_id')
+            ->count('steam_id');
+    }
+
+    private function getTotalAmountsByResource($playerGatherAll)
+    {
+        return $playerGatherAll->groupBy('resource')
+            ->map(function ($items, $resource) {
+                return $items->sum('amount');
+            })->toArray();
+    }
+
+    private function getTopPlayerKills($playerKillsAll)
+    {
+        return $playerKillsAll
+            ->groupBy('username')
+            ->map(function ($kills, $username) {
+                return [
+                    'username' => $username,
+                    'kill_count' => $kills->count(),
+                ];
+            })
+            ->sortByDesc('kill_count')
+            ->take(10);
+    }
+
+    private function getTopPlayerKillsWeapons($playerKillsAll)
+    {
+        return $playerKillsAll
+            ->groupBy('weapon')
+            ->map(function ($kills, $weapon) {
+                return [
+                    'weapon' => $weapon,
+                    'count' => $kills->count(),
+                ];
+            })
+            ->sortByDesc('count')
+            ->take(10);
+    }
+
+    private function getTopPlayerDeaths($playerDeathsAll)
+    {
+        return $playerDeathsAll
+            ->groupBy('steam_id')
+            ->map(function ($deaths, $steam_id) {
+                return [
+                    'username' => $deaths->first()->username, // Assuming the username is consistent for each steam_id
+                    'death_count' => $deaths->count(),
+                ];
+            })
+            ->sortByDesc('death_count')
+            ->take(10);
+    }
+
+    private function getTopPlayerDeathsCause($playerDeathsAll)
+    {
+        return $playerDeathsAll
+            ->groupBy('cause')
+            ->map(function ($deaths, $cause) {
+                return [
+                    'cause' => $cause,
+                    'count' => $deaths->count(),
+                ];
+            })
+            ->sortByDesc('count')
+            ->take(10);
+    }
+
+    private function getTopPlayerDeathGrid($playerDeathsAll)
+    {
+        return $playerDeathsAll
+            ->groupBy('grid')
+            ->map(function ($deaths, $grid) {
+                return [
+                    'grid' => $grid,
+                    'count' => $deaths->count(),
+                ];
+            })
+            ->sortByDesc('count')
+            ->take(10);
+    }
+
+    private function getKillsBodyPartChart($playerKillsAll)
+    {
+        return $playerKillsAll->groupBy('body_part')
+            ->map(function ($items, $bodyPart) {
+                return [
+                    'body_part' => $bodyPart,
+                    'count' => $items->count(),
+                ];
+            })->values()->toArray();
+    }
+
+    private function getTopPlayerKillDistances($playerKillsAll)
+    {
+        return $playerKillsAll
+            ->sortByDesc('distance')
+            ->take(10)
+            ->map(function ($kill) {
+                return [
+                    'username' => $kill->username,
+                    'distance' => $kill->distance,
+                ];
+            });
+    }
+
+    private function getTopBulletsFired($server)
+    {
+        return $server->weaponfire()
+            ->select('username', 'steam_id')
+            ->selectRaw('SUM(amount) as total_bullets')
+            ->groupBy('username', 'steam_id')
+            ->orderByDesc('total_bullets')
+            ->take(10)
+            ->get();
+    }
+
+    private function getTopWeaponBulletsFired($server)
+    {
+        return $server->weaponfire()
+            ->select('weapon')
+            ->selectRaw('SUM(amount) as total_bullets')
+            ->groupBy('weapon')
+            ->orderByDesc('total_bullets')
+            ->take(10)
+            ->get();
     }
 }
