@@ -30,6 +30,7 @@ class ServerController extends Controller
             $gatherPage = $request->input('gatherPage', 1);
             $deathsPage = $request->input('deathsPage', 1);
             $weaponFirePage = $request->input('weaponFirePage', 1);
+            $destroyedBuildingsPage = $request->input('destroyedBuildingsPage', 1);
 
             // Get the player count total for the server
             $uniquePlayerCount = $this->getUniquePlayerCount($server);
@@ -109,6 +110,54 @@ class ServerController extends Controller
             $topWeaponBulletsFired = $this->getTopWeaponBulletsFired($server);
 
 
+            // Set up pagination for Weapon Fire
+            Paginator::currentPageResolver(function () use ($destroyedBuildingsPage) {
+                return $destroyedBuildingsPage;
+            });
+
+            // Get all the destroyed buildings
+            $destroyedBuildingsAll = $server->destroyedbuildings()->get();
+            $destroyedBuildings = $server->destroyedbuildings()->paginate(10, ['*'], 'destroyedBuildingsPage');
+
+            // Get the top destroyed building types
+            $topDestroyedBuildingTypes = $destroyedBuildingsAll
+                ->groupBy('type')
+                ->map(function ($items, $type) {
+                    return [
+                        'type' => $type,
+                        'count' => $items->count(),
+                    ];
+                })
+                ->sortByDesc('count')
+                ->take(10)
+                ->values();
+
+            // get the top destroyers on the server
+            $topDestroyers = $destroyedBuildingsAll
+                ->groupBy('username') // or 'steam_id' if you prefer to group by steam_id
+                ->map(function ($group, $username) {
+                    return [
+                        'username' => $username,
+                        'count' => $group->count() // Count the number of entries for each player
+                    ];
+                })
+                ->sortByDesc('count') // Sort by count in descending order
+                ->values() // Reset the keys to make it sequential
+                ->take(10); // Take the top 10 players
+
+            // Get the most destructive weapons for buildings
+            $mostDestructiveBuildingWeapons = $destroyedBuildingsAll
+                ->groupBy('weapon')
+                ->map(function ($group, $weapon) {
+                    return [
+                        'weapon' => $weapon,
+                        'count' => $group->count()
+                    ];
+                })
+                ->sortByDesc('count')
+                ->values()
+                ->take(10);
+
             return view('user.server.show')
                 ->withServer($server)
                 ->withPlayerCount($uniquePlayerCount)
@@ -127,7 +176,11 @@ class ServerController extends Controller
                 ->withTopPlayerKillDistances($topPlayerKillDistances)
                 ->withWeaponFire($weaponFire)
                 ->withTopBulletsFired($topBulletsFired)
-                ->withTopWeaponBulletsFired($topWeaponBulletsFired);
+                ->withTopWeaponBulletsFired($topWeaponBulletsFired)
+                ->withDestroyedBuildings($destroyedBuildings)
+                ->withTopDestroyedBuildingTypes($topDestroyedBuildingTypes)
+                ->withTopDestroyers($topDestroyers)
+                ->withMostDestructiveBuildingWeapons($mostDestructiveBuildingWeapons);
         }
 
         return abort(404);

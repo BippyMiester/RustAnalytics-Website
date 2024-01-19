@@ -179,7 +179,7 @@
             </table>
             <div class="text-center">
                 <!-- Pagination Links -->
-                {{ $playerDeaths->appends(['deathsPage' => $playerDeaths->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'killsPage' => Request::input('killsPage'), 'weaponFirePage' => Request::input('weaponFirePage')])->links('pagination::bootstrap-4') }}
+                {{ $playerDeaths->appends(['deathsPage' => $playerDeaths->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'killsPage' => Request::input('killsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
 
