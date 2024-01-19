@@ -6,6 +6,4 @@
 
     @include('modules.dashboard.statCards')
 
-
-    
 @endsection
