@@ -35,6 +35,9 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::prefix('v1')->group(function () {
+    Route::get('test', function () {
+        return "Works";
+    });
     // Server
     Route::prefix('server')->group(function () {
         Route::post('update', [ServerController::class, 'update']);
