@@ -7,7 +7,7 @@
                     <h1 class="fw-bold display-5" data-aos="fade-up">Rust Server Stats Made Easy</h1>
                     <p class="lead" data-aos="fade-up">Maximize your Rust gaming with ease! Get real-time server stats, player insights, and game analytics. Play smarter, not harder.</p>
                     <div class="action-btns mt-5" data-aos="fade-up" data-aos-delay="50">
-                        <a href="#" class="btn btn-primary me-lg-3 me-sm-3">Join $5/Mo.</a>
+                        <a href="{{ route('login.discord') }}" class="btn btn-primary me-lg-3 me-sm-3">Sign Up Today!</a>
                         <a href="https://discord.rustanalytics.com/" target="_blank" class="btn btn-outline-light">Contact Us</a>
                     </div>
                 </div>
