@@ -192,8 +192,7 @@
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script>
 
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
+    
 
     var pusher = new Pusher('f2cbd1e30b9474b0073f', {
         cluster: 'us2'
