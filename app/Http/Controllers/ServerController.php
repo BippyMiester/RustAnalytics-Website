@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PlayerGather;
-use App\Models\PlayerKills;
 use App\Models\Server;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
