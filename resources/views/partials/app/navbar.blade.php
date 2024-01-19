@@ -17,7 +17,7 @@
                     <li><a href="{{ route('index') }}" class="nav-link">Home</a></li>
 {{--                    <li><a href="#" class="nav-link">Pricing</a></li>--}}
 {{--                    <li><a href="#" target="_blank" class="nav-link">FAQ</a></li>--}}
-                    <li><a href="https://discord.gg/CUH3vADmMp" target="_blank" class="nav-link">Discord</a></li>
+                    <li><a href="https://discord.rustanalytics.com/" target="_blank" class="nav-link">Discord</a></li>
                 </ul>
             </div>
 
