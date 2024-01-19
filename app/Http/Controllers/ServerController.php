@@ -31,6 +31,7 @@ class ServerController extends Controller
             $deathsPage = $request->input('deathsPage', 1);
             $weaponFirePage = $request->input('weaponFirePage', 1);
             $destroyedBuildingsPage = $request->input('destroyedBuildingsPage', 1);
+            $destroyedContainersPage = $request->input('destroyedContainersPage', 1);
 
             // Get the player count total for the server
             $uniquePlayerCount = $this->getUniquePlayerCount($server);
@@ -120,43 +121,31 @@ class ServerController extends Controller
             $destroyedBuildings = $server->destroyedbuildings()->paginate(10, ['*'], 'destroyedBuildingsPage');
 
             // Get the top destroyed building types
-            $topDestroyedBuildingTypes = $destroyedBuildingsAll
-                ->groupBy('type')
-                ->map(function ($items, $type) {
-                    return [
-                        'type' => $type,
-                        'count' => $items->count(),
-                    ];
-                })
-                ->sortByDesc('count')
-                ->take(10)
-                ->values();
+            $topDestroyedBuildingTypes = $this->getTopDestroyedBuildingTypes($destroyedBuildingsAll);
 
             // get the top destroyers on the server
-            $topDestroyers = $destroyedBuildingsAll
-                ->groupBy('username') // or 'steam_id' if you prefer to group by steam_id
-                ->map(function ($group, $username) {
-                    return [
-                        'username' => $username,
-                        'count' => $group->count() // Count the number of entries for each player
-                    ];
-                })
-                ->sortByDesc('count') // Sort by count in descending order
-                ->values() // Reset the keys to make it sequential
-                ->take(10); // Take the top 10 players
+            $topDestroyers = $this->getTopDestroyers($destroyedBuildingsAll);
 
             // Get the most destructive weapons for buildings
-            $mostDestructiveBuildingWeapons = $destroyedBuildingsAll
-                ->groupBy('weapon')
-                ->map(function ($group, $weapon) {
-                    return [
-                        'weapon' => $weapon,
-                        'count' => $group->count()
-                    ];
-                })
-                ->sortByDesc('count')
-                ->values()
-                ->take(10);
+            $mostDestructiveBuildingWeapons = $this->getMostDestructiveBuildingWeapons($destroyedBuildingsAll);
+
+            // Set up pagination for Weapon Fire
+            Paginator::currentPageResolver(function () use ($destroyedContainersPage) {
+                return $destroyedContainersPage;
+            });
+
+            // Get all the destroyed buildings
+            $destroyedContainersAll = $server->destroyedcontainers()->get();
+            $destroyedContainers = $server->destroyedcontainers()->paginate(10, ['*'], 'destroyedContainersPage');
+
+            // Get the top destroyed containers
+            $topDestroyedContainers = $this->getTopDestroyedContainers($destroyedContainersAll);
+
+            // Get Top destroyers of containers
+            $topContainerDestroyers = $this->getTopContainerDestroyers($destroyedContainersAll);
+
+            // Get most destructive container weapons
+            $mostDestructiveContainerWeapons = $this->getMostDestructiveContainerWeapons($destroyedContainersAll);
 
             return view('user.server.show')
                 ->withServer($server)
@@ -180,7 +169,11 @@ class ServerController extends Controller
                 ->withDestroyedBuildings($destroyedBuildings)
                 ->withTopDestroyedBuildingTypes($topDestroyedBuildingTypes)
                 ->withTopDestroyers($topDestroyers)
-                ->withMostDestructiveBuildingWeapons($mostDestructiveBuildingWeapons);
+                ->withMostDestructiveBuildingWeapons($mostDestructiveBuildingWeapons)
+                ->withDestroyedContainers($destroyedContainers)
+                ->withTopDestroyedContainers($topDestroyedContainers)
+                ->withTopContainerDestroyers($topContainerDestroyers)
+                ->withMostDestructiveContainerWeapons($mostDestructiveContainerWeapons);
         }
 
         return abort(404);
@@ -383,5 +376,95 @@ class ServerController extends Controller
             ->orderByDesc('total_bullets')
             ->take(10)
             ->get();
+    }
+
+    private function getTopDestroyedBuildingTypes($destroyedBuildingsAll)
+    {
+        return $destroyedBuildingsAll
+            ->groupBy('type')
+            ->map(function ($items, $type) {
+                return [
+                    'type' => $type,
+                    'count' => $items->count(),
+                ];
+            })
+            ->sortByDesc('count')
+            ->take(10)
+            ->values();
+    }
+
+    private function getTopDestroyers($destroyedBuildingsAll)
+    {
+        return $destroyedBuildingsAll
+            ->groupBy('username') // or 'steam_id' if you prefer to group by steam_id
+            ->map(function ($group, $username) {
+                return [
+                    'username' => $username,
+                    'count' => $group->count() // Count the number of entries for each player
+                ];
+            })
+            ->sortByDesc('count') // Sort by count in descending order
+            ->values() // Reset the keys to make it sequential
+            ->take(10); // Take the top 10 players
+    }
+
+    private function getMostDestructiveBuildingWeapons($destroyedBuildingsAll)
+    {
+        return $destroyedBuildingsAll
+            ->groupBy('weapon')
+            ->map(function ($group, $weapon) {
+                return [
+                    'weapon' => $weapon,
+                    'count' => $group->count()
+                ];
+            })
+            ->sortByDesc('count')
+            ->values()
+            ->take(10);
+    }
+
+    private function getTopDestroyedContainers($destroyedContainersAll)
+    {
+        return $destroyedContainersAll
+            ->groupBy('type')
+            ->map(function ($group, $type) {
+                return [
+                    'type' => $type,
+                    'count' => $group->count()
+                ];
+            })
+            ->sortByDesc('count')
+            ->values()
+            ->take(10);
+    }
+
+    private function getTopContainerDestroyers($destroyedContainersAll)
+    {
+        return $destroyedContainersAll
+            ->groupBy('username') // or 'steam_id' if you prefer to group by steam_id
+            ->map(function ($group, $username) {
+                return [
+                    'username' => $username,
+                    'count' => $group->count() // Count the number of entries for each player
+                ];
+            })
+            ->sortByDesc('count') // Sort by count in descending order
+            ->values() // Reset the keys to make it sequential
+            ->take(10); // Take the top 10 players
+    }
+
+    private function getMostDestructiveContainerWeapons($destroyedContainersAll)
+    {
+        return $destroyedContainersAll
+        ->groupBy('weapon')
+        ->map(function ($group, $weapon) {
+            return [
+                'weapon' => $weapon,
+                'count' => $group->count()
+            ];
+        })
+        ->sortByDesc('count')
+        ->values()
+        ->take(10);
     }
 }

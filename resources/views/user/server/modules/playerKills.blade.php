@@ -147,7 +147,7 @@
             </table>
             <div class="text-center">
                 <!-- Pagination Links -->
-                {{ $playerKills->appends(['killsPage' => $playerKills->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage')])->links('pagination::bootstrap-4') }}
+                {{ $playerKills->appends(['killsPage' => $playerKills->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage'), 'destroyedContainersPage' => Request::input('destroyedContainersPage')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
 
@@ -179,7 +179,7 @@
             </table>
             <div class="text-center">
                 <!-- Pagination Links -->
-                {{ $playerDeaths->appends(['deathsPage' => $playerDeaths->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'killsPage' => Request::input('killsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage')])->links('pagination::bootstrap-4') }}
+                {{ $playerDeaths->appends(['deathsPage' => $playerDeaths->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'killsPage' => Request::input('killsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedContainersPage' => Request::input('destroyedContainersPage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
 
