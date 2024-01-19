@@ -12,7 +12,7 @@
 
     @include('modules.app.installProcess')
 
-    @include('modules.app.pricing')
+{{--    @include('modules.app.pricing')--}}
 
 {{--    @include('modules.app.faq')--}}
 
