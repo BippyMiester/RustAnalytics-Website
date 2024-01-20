@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Server;
 use App\Models\WeaponFire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 
 class WeaponFireController extends Controller
 {
@@ -23,6 +24,16 @@ class WeaponFireController extends Controller
         $server = Server::where('api_key', $request->api_key)->first();
         if(!$server) {
             return $this->sendResponseCode(400, 'Server API Key Invalid. Check your API key and try again.');
+        }
+
+        $executed = RateLimiter::attempt(
+            'serverUpdate:'.$request->api_key,
+            $perMinute = 3000,
+            function() {}
+        );
+
+        if (! $executed) {
+            return $this->sendResponseCode(429, 'Rate limit exceeded');
         }
 
         $weaponFire = new WeaponFire;

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PlayerData;
 use App\Models\Server;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 
 class PlayerDataController extends Controller
 {
@@ -23,6 +24,16 @@ class PlayerDataController extends Controller
         $server = Server::where('api_key', $request->api_key)->first();
         if(!$server) {
             return $this->sendResponseCode(400, 'Server API Key Invalid. Check your API key and try again.');
+        }
+
+        $executed = RateLimiter::attempt(
+            'serverUpdate:'.$request->api_key,
+            $perMinute = 250,
+            function() {}
+        );
+
+        if (! $executed) {
+            return $this->sendResponseCode(429, 'Rate limit exceeded');
         }
 
         $playerData = new PlayerData;
