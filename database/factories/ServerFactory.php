@@ -40,7 +40,8 @@ class ServerFactory extends Factory
             'protocol' => $this->faker->semver(),
             'last_wiped' => $wipeDate,
             'blueprint_last_wiped' => $wipeDate,
-            'description' => $this->faker->paragraph()
+            'description' => $this->faker->paragraph(),
+            'refresh_rate' => 60.0
         ];
     }
 }
