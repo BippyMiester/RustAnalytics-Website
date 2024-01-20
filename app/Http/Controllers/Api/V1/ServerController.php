@@ -13,6 +13,21 @@ class ServerController extends Controller
         return response()->json(['Response Message' => $msg], $code);
     }
 
+    public function getRefreshRate(Request $request) {
+        // Check if request is null
+        if($request->all() == null) {
+            return $this->sendResponseCode(400, 'RA_ERROR_NULL: (ServerController) Server Data is Null!');
+        }
+
+        // Grab the Server via the api Key
+        $server = Server::where('api_key', $request->api_key)->first();
+        if(!$server) {
+            return $this->sendResponseCode(400, 'Server API Key Invalid. Check your API key and try again.');
+        }
+
+        return $server->refresh_rate;
+    }
+
     public function update(Request $request) {
 
         // Check if request is null
