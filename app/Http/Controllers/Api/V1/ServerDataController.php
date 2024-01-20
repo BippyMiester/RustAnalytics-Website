@@ -44,7 +44,7 @@ class ServerDataController extends Controller
         $serverData->network_out = $request->network_out;
         $serverData->save();
 
-        event(new ServerDataUpdateEvent($server));
+        //event(new ServerDataUpdateEvent($server));
 
         print($serverData);
     }
