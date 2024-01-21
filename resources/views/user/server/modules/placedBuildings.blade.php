@@ -59,7 +59,7 @@
                             @if($building->x == null)
                                 No Data
                             @else
-                                {{ $building->x }}, {{ $building->y }}
+                                {{ number_format($building->x, 2, '.', '') }}, {{ number_format($building->y, 2, '.', '') }}
                             @endif
                         </td>
                         <td>
