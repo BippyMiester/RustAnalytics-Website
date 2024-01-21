@@ -159,7 +159,7 @@
                     <th>Steam ID</th>
                     <th>Username</th>
                     <th>Cause</th>
-                    <th>X/Y</th>
+                    <th>X/Y/Z</th>
                     <th>Grid</th>
                 </tr>
                 </thead>
@@ -171,7 +171,25 @@
                         </th>
                         <td>{{ $death->username }}</td>
                         <td>{{ $death->cause }}</td>
-                        <td>{{ $death->x }}, {{ $death->y }}</td>
+                        @if(!$death->x || !$death->y || !$death->z)
+                            <td>No Data</td>
+                        @else
+                            <td class="copyCoordinates" id="playerDeathCoordinates{{ str_replace('.', '', $death->x).str_replace('.', '', $death->y).str_replace('.', '', $death->z) }}">
+                                {{ number_format($death->x, 2, '.', '') }}, {{ number_format($death->y, 2, '.', '') }}, {{ number_format($death->z, 2, '.', '') }} <i class="fa-regular fa-copy" style="color: #c0392b; font-size: 1.1em;"></i>
+                            </td>
+                            <script>
+                                document.getElementById("playerDeathCoordinates{{ str_replace('.', '', $death->x).str_replace('.', '', $death->y).str_replace('.', '', $death->z) }}").addEventListener('click', function() {
+                                    const textToCopy = 'teleportpos ({{ $death->x }},{{ $death->y }},{{ $death->z }})';
+                                    navigator.clipboard.writeText(textToCopy).then(() => {
+                                        toastify().success('Command Copied Successfully!');
+                                        console.log('Text copied to clipboard');
+                                    }).catch(err => {
+                                        console.error('Error in copying text: ', err);
+                                        console.error("placedStructuresCoordinates{{ str_replace('.', '', $death->x).str_replace('.', '', $death->y).str_replace('.', '', $death->z) }}");
+                                    });
+                                });
+                            </script>
+                        @endif
                         <td>{{ $death->grid }}</td>
                     </tr>
                 @endforeach

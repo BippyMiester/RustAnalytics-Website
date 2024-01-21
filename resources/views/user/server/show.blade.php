@@ -2,6 +2,14 @@
 
 @section('title', $server->name)
 
+@section('stylesheets')
+    <style>
+        .copyCoordinates:hover {
+            cursor: pointer;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     <h1>{{ $server->name }}</h1>

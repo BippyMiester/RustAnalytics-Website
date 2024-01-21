@@ -96,8 +96,4 @@
     </div>
 </div>
 
-<style>
-    .copyCoordinates:hover {
-        cursor: pointer;
-    }
-</style>
+

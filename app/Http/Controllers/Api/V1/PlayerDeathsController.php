@@ -33,6 +33,7 @@ class PlayerDeathsController extends Controller
         $playerDeath->cause = $request->cause;
         $playerDeath->x = $request->x;
         $playerDeath->y = $request->y;
+        $playerDeath->z = $request->z;
         $playerDeath->grid = $request->grid;
         $playerDeath->save();
 
