@@ -35,6 +35,7 @@ class DestroyedContainersController extends Controller
         $destroyedContainer->grid = $request->grid;
         $destroyedContainer->x = $request->x;
         $destroyedContainer->y = $request->y;
+        $destroyedContainer->z = $request->z;
         $destroyedContainer->save();
 
         print($destroyedContainer);

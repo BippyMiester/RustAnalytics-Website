@@ -59,8 +59,8 @@
                     <th>Victim/Owner</th>
                     <th>Type</th>
                     <th>Weapon</th>
+                    <th>X/Y/Z</th>
                     <th>Grid</th>
-                    <th>X, Y</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -73,8 +73,26 @@
                         <td>{{ $container->owner }}</td>
                         <td>{{ $container->type }}</td>
                         <td>{{ $container->weapon }}</td>
+                        @if(!$container->x || !$container->y || !$container->z)
+                            <td>No Data</td>
+                        @else
+                            <td class="copyCoordinates" id="destroyedContainerCoordinate{{ str_replace('.', '', $container->x).str_replace('.', '', $container->y).str_replace('.', '', $container->z) }}">
+                                {{ number_format($container->x, 2, '.', '') }}, {{ number_format($container->y, 2, '.', '') }}, {{ number_format($container->z, 2, '.', '') }} <i class="fa-regular fa-copy" style="color: #c0392b; font-size: 1.1em;"></i>
+                            </td>
+                            <script>
+                                document.getElementById("destroyedContainerCoordinate{{ str_replace('.', '', $container->x).str_replace('.', '', $container->y).str_replace('.', '', $container->z) }}").addEventListener('click', function() {
+                                    const textToCopy = 'teleportpos ({{ $container->x }},{{ $container->y }},{{ $container->z }})';
+                                    navigator.clipboard.writeText(textToCopy).then(() => {
+                                        toastify().success('Command Copied Successfully!');
+                                        console.log('Text copied to clipboard');
+                                    }).catch(err => {
+                                        console.error('Error in copying text: ', err);
+                                        console.error("placedStructuresCoordinates{{ str_replace('.', '', $container->x).str_replace('.', '', $container->y).str_replace('.', '', $container->z) }}");
+                                    });
+                                });
+                            </script>
+                        @endif
                         <td>{{ $container->grid }}</td>
-                        <td>{{ $container->x . ', ' . $container->y }}</td>
                     </tr>
                 @endforeach
                 </tbody>
