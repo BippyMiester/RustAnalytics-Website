@@ -34,6 +34,9 @@ class DestroyedBuildingsController extends Controller
         $destroyedBuilding->type = $request->type;
         $destroyedBuilding->tier = $request->tier;
         $destroyedBuilding->weapon = $request->weapon;
+        $destroyedBuilding->x = $request->x;
+        $destroyedBuilding->y = $request->y;
+        $destroyedBuilding->z = $request->z;
         $destroyedBuilding->grid = $request->grid;
         $destroyedBuilding->save();
 

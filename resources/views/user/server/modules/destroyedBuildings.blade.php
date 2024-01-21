@@ -60,6 +60,7 @@
                     <th>Type</th>
                     <th>Tier</th>
                     <th>Weapon</th>
+                    <th>X/Y/Z</th>
                     <th>Grid</th>
                 </tr>
                 </thead>
@@ -74,6 +75,25 @@
                         <td>{{ $building->type }}</td>
                         <td>{{ $building->tier }}</td>
                         <td>{{ $building->weapon }}</td>
+                        @if(!$building->x || !$building->y || !$building->z)
+                            <td>No Data</td>
+                        @else
+                            <td class="copyCoordinates" id="destroyedBuildingCoordinates{{ str_replace('.', '', $building->x).str_replace('.', '', $building->y).str_replace('.', '', $building->z) }}">
+                                {{ number_format($building->x, 2, '.', '') }}, {{ number_format($building->y, 2, '.', '') }}, {{ number_format($building->z, 2, '.', '') }} <i class="fa-regular fa-copy" style="color: #c0392b; font-size: 1.1em;"></i>
+                            </td>
+                            <script>
+                                document.getElementById("destroyedBuildingCoordinates{{ str_replace('.', '', $building->x).str_replace('.', '', $building->y).str_replace('.', '', $building->z) }}").addEventListener('click', function() {
+                                    const textToCopy = 'teleportpos ({{ $building->x }},{{ $building->y }},{{ $building->z }})';
+                                    navigator.clipboard.writeText(textToCopy).then(() => {
+                                        toastify().success('Command Copied Successfully!');
+                                        console.log('Text copied to clipboard');
+                                    }).catch(err => {
+                                        console.error('Error in copying text: ', err);
+                                        console.error("placedStructuresCoordinates{{ str_replace('.', '', $building->x).str_replace('.', '', $building->y).str_replace('.', '', $building->z) }}");
+                                    });
+                                });
+                            </script>
+                        @endif
                         <td>{{ $building->grid }}</td>
                     </tr>
                 @endforeach
