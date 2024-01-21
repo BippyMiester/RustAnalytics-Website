@@ -32,6 +32,7 @@ class ServerController extends Controller
             $weaponFirePage = $request->input('weaponFirePage', 1);
             $destroyedBuildingsPage = $request->input('destroyedBuildingsPage', 1);
             $destroyedContainersPage = $request->input('destroyedContainersPage', 1);
+            $placedStructuresPage = $request->input('placedStructuresPage', 1);
 
             // Get the player count total for the server
             $uniquePlayerCount = $this->getUniquePlayerCount($server);
@@ -63,7 +64,7 @@ class ServerController extends Controller
 
             // Get the player Kills Data
             $playerKillsAll = $server->playerkills()->get();
-            $playerKills = $server->playerkills()->paginate(15, ['*'], 'killsPage');
+            $playerKills = $server->playerkills()->orderBy('created_at', 'desc')->paginate(15, ['*'], 'killsPage');
 
             // Top Player Kills
             $topPlayerKills = $this->getTopPlayerKills($playerKillsAll);
@@ -78,7 +79,7 @@ class ServerController extends Controller
 
             // Get the player deaths data
             $playerDeathsAll = $server->playerdeaths()->get();
-            $playerDeaths = $server->playerdeaths()->paginate(15, ['*'], 'deathsPage');
+            $playerDeaths = $server->playerdeaths()->orderBy('created_at', 'desc')->paginate(15, ['*'], 'deathsPage');
 
             // Get the top player deaths
             $topPlayerDeaths = $this->getTopPlayerDeaths($playerDeathsAll);
@@ -102,7 +103,7 @@ class ServerController extends Controller
 
             // Get the player weapon Fire
             $weaponFireAll = $server->weaponfire()->get();
-            $weaponFire = $server->weaponfire()->paginate(10, ['*'], 'weaponFirePage');
+            $weaponFire = $server->weaponfire()->orderBy('created_at', 'desc')->paginate(10, ['*'], 'weaponFirePage');
 
             // Get the top players base on number of bullets fired
             $topBulletsFired = $this->getTopBulletsFired($server);
@@ -111,14 +112,14 @@ class ServerController extends Controller
             $topWeaponBulletsFired = $this->getTopWeaponBulletsFired($server);
 
 
-            // Set up pagination for Weapon Fire
+            // Set up pagination for Destroyed Buildings
             Paginator::currentPageResolver(function () use ($destroyedBuildingsPage) {
                 return $destroyedBuildingsPage;
             });
 
             // Get all the destroyed buildings
             $destroyedBuildingsAll = $server->destroyedbuildings()->get();
-            $destroyedBuildings = $server->destroyedbuildings()->paginate(10, ['*'], 'destroyedBuildingsPage');
+            $destroyedBuildings = $server->destroyedbuildings()->orderBy('created_at', 'desc')->paginate(10, ['*'], 'destroyedBuildingsPage');
 
             // Get the top destroyed building types
             $topDestroyedBuildingTypes = $this->getTopDestroyedBuildingTypes($destroyedBuildingsAll);
@@ -129,14 +130,14 @@ class ServerController extends Controller
             // Get the most destructive weapons for buildings
             $mostDestructiveBuildingWeapons = $this->getMostDestructiveBuildingWeapons($destroyedBuildingsAll);
 
-            // Set up pagination for Weapon Fire
+            // Set up pagination for Destroyed Containers
             Paginator::currentPageResolver(function () use ($destroyedContainersPage) {
                 return $destroyedContainersPage;
             });
 
-            // Get all the destroyed buildings
+            // Get all the destroyed containers
             $destroyedContainersAll = $server->destroyedcontainers()->get();
-            $destroyedContainers = $server->destroyedcontainers()->paginate(10, ['*'], 'destroyedContainersPage');
+            $destroyedContainers = $server->destroyedcontainers()->orderBy('created_at', 'desc')->paginate(10, ['*'], 'destroyedContainersPage');
 
             // Get the top destroyed containers
             $topDestroyedContainers = $this->getTopDestroyedContainers($destroyedContainersAll);
@@ -146,6 +147,21 @@ class ServerController extends Controller
 
             // Get most destructive container weapons
             $mostDestructiveContainerWeapons = $this->getMostDestructiveContainerWeapons($destroyedContainersAll);
+
+            // Set up pagination for Placed structures
+            Paginator::currentPageResolver(function () use ($placedStructuresPage) {
+                return $placedStructuresPage;
+            });
+
+            // get all the placed structures
+            $placedStructuresAll = $server->placedstructures()->get();
+            $placedStructures = $server->placedstructures()->orderBy('created_at', 'desc')->paginate(10, ['*'], 'placedStructuresPage');
+
+            // top placed structures
+            $topPlacedStructures = $this->getTopPlacedStructures($placedStructuresAll);
+
+            // top placed structures by username
+            $topPlacedStructuresPlayers = $this->getTopPlacedStructuresPlayers($placedStructuresAll);
 
             return view('user.server.show')
                 ->withServer($server)
@@ -173,7 +189,10 @@ class ServerController extends Controller
                 ->withDestroyedContainers($destroyedContainers)
                 ->withTopDestroyedContainers($topDestroyedContainers)
                 ->withTopContainerDestroyers($topContainerDestroyers)
-                ->withMostDestructiveContainerWeapons($mostDestructiveContainerWeapons);
+                ->withMostDestructiveContainerWeapons($mostDestructiveContainerWeapons)
+                ->withPlacedStructures($placedStructures)
+                ->withTopPlacedStructures($topPlacedStructures)
+                ->withTopPlacedStructuresPlayers($topPlacedStructuresPlayers);
         }
 
         return abort(404);
@@ -466,5 +485,35 @@ class ServerController extends Controller
         ->sortByDesc('count')
         ->values()
         ->take(10);
+    }
+
+    private function getTopPlacedStructures($placedStructuresAll)
+    {
+        return $placedStructuresAll
+            ->groupBy('type')
+            ->map(function ($group, $type) {
+                return [
+                    'type' => $type,
+                    'count' => $group->count()
+                ];
+            })
+            ->sortByDesc('count')
+            ->values()
+            ->take(10);
+    }
+
+    private function getTopPlacedStructuresPlayers($placedStructuresAll)
+    {
+        return $placedStructuresAll
+            ->groupBy('username') // or 'steam_id' if you prefer to group by steam_id
+            ->map(function ($group, $username) {
+                return [
+                    'username' => $username,
+                    'count' => $group->count() // Count the number of entries for each player
+                ];
+            })
+            ->sortByDesc('count') // Sort by count in descending order
+            ->values() // Reset the keys to make it sequential
+            ->take(10); // Take the top 10 players
     }
 }

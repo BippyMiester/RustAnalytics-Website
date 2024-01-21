@@ -30,6 +30,9 @@ class PlacedStructuresController extends Controller
         $placedStructure->username = $request->username;
         $placedStructure->steam_id = $request->steam_id;
         $placedStructure->type = $request->type;
+        $placedStructure->x = $request->x;
+        $placedStructure->y = $request->y;
+        $placedStructure->grid = $request->grid;
         $placedStructure->amount = $request->amount;
         $placedStructure->save();
 

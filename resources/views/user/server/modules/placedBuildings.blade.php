@@ -1,10 +1,85 @@
 <div class="tab-pane" id="v-placedBuildings">
-    <div class="row justify-content-center">
-        <div class="col-sm-6 text-center">
-            <h1>Coming Soon!</h1>
-            <p>As our plugin is still in the Beta Testing phase, we unfortunately haven't gotten around to displaying this information yet on our website! But don't worry! We're still collecting the data, and we'll display it soon enough!</p>
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-default panel-shadow" data-collapsed="0"><!-- to apply shadow add class "panel-shadow" -->
+                    <!-- panel head -->
+                    <div class="panel-heading">
+                        <div class="panel-title">Top Placed Buildings</div>
+                    </div>
+
+                    <!-- panel body -->
+                    <div class="panel-body">
+                        @foreach ($topPlacedStructures as $type)
+                            <p><strong>{{ $type['type'] }}</strong> - {{ $type['count'] }}</p>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="panel panel-default panel-shadow" data-collapsed="0"><!-- to apply shadow add class "panel-shadow" -->
+                    <!-- panel head -->
+                    <div class="panel-heading">
+                        <div class="panel-title">Most Constructive Players</div>
+                    </div>
+
+                    <!-- panel body -->
+                    <div class="panel-body">
+                        @foreach ($topPlacedStructuresPlayers as $player)
+                            <p><strong>{{ $player['username'] }}</strong> - {{ $player['count'] }} Buildings</p>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-sm table-hover table-borderless">
+                <thead>
+                <tr>
+                    <th>Steam ID</th>
+                    <th>Username</th>
+                    <th>Type</th>
+                    <th>X/Y</th>
+                    <th>Grid</th>
+                    <th>Placed On</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($placedStructures as $building)
+                    <tr>
+                        <th>
+                            <a href="https://www.steamidfinder.com/lookup/{{ $building->steam_id }}/" target="_blank"><strong>{{ $building->steam_id }}</strong></a>
+                        </th>
+                        <td>{{ $building->username }}</td>
+                        <td>{{ $building->type }}</td>
+                        <td>
+                            @if($building->x == null)
+                                No Data
+                            @else
+                                {{ $building->x }}, {{ $building->y }}
+                            @endif
+                        </td>
+                        <td>
+                            @if($building->grid == null)
+                                No Data
+                            @else
+                                {{ $building->grid }}
+                            @endif
+                        </td>
+                        <td>{{ $building->created_at->format('H:i:s | m-d-y') }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <div class="text-center">
+                <!-- Pagination Links -->
+                {{ $placedStructures->appends(['placedStructuresPage' => $placedStructures->currentPage(), 'killsPage' => Request::get('killsPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedContainersPage' => Request::input('destroyedContainersPage'), 'gatherPage' => Request::input('gatherPage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage')])->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
+
+    </div>
+</div>
 
