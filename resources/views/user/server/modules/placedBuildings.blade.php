@@ -55,7 +55,7 @@
                         </th>
                         <td>{{ $building->username }}</td>
                         <td>{{ $building->type }}</td>
-                        @if($building->x == null)
+                        @if(!$building->x || !$building->y || !$building->z)
                             <td>No Data</td>
                         @else
                             <td id="placedStructuresCoordinates{{ str_replace('.', '', $building->x).str_replace('.', '', $building->y).str_replace('.', '', $building->z) }}">
