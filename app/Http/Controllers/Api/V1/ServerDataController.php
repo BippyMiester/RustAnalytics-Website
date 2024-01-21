@@ -34,7 +34,7 @@ class ServerDataController extends Controller
             function() {}
         );
 
-        if (! $executed) {
+        if (!$executed) {
             return $this->sendResponseCode(429, 'Rate limit exceeded');
         }
 
@@ -55,7 +55,7 @@ class ServerDataController extends Controller
         $serverData->network_out = $request->network_out;
         $serverData->save();
 
-        //event(new ServerDataUpdateEvent($server));
+        event(new ServerDataUpdateEvent($server));
 
         print($serverData);
     }
