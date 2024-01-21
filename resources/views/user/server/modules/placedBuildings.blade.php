@@ -58,7 +58,7 @@
                         @if(!$building->x || !$building->y || !$building->z)
                             <td>No Data</td>
                         @else
-                            <td id="placedStructuresCoordinates{{ str_replace('.', '', $building->x).str_replace('.', '', $building->y).str_replace('.', '', $building->z) }}">
+                            <td class="copyCoordinates" id="placedStructuresCoordinates{{ str_replace('.', '', $building->x).str_replace('.', '', $building->y).str_replace('.', '', $building->z) }}">
                                 {{ number_format($building->x, 2, '.', '') }}, {{ number_format($building->y, 2, '.', '') }}, {{ number_format($building->z, 2, '.', '') }} <i class="fa-regular fa-copy" style="color: #c0392b; font-size: 1.1em;"></i>
                             </td>
                             <script>
@@ -95,3 +95,9 @@
 
     </div>
 </div>
+
+<style>
+    .copyCoordinates:hover {
+        cursor: pointer;
+    }
+</style>
