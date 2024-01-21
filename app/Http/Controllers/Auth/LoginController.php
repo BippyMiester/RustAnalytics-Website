@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\Auth\User;
 use App\Http\Controllers\Controller;
+use App\Models\PusherTimeout;
 use App\Models\Server;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
@@ -106,7 +107,8 @@ class LoginController extends Controller
 
         // Create a server for the user if the user is new
         if($this->isNewUser) {
-            $this->createNewServer($user);
+            $server = $this->createNewServer($user);
+            $timeout = $this->createNewPusherTimeout($server);
         }
 
         Auth::login($user, false);
@@ -156,6 +158,14 @@ class LoginController extends Controller
         $server->api_key = Str::uuid();
         $server->slug = Str::uuid();
         $server->save();
+        return $server;
+    }
+
+    private function createNewPusherTimeout(Server $server)
+    {
+        $timeout = new PusherTimeout;
+        $timeout->api_key = $server->api_key;
+        $timeout->save();
     }
 
 
