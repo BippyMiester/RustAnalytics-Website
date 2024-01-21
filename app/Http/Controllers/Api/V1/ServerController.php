@@ -53,8 +53,45 @@ class ServerController extends Controller
         $server->blueprint_last_wiped = DateTime::createFromFormat('m/d/Y H:i:s', $request->blueprint_last_wiped)->format('Y-m-d H:i:s');
         $server->description = $request->description;
         $server->version = $request->version;
+        $server->tags = $this->filterTags($request->tags);
+
         $server->save();
 
         print($server);
+    }
+
+    private function filterTags($tags)
+    {
+        $allowedTags = [
+            "monthly",
+            "biweekly",
+            "weekly",
+            "vanilla",
+            "hardcore",
+            "softcore",
+            "pve",
+            "roleplay",
+            "creative",
+            "minigame",
+            "training",
+            "battlefield",
+            "broyale",
+            "builds",
+            "carbon",
+            "modded",
+        ];
+
+        // Retrieve tags from request
+        $requestTagsString = $tags; // This should be a string like "monthly,unknownTag,weekly"
+        $requestTagsArray = explode(',', $requestTagsString); // Split the string into an array
+
+// Filter tags
+        $filteredTags = array_filter($requestTagsArray, function ($tag) use ($allowedTags) {
+            return in_array($tag, $allowedTags);
+        });
+
+// Convert the filtered tags back to a string
+        $filteredTagsString = implode(',', $filteredTags);
+        return $filteredTagsString;
     }
 }

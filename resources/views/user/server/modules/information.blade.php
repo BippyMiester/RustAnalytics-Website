@@ -51,6 +51,10 @@
                     <td>Description</td>
                     <td>{{ $server->description }}</td>
                 </tr>
+                <tr>
+                    <td>Server Tags</td>
+                    <td>{{ $server->tags }}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
