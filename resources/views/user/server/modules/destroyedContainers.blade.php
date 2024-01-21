@@ -81,7 +81,7 @@
             </table>
             <div class="text-center">
                 <!-- Pagination Links -->
-                {{ $destroyedContainers->appends(['destroyedContainersPage' => $destroyedContainers->currentPage(), 'killsPage' => Request::get('killsPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage'), 'gatherPage' => Request::input('gatherPage')])->links('pagination::bootstrap-4') }}
+                {{ $destroyedContainers->appends(['destroyedContainersPage' => $destroyedContainers->currentPage(), 'killsPage' => Request::get('killsPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage'), 'gatherPage' => Request::input('gatherPage'), 'placedStructuresPage' => Request::input('placedStructuresPage')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
 
