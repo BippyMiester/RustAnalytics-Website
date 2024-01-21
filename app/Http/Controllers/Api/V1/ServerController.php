@@ -85,12 +85,12 @@ class ServerController extends Controller
         $requestTagsString = $tags; // This should be a string like "monthly,unknownTag,weekly"
         $requestTagsArray = explode(',', $requestTagsString); // Split the string into an array
 
-// Filter tags
+        // Filter tags
         $filteredTags = array_filter($requestTagsArray, function ($tag) use ($allowedTags) {
             return in_array($tag, $allowedTags);
         });
 
-// Convert the filtered tags back to a string
+        // Convert the filtered tags back to a string
         $filteredTagsString = implode(',', $filteredTags);
         return $filteredTagsString;
     }

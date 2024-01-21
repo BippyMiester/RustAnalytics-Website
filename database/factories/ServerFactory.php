@@ -41,7 +41,8 @@ class ServerFactory extends Factory
             'last_wiped' => $wipeDate,
             'blueprint_last_wiped' => $wipeDate,
             'description' => $this->faker->paragraph(),
-            'refresh_rate' => 60.0
+            'refresh_rate' => 60.0,
+            'tags' => "monthly,pve,vanilla"
         ];
     }
 }
