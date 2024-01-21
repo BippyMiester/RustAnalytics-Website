@@ -34,3 +34,5 @@
 <meta name="msapplication-config" content="/imgs/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 <!-- END FAVICON LINKS -->
+
+@toastifyCss

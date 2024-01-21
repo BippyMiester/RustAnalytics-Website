@@ -31,3 +31,5 @@
 <script src="/js/dashboard/neon-demo.js"></script>
 
 <script src="https://kit.fontawesome.com/0d9c5a4db2.js" crossorigin="anonymous"></script>
+
+@toastifyJs

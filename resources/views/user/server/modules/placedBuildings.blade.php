@@ -42,7 +42,7 @@
                     <th>Steam ID</th>
                     <th>Username</th>
                     <th>Type</th>
-                    <th>X/Y</th>
+                    <th>X/Y/Z</th>
                     <th>Grid</th>
                     <th>Placed On</th>
                 </tr>
@@ -55,13 +55,26 @@
                         </th>
                         <td>{{ $building->username }}</td>
                         <td>{{ $building->type }}</td>
-                        <td>
-                            @if($building->x == null)
-                                No Data
-                            @else
-                                {{ number_format($building->x, 2, '.', '') }}, {{ number_format($building->y, 2, '.', '') }}
-                            @endif
-                        </td>
+                        @if($building->x == null)
+                            <td>No Data</td>
+                        @else
+                            <td id="placedStructuresCoordinates{{ str_replace('.', '', $building->x).str_replace('.', '', $building->y).str_replace('.', '', $building->z) }}">
+                                {{ number_format($building->x, 2, '.', '') }}, {{ number_format($building->y, 2, '.', '') }}, {{ number_format($building->z, 2, '.', '') }} <i class="fa-regular fa-copy" style="color: #c0392b; font-size: 1.1em;"></i>
+                            </td>
+                            <script>
+                                document.getElementById("placedStructuresCoordinates{{ str_replace('.', '', $building->x).str_replace('.', '', $building->y).str_replace('.', '', $building->z) }}").addEventListener('click', function() {
+                                    const textToCopy = 'teleportpos ({{ $building->x }},{{ $building->y }},{{ $building->z }})';
+                                    navigator.clipboard.writeText(textToCopy).then(() => {
+                                        toastify().success('Command Copied Successfully!');
+                                        console.log('Text copied to clipboard');
+                                    }).catch(err => {
+                                        console.error('Error in copying text: ', err);
+                                        console.error("placedStructuresCoordinates{{ str_replace('.', '', $building->x).str_replace('.', '', $building->y).str_replace('.', '', $building->z) }}");
+                                    });
+                                });
+                            </script>
+                        @endif
+
                         <td>
                             @if($building->grid == null)
                                 No Data
@@ -82,4 +95,3 @@
 
     </div>
 </div>
-

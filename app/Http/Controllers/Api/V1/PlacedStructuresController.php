@@ -32,6 +32,7 @@ class PlacedStructuresController extends Controller
         $placedStructure->type = $request->type;
         $placedStructure->x = $request->x;
         $placedStructure->y = $request->y;
+        $placedStructure->z = $request->z;
         $placedStructure->grid = $request->grid;
         $placedStructure->amount = $request->amount;
         $placedStructure->save();
