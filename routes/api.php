@@ -40,7 +40,7 @@ Route::prefix('v1')->group(function () {
     });
 
     // Server
-    Route::prefix('server')->group(function () {
+    Route::middleware('requiredVersionCheck')->prefix('server')->group(function () {
         Route::post('update', [ServerController::class, 'update']);
         Route::post('getRefreshRates', [ServerController::class, 'getRefreshRate']);
 
