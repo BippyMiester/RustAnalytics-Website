@@ -195,9 +195,6 @@
 
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script>
-
-
-
     var pusher = new Pusher('f2cbd1e30b9474b0073f', {
         cluster: 'us2'
     });
@@ -208,6 +205,16 @@
     channel.bind('server-data-update', function(data) {
         // Ensure that serverData exists and is an array
         if (data.serverData && Array.isArray(data.serverData) && data.serverData.length > 0) {
+            // Hide the 'Waiting For Server To Give Us Data. Is it offline?' span on the first event
+            if (!firstEventReceived) {
+                $('.line-server-fps-waiting').hide();
+                $('.line-server-entities-waiting').hide();
+                $('.line-server-fps-wrapper').css('display', 'flex');
+                $('.line-server-entities-wrapper').css('display', 'flex');
+                firstEventReceived = true; // Set the flag to true after the first event
+            }
+
+            // Get the most recent entry from the database
             var mostRecentData = data.serverData[0];
 
             // Get the most current FPS
@@ -217,15 +224,6 @@
             // Update the currentServerFPS span with the current server_fps value
             $('.currentServerFPS').text(currentFps);
             $('.currentServerEntities').text(currentEntities);
-
-            // Hide the 'Waiting For Server To Give Us Data. Is it offline?' span on the first event
-            if (!firstEventReceived) {
-                $('.line-server-fps-waiting').hide();
-                $('.line-server-entities-waiting').hide();
-                $('.line-server-fps-wrapper').css('display', 'flex');
-                $('.line-server-entities-wrapper').css('display', 'flex');
-                firstEventReceived = true; // Set the flag to true after the first event
-            }
 
             // Extract memory usage values
             var currentMemory = mostRecentData.used_memory;
@@ -309,4 +307,33 @@
             console.log("serverData is undefined or not an array");
         }
     });
+
+    // Function to stop receiving events and update the UI
+    function stopPusherAndUpdateUI() {
+        // Unsubscribe from the channel
+        pusher.unsubscribe('server-panel-update.{{ $server->slug }}');
+
+        // Update text content for specified IDs
+        ['server-memory-usage', 'server-network-usage', 'server-ingame-time', 'server-players-online'].forEach(function(id) {
+            document.getElementById(id).textContent = "Timeout: Refresh Webpage";
+        });
+
+        // Update text content for specified classes
+        document.querySelectorAll('.line-server-fps-waiting, .line-server-entities-waiting').forEach(function(elem) {
+            elem.textContent = "Timeout: Refresh Webpage";
+        });
+
+        // Hide certain classes
+        document.querySelectorAll('.line-server-fps-wrapper, .line-server-entities-wrapper').forEach(function(elem) {
+            elem.style.display = 'none';
+        });
+
+        // Show certain classes
+        document.querySelectorAll('.line-server-fps-waiting, .line-server-entities-waiting').forEach(function(elem) {
+            elem.style.display = 'block';
+        });
+    }
+
+    // Schedule to stop receiving events and update the UI after 15 minutes
+    setTimeout(stopPusherAndUpdateUI, 600000); // 10 minutes in milliseconds
 </script>

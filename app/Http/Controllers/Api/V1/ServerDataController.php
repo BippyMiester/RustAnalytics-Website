@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Events\ServerDataUpdateEvent;
 use App\Http\Controllers\Controller;
+use App\Models\PusherTimeout;
 use App\Models\Server;
 use App\Models\ServerData;
 use DateTime;
@@ -55,7 +56,12 @@ class ServerDataController extends Controller
         $serverData->network_out = $request->network_out;
         $serverData->save();
 
-        event(new ServerDataUpdateEvent($server));
+        $timeout = PusherTimeout::where('api_key', $server->api_key)->first();
+        if($timeout->count < 10) {
+            event(new ServerDataUpdateEvent($server));
+            $timeout->count = $timeout->count + 1;
+            $timeout->save();
+        }
 
         print($serverData);
     }

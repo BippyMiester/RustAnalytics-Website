@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PusherTimeout;
 use App\Models\Server;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -25,6 +26,11 @@ class ServerController extends Controller
         $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
 
         if($server) {
+            // Reset the timeout
+            $timeout = PusherTimeout::where('api_key', $server->api_key)->first();
+            $timeout->count = 0;
+            $timeout->save();
+
             // Get the current page numbers from the request
             $killsPage = $request->input('killsPage', 1);
             $gatherPage = $request->input('gatherPage', 1);
