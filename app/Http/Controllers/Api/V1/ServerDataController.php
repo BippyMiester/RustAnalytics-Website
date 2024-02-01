@@ -57,9 +57,9 @@ class ServerDataController extends Controller
         $serverData->save();
 
         $timeout = PusherTimeout::where('api_key', $server->api_key)->first();
-        if($timeout->count < 10) {
+        if($timeout->server_data_count < 10) {
             event(new ServerDataUpdateEvent($server));
-            $timeout->count = $timeout->count + 1;
+            $timeout->server_data_count = $timeout->server_data_count + 1;
             $timeout->save();
         }
 

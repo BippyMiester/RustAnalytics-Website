@@ -28,7 +28,7 @@ class ServerController extends Controller
         if($server) {
             // Reset the timeout
             $timeout = PusherTimeout::where('api_key', $server->api_key)->first();
-            $timeout->count = 0;
+            $timeout->server_data_count = 0;
             $timeout->save();
 
             // Get the current page numbers from the request
