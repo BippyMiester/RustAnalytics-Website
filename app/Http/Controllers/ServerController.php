@@ -39,6 +39,7 @@ class ServerController extends Controller
             $destroyedBuildingsPage = $request->input('destroyedBuildingsPage', 1);
             $destroyedContainersPage = $request->input('destroyedContainersPage', 1);
             $placedStructuresPage = $request->input('placedStructuresPage', 1);
+            $placedDeployablesPage = $request->input('placedDeployablesPage', 1);
 
             // Get the player count total for the server
             $uniquePlayerCount = $this->getUniquePlayerCount($server);
@@ -169,6 +170,21 @@ class ServerController extends Controller
             // top placed structures by username
             $topPlacedStructuresPlayers = $this->getTopPlacedStructuresPlayers($placedStructuresAll);
 
+            // Set up pagination for Placed Deployables
+            Paginator::currentPageResolver(function () use ($placedDeployablesPage) {
+                return $placedDeployablesPage;
+            });
+
+            // Get all the placed deployables
+            $placedDeployablesAll = $server->placeddeployables()->get();
+            $placedDeployables = $server->placeddeployables()->orderBy('created_at', 'desc')->paginate(10, ['*'], 'placedDeployablesPage');
+
+            // top placed deployables
+            $topPlacedDeployables = $this->getTopPlacedDeployables($placedDeployablesAll);
+
+            // top placed deployables by username
+            $topPlacedDeployablesPlayers = $this->getTopPlacedDeployablesPlayers($placedDeployablesAll);
+
             return view('user.server.show')
                 ->withServer($server)
                 ->withPlayerCount($uniquePlayerCount)
@@ -198,7 +214,10 @@ class ServerController extends Controller
                 ->withMostDestructiveContainerWeapons($mostDestructiveContainerWeapons)
                 ->withPlacedStructures($placedStructures)
                 ->withTopPlacedStructures($topPlacedStructures)
-                ->withTopPlacedStructuresPlayers($topPlacedStructuresPlayers);
+                ->withTopPlacedStructuresPlayers($topPlacedStructuresPlayers)
+                ->withPlacedDeployables($placedDeployables)
+                ->withTopPlacedDeployables($topPlacedDeployables)
+                ->withTopPlacedDeployablesPlayers($topPlacedDeployablesPlayers);
         }
 
         return abort(404);
@@ -511,6 +530,36 @@ class ServerController extends Controller
     private function getTopPlacedStructuresPlayers($placedStructuresAll)
     {
         return $placedStructuresAll
+            ->groupBy('username') // or 'steam_id' if you prefer to group by steam_id
+            ->map(function ($group, $username) {
+                return [
+                    'username' => $username,
+                    'count' => $group->count() // Count the number of entries for each player
+                ];
+            })
+            ->sortByDesc('count') // Sort by count in descending order
+            ->values() // Reset the keys to make it sequential
+            ->take(10); // Take the top 10 players
+    }
+
+    private function getTopPlacedDeployables($placedDeployablesAll)
+    {
+        return $placedDeployablesAll
+            ->groupBy('type')
+            ->map(function ($group, $type) {
+                return [
+                    'type' => $type,
+                    'count' => $group->count()
+                ];
+            })
+            ->sortByDesc('count')
+            ->values()
+            ->take(10);
+    }
+
+    private function getTopPlacedDeployablesPlayers($placedDeployablesAll)
+    {
+        return $placedDeployablesAll
             ->groupBy('username') // or 'steam_id' if you prefer to group by steam_id
             ->map(function ($group, $username) {
                 return [

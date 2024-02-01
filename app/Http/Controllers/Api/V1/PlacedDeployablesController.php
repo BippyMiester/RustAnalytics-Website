@@ -31,6 +31,10 @@ class PlacedDeployablesController extends Controller
         $placedDeployable->steam_id = $request->steam_id;
         $placedDeployable->type = $request->type;
         $placedDeployable->amount = $request->amount;
+        $placedDeployable->x = $request->x;
+        $placedDeployable->y = $request->y;
+        $placedDeployable->z = $request->z;
+        $placedDeployable->grid = $request->grid;
         $placedDeployable->save();
 
         print($placedDeployable);

@@ -89,7 +89,7 @@
             </table>
             <div class="text-center">
                 <!-- Pagination Links -->
-                {{ $placedStructures->appends(['placedStructuresPage' => $placedStructures->currentPage(), 'killsPage' => Request::get('killsPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedContainersPage' => Request::input('destroyedContainersPage'), 'gatherPage' => Request::input('gatherPage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage')])->links('pagination::bootstrap-4') }}
+                {{ $placedStructures->appends(['placedStructuresPage' => $placedStructures->currentPage(), 'killsPage' => Request::get('killsPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedContainersPage' => Request::input('destroyedContainersPage'), 'gatherPage' => Request::input('gatherPage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage'), 'placedDeployablesPage' => Request::input('placedDeployablesPage')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
 

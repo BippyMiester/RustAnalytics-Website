@@ -147,7 +147,7 @@
             </table>
             <div class="text-center">
                 <!-- Pagination Links -->
-                {{ $playerKills->appends(['killsPage' => $playerKills->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage'), 'destroyedContainersPage' => Request::input('destroyedContainersPage'), 'placedStructuresPage' => Request::input('placedStructuresPage')])->links('pagination::bootstrap-4') }}
+                {{ $playerKills->appends(['killsPage' => $playerKills->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage'), 'destroyedContainersPage' => Request::input('destroyedContainersPage'), 'placedStructuresPage' => Request::input('placedStructuresPage'), 'placedDeployablesPage' => Request::input('placedDeployablesPage')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
 
@@ -197,7 +197,7 @@
             </table>
             <div class="text-center">
                 <!-- Pagination Links -->
-                {{ $playerDeaths->appends(['deathsPage' => $playerDeaths->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'killsPage' => Request::input('killsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedContainersPage' => Request::input('destroyedContainersPage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage'), 'placedStructuresPage' => Request::input('placedStructuresPage')])->links('pagination::bootstrap-4') }}
+                {{ $playerDeaths->appends(['deathsPage' => $playerDeaths->currentPage(), 'gatherPage' => Request::input('gatherPage'), 'killsPage' => Request::input('killsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedContainersPage' => Request::input('destroyedContainersPage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage'), 'placedStructuresPage' => Request::input('placedStructuresPage'), 'placedDeployablesPage' => Request::input('placedDeployablesPage')])->links('pagination::bootstrap-4') }}
             </div>
         </div>
 
