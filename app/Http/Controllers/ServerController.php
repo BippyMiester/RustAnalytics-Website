@@ -40,6 +40,7 @@ class ServerController extends Controller
             $destroyedContainersPage = $request->input('destroyedContainersPage', 1);
             $placedStructuresPage = $request->input('placedStructuresPage', 1);
             $placedDeployablesPage = $request->input('placedDeployablesPage', 1);
+            $animalKillsPage = $request->input('animalKillsPage', 1);
 
             // Get the player count total for the server
             $uniquePlayerCount = $this->getUniquePlayerCount($server);
@@ -185,6 +186,24 @@ class ServerController extends Controller
             // top placed deployables by username
             $topPlacedDeployablesPlayers = $this->getTopPlacedDeployablesPlayers($placedDeployablesAll);
 
+            // Set up pagination for Animal Kills
+            Paginator::currentPageResolver(function () use ($animalKillsPage) {
+                return $animalKillsPage;
+            });
+
+            // Get all the animal kills
+            $animalKillsAll = $server->animalkills()->get();
+            $animalKills = $server->animalkills()->orderBy('created_at', 'desc')->paginate(10, ['*'], 'animalKillsPage');
+
+            // Get top animals being killed
+            $topAnimalKills = $this->getTopAnimalKills($animalKillsAll);
+
+            // Get top weapons being used for killing
+            $topAnimalKillsWeapons = $this->getTopAnimalKillsWeapons($animalKillsAll);
+
+            // get the top animal kills sorted by username
+            $topAnimalKillsUsers = $this->getTopAnimalKillsUsers($animalKillsAll);
+
             return view('user.server.show')
                 ->withServer($server)
                 ->withPlayerCount($uniquePlayerCount)
@@ -217,7 +236,11 @@ class ServerController extends Controller
                 ->withTopPlacedStructuresPlayers($topPlacedStructuresPlayers)
                 ->withPlacedDeployables($placedDeployables)
                 ->withTopPlacedDeployables($topPlacedDeployables)
-                ->withTopPlacedDeployablesPlayers($topPlacedDeployablesPlayers);
+                ->withTopPlacedDeployablesPlayers($topPlacedDeployablesPlayers)
+                ->withAnimalKills($animalKills)
+                ->withTopAnimalKills($topAnimalKills)
+                ->withTopAnimalKillsWeapons($topAnimalKillsWeapons)
+                ->withTopAnimalKillsUsers($topAnimalKillsUsers);
         }
 
         return abort(404);
@@ -570,5 +593,41 @@ class ServerController extends Controller
             ->sortByDesc('count') // Sort by count in descending order
             ->values() // Reset the keys to make it sequential
             ->take(10); // Take the top 10 players
+    }
+
+    private function getTopAnimalKills($animalKillsAll)
+    {
+        return $animalKillsAll->groupBy('animal_type')
+            ->map(function ($kills, $type) {
+                return [
+                    'type' => $type,
+                    'count' => $kills->count()
+                ];
+            })
+            ->values() // Reset the keys to ensure a 0-indexed array for iteration
+            ->sortByDesc('count'); // Sort by count, descending
+    }
+
+    private function getTopAnimalKillsWeapons($animalKillsAll)
+    {
+        return $animalKillsAll->groupBy('weapon')
+            ->map(function ($items, $weapon) {
+                return ['weapon' => $weapon, 'count' => $items->count()];
+            })
+            ->sortByDesc('count')
+            ->values() // Reindex array
+            ->all();
+    }
+
+    private function getTopAnimalKillsUsers($animalKillsAll)
+    {
+        return $animalKillsAll->groupBy('username')
+            ->map(function ($kills, $username) {
+                return ['username' => $username, 'count' => $kills->count()];
+            })
+            ->sortByDesc('count')
+            ->take(10)
+            ->values() // Reset keys after sorting and taking top 10
+            ->all();
     }
 }
