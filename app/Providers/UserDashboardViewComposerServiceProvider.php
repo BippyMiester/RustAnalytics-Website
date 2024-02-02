@@ -15,10 +15,13 @@ class UserDashboardViewComposerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
+            $servers = collect(); // Default to an empty collection
+
             if (auth()->check()) {
                 $servers = Server::where('user_id', Auth::id())->get();
-                $view->with('servers', $servers);
             }
+
+            $view->with('servers', $servers);
         });
     }
 }
