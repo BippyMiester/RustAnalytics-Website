@@ -97,7 +97,7 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="text-center">
+            <div class="d-flex justify-content-center">
                 <!-- Pagination Links -->
                 {{ $destroyedContainers->appends(['destroyedContainersPage' => $destroyedContainers->currentPage(), 'killsPage' => Request::get('killsPage'), 'deathsPage' => Request::input('deathsPage'), 'weaponFirePage' => Request::input('weaponFirePage'), 'destroyedBuildingsPage' => Request::input('destroyedBuildingsPage'), 'gatherPage' => Request::input('gatherPage'), 'placedStructuresPage' => Request::input('placedStructuresPage'), 'placedDeployablesPage' => Request::input('placedDeployablesPage')])->links('pagination::bootstrap-4') }}
             </div>

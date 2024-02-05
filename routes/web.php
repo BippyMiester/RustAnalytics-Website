@@ -40,6 +40,7 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
             Route::prefix('{slug}')->group(function () {
                 Route::get('/', [DashboardServerController::class, 'show'])->name('show');
                 Route::get('animalkills', [DashboardServerController::class, 'animalkills'])->name('animalkills');
+                Route::get('destroyedcontainers', [DashboardServerController::class, 'destroyedcontainers'])->name('destroyedcontainers');
             });
 
         });

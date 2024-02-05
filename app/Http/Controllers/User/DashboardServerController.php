@@ -63,6 +63,34 @@ class DashboardServerController extends Controller
 
     }
 
+    public function destroyedcontainers(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+            // Get all the destroyed containers
+            $destroyedContainersAll = $server->destroyedcontainers()->get();
+            $destroyedContainers = $server->destroyedcontainers()->orderBy('created_at', 'desc')->paginate(10);
+
+            // Get the top destroyed containers
+            $topDestroyedContainers = $this->getTopDestroyedContainers($destroyedContainersAll);
+
+            // Get Top destroyers of containers
+            $topContainerDestroyers = $this->getTopContainerDestroyers($destroyedContainersAll);
+
+            // Get most destructive container weapons
+            $mostDestructiveContainerWeapons = $this->getMostDestructiveContainerWeapons($destroyedContainersAll);
+
+            return view('user.dashboard.server.destroyedcontainers')
+                ->withServer($server)
+                ->withDestroyedContainers($destroyedContainers)
+                ->withTopDestroyedContainers($topDestroyedContainers)
+                ->withTopContainerDestroyers($topContainerDestroyers)
+                ->withMostDestructiveContainerWeapons($mostDestructiveContainerWeapons);
+        }
+
+        return abort(404);
+    }
+
     // Helper Functions
     private function getPlayersList($server)
     {
