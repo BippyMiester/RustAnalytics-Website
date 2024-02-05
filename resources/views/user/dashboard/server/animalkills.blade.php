@@ -2,6 +2,12 @@
 
 @section('title', $server->name . ' - Animal Kills')
 
+@section('breadcrumbs')
+    <li class="breadcrumb-item">Servers</li>
+    <li class="breadcrumb-item"><a href="{{ route('user.dashboard.server.show', $server->slug) }}">{{ \Illuminate\Support\Str::limit($server->name, 30) }}</a></li>
+    <li class="breadcrumb-item active">Animal Kills</li>
+@endsection
+
 @section('content')
 
     <!-- Begin Cards Row -->

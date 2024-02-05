@@ -16,10 +16,10 @@
 
     <!-- BEGIN #content -->
     <div id="content" class="app-content">
-{{--        <ul class="breadcrumb">--}}
-{{--            <li class="breadcrumb-item"><a href="#">LAYOUT</a></li>--}}
-{{--            <li class="breadcrumb-item active">STARTER PAGE</li>--}}
-{{--        </ul>--}}
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('user.dashboard.index') }}">Dashboard</a></li>
+            @yield('breadcrumbs')
+        </ul>
 
         <h1 class="page-header">
             @yield('title')

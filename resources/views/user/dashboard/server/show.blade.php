@@ -2,6 +2,11 @@
 
 @section('title', $server->name)
 
+@section('breadcrumbs')
+    <li class="breadcrumb-item">Servers</li>
+    <li class="breadcrumb-item active">{{ \Illuminate\Support\Str::limit($server->name, 30) }}</li>
+@endsection
+
 @section('content')
 
     <!-- Begin Cards Row -->
