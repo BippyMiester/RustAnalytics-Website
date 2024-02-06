@@ -91,6 +91,34 @@ class DashboardServerController extends Controller
         return abort(404);
     }
 
+    public function destroyedstructures(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+            // Get all the destroyed buildings
+            $destroyedBuildingsAll = $server->destroyedbuildings()->get();
+            $destroyedBuildings = $server->destroyedbuildings()->orderBy('created_at', 'desc')->paginate(10);
+
+            // Get the top destroyed building types
+            $topDestroyedBuildingTypes = $this->getTopDestroyedBuildingTypes($destroyedBuildingsAll);
+
+            // get the top destroyers on the server
+            $topDestroyers = $this->getTopDestroyers($destroyedBuildingsAll);
+
+            // Get the most destructive weapons for buildings
+            $mostDestructiveBuildingWeapons = $this->getMostDestructiveBuildingWeapons($destroyedBuildingsAll);
+
+            return view('user.dashboard.server.destroyedstructures')
+                ->withServer($server)
+                ->withDestroyedBuildings($destroyedBuildings)
+                ->withTopDestroyedBuildingTypes($topDestroyedBuildingTypes)
+                ->withTopDestroyers($topDestroyers)
+                ->withMostDestructiveBuildingWeapons($mostDestructiveBuildingWeapons);
+        }
+
+        return abort(404);
+    }
+
     // Helper Functions
     private function getPlayersList($server)
     {
