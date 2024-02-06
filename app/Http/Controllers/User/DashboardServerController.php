@@ -119,6 +119,31 @@ class DashboardServerController extends Controller
         return abort(404);
     }
 
+    public function placeddeployables(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+            // Get all the placed deployables
+            $placedDeployablesAll = $server->placeddeployables()->get();
+            $placedDeployables = $server->placeddeployables()->orderBy('created_at', 'desc')->paginate(10);
+
+            // top placed deployables
+            $topPlacedDeployables = $this->getTopPlacedDeployables($placedDeployablesAll);
+
+            // top placed deployables by username
+            $topPlacedDeployablesPlayers = $this->getTopPlacedDeployablesPlayers($placedDeployablesAll);
+
+
+            return view('user.dashboard.server.placeddeployables')
+                ->withServer($server)
+                ->withPlacedDeployables($placedDeployables)
+                ->withTopPlacedDeployables($topPlacedDeployables)
+                ->withTopPlacedDeployablesPlayers($topPlacedDeployablesPlayers);
+        }
+
+        return abort(404);
+    }
+
     // Helper Functions
     private function getPlayersList($server)
     {
