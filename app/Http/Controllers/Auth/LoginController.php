@@ -116,7 +116,7 @@ class LoginController extends Controller
         $this->isUserStaff($user);
 
         // Return to User Dashboard
-        return redirect()->route('user.dashboard');
+        return redirect()->route('user.dashboard.index');
 
     }
 
