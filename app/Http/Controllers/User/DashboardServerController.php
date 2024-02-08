@@ -144,6 +144,31 @@ class DashboardServerController extends Controller
         return abort(404);
     }
 
+    public function placedstructures(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+
+            // get all the placed structures
+            $placedStructuresAll = $server->placedstructures()->get();
+            $placedStructures = $server->placedstructures()->orderBy('created_at', 'desc')->paginate(10, ['*'], 'placedStructuresPage');
+
+            // top placed structures
+            $topPlacedStructures = $this->getTopPlacedStructures($placedStructuresAll);
+
+            // top placed structures by username
+            $topPlacedStructuresPlayers = $this->getTopPlacedStructuresPlayers($placedStructuresAll);
+
+            return view('user.dashboard.server.placedstructures')
+                ->withServer($server)
+                ->withPlacedStructures($placedStructures)
+                ->withTopPlacedStructures($topPlacedStructures)
+                ->withTopPlacedStructuresPlayers($topPlacedStructuresPlayers);
+        }
+
+        return abort(404);
+    }
+
     // Helper Functions
     private function getPlayersList($server)
     {

@@ -43,6 +43,7 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
                 Route::get('destroyedcontainers', [DashboardServerController::class, 'destroyedcontainers'])->name('destroyedcontainers');
                 Route::get('destroyedstructures', [DashboardServerController::class, 'destroyedstructures'])->name('destroyedstructures');
                 Route::get('placeddeployables', [DashboardServerController::class, 'placeddeployables'])->name('placeddeployables');
+                Route::get('placedstructures', [DashboardServerController::class, 'placedstructures'])->name('placedstructures');
             });
 
         });
