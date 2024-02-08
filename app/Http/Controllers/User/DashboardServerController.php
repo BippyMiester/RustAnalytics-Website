@@ -169,19 +169,22 @@ class DashboardServerController extends Controller
         return abort(404);
     }
 
-    // Helper Functions
-    private function getPlayersList($server)
-    {
-        $uniqueSteamIds = $server->players()->select('steam_id')->distinct()->pluck('steam_id');
-        $players = collect();
-        foreach ($uniqueSteamIds as $steamId) {
-            $latestEntry = $server->players()->where('steam_id', $steamId)
-                ->latest()
-                ->first();
-            $players->push($latestEntry);
+    public function playerconnections(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+            // Get the list of players for the server, most recent first
+            $players = $server->players()->orderBy('created_at', 'desc')->paginate(25);
+
+            return view('user.dashboard.server.playerconnections')
+                ->withServer($server)
+                ->withPlayers($players);
         }
-        return $players;
+
+        return abort(404);
     }
+
+    // Helper Functions
 
     private function getPlayerGatherData(Request $request, $playerGatherAll)
     {
