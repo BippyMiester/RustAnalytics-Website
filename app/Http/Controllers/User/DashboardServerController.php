@@ -10,6 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardServerController extends Controller
 {
@@ -179,6 +180,28 @@ class DashboardServerController extends Controller
             return view('user.dashboard.server.playerconnections')
                 ->withServer($server)
                 ->withPlayers($players);
+        }
+
+        return abort(404);
+    }
+
+    public function playercrafting(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+
+            // Get the player crafting data
+            $playerCrafting = $server->playercrafting()->orderBy('created_at', 'desc')->paginate(25);
+
+            $topCraftedItems = $this->getTopCraftedItems($server);
+
+            $topCraftersBySteamID = $this->getTopCraftersBySteamID($server);
+
+            return view('user.dashboard.server.playercrafting')
+                ->withServer($server)
+                ->withPlayerCrafting($playerCrafting)
+                ->withTopCraftedItems($topCraftedItems)
+                ->withTopCraftersBySteamID($topCraftersBySteamID);
         }
 
         return abort(404);
@@ -557,5 +580,25 @@ class DashboardServerController extends Controller
             ->take(10)
             ->values() // Reset keys after sorting and taking top 10
             ->all();
+    }
+
+    private function getTopCraftedItems($server)
+    {
+        return $server->playercrafting()
+            ->select('item_crafted', DB::raw('SUM(amount) as total_crafted'))
+            ->groupBy('item_crafted')
+            ->orderBy('total_crafted', 'desc')
+            ->take(10)
+            ->get();
+    }
+
+    private function getTopCraftersBySteamID($server)
+    {
+        return $server->playercrafting()
+            ->select('steam_id', 'username', DB::raw('SUM(amount) as total_crafted'))
+            ->groupBy('steam_id', 'username') // Include username in the GROUP BY clause
+            ->orderBy('total_crafted', 'desc')
+            ->take(10)
+            ->get();
     }
 }

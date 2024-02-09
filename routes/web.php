@@ -45,6 +45,7 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
                 Route::get('placeddeployables', [DashboardServerController::class, 'placeddeployables'])->name('placeddeployables');
                 Route::get('placedstructures', [DashboardServerController::class, 'placedstructures'])->name('placedstructures');
                 Route::get('playerconnections', [DashboardServerController::class, 'playerconnections'])->name('playerconnections');
+                Route::get('playercrafting', [DashboardServerController::class, 'playercrafting'])->name('playercrafting');
             });
 
         });

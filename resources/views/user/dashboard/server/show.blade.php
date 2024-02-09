@@ -174,7 +174,7 @@
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">Player Crafting</h5>
-                    <a href="#" class="btn btn-primary">View</a>
+                    <a href="{{ route('user.dashboard.server.playercrafting', $server->slug) }}" class="btn btn-primary">View</a>
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
