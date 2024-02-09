@@ -207,6 +207,35 @@ class DashboardServerController extends Controller
         return abort(404);
     }
 
+    public function playerdeaths(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+
+            // Get the player deaths data
+            $playerDeathsAll = $server->playerdeaths()->get();
+            $playerDeaths = $server->playerdeaths()->orderBy('created_at', 'desc')->paginate(15, ['*'], 'deathsPage');
+
+            // Get the top player deaths
+            $topPlayerDeaths = $this->getTopPlayerDeaths($playerDeathsAll);
+
+            // Get Top Player Deaths Cause Count
+            $topPlayerDeathsCause = $this->getTopPlayerDeathsCause($playerDeathsAll);
+
+            // Get Player Death Top 10 Most Common Grid Locations
+            $topPlayerDeathGrid = $this->getTopPlayerDeathGrid($playerDeathsAll);
+
+            return view('user.dashboard.server.playerdeaths')
+                ->withServer($server)
+                ->withPlayerDeaths($playerDeaths)
+                ->withTopPlayerDeaths($topPlayerDeaths)
+                ->withTopPlayerDeathsCause($topPlayerDeathsCause)
+                ->withTopPlayerDeathGrid($topPlayerDeathGrid);
+        }
+
+        return abort(404);
+    }
+
     // Helper Functions
 
     private function getPlayerGatherData(Request $request, $playerGatherAll)
