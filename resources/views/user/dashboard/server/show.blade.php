@@ -114,8 +114,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center mb-3">
         <div class="col-sm-3">
             <div class="card mb-3">
                 <div class="card-body pb-0 text-center">
@@ -184,8 +182,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center mb-3">
         <div class="col-sm-3">
             <div class="card mb-3">
                 <div class="card-body pb-0 text-center">
@@ -237,25 +233,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body pb-0 text-center">
-                    <img src="{{ asset('imgs/dashboard2/icons/server_data.png') }}" alt="" class="card-img-top w-50">
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="card-title">Server Data</h5>
-                    <a href="#" class="btn btn-primary">View</a>
-                </div>
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center mb-3">
         <div class="col-sm-3">
             <div class="card mb-3">
                 <div class="card-body pb-0 text-center">
