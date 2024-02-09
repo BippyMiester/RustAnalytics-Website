@@ -26,7 +26,7 @@
                     <a href="{{ route('login.discord') }}" class="btn btn-link text-decoration-none me-2">Sign In</a>
                 @endguest
                 @auth
-                    <a href="{{ route('user.dashboard') }}" class="btn btn-link text-decoration-none me-2">Dashboard</a>
+                    <a href="{{ route('user.dashboard.index') }}" class="btn btn-link text-decoration-none me-2">Dashboard</a>
                 @endauth
 
 {{--                <a href="request-demo.html" class="btn btn-primary">Documentation</a>--}}

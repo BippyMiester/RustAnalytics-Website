@@ -25,7 +25,7 @@
 
     <!-- BEGIN brand -->
     <div class="brand">
-        <a href="index.html" class="brand-logo">
+        <a href="{{ route('index') }}" class="brand-logo">
 					<span class="brand-img">
 						<span class="brand-img-text text-theme">RA</span>
 					</span>
