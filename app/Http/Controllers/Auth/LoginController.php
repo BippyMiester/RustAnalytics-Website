@@ -108,7 +108,7 @@ class LoginController extends Controller
         // Create a server for the user if the user is new
         if($this->isNewUser) {
             $server = $this->createNewServer($user);
-            $timeout = $this->createNewPusherTimeout($server);
+            $this->createNewPusherTimeout($server);
         }
 
         Auth::login($user, false);
