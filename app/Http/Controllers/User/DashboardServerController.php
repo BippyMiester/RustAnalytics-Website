@@ -236,6 +236,35 @@ class DashboardServerController extends Controller
         return abort(404);
     }
 
+    public function playerkills(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+
+            // Get the player Kills Data
+            $playerKillsAll = $server->playerkills()->get();
+            $playerKills = $server->playerkills()->orderBy('created_at', 'desc')->paginate(15, ['*'], 'killsPage');
+
+            // Top Player Kills
+            $topPlayerKills = $this->getTopPlayerKills($playerKillsAll);
+
+            // Get Top Player Kills Weapon Count
+            $topPlayerKillsWeapons = $this->getTopPlayerKillsWeapons($playerKillsAll);
+
+            // Get the top player kill distances
+            $topPlayerKillDistances = $this->getTopPlayerKillDistances($playerKillsAll);
+
+            return view('user.dashboard.server.playerkills')
+                ->withServer($server)
+                ->withPlayerKills($playerKills)
+                ->withTopPlayerKills($topPlayerKills)
+                ->withTopPlayerKillsWeapons($topPlayerKillsWeapons)
+                ->withTopPlayerKillDistances($topPlayerKillDistances);
+        }
+
+        return abort(404);
+    }
+
     // Helper Functions
 
     private function getPlayerGatherData(Request $request, $playerGatherAll)

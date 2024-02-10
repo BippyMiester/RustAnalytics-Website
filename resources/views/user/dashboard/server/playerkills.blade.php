@@ -1,11 +1,11 @@
 @extends('layouts.dashboard2')
 
-@section('title', $server->name . ' - Player Deaths')
+@section('title', $server->name . ' - Player Kills')
 
 @section('breadcrumbs')
     <li class="breadcrumb-item">Servers</li>
     <li class="breadcrumb-item"><a href="{{ route('user.dashboard.server.show', $server->slug) }}">{{ \Illuminate\Support\Str::limit($server->name, 30) }}</a></li>
-    <li class="breadcrumb-item active">Player Deaths</li>
+    <li class="breadcrumb-item active">Player Kills</li>
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <!-- BEGIN title -->
                     <div class="d-flex fw-bold mb-3">
-                        <span class="flex-grow-1">Top Deaths</span>
+                        <span class="flex-grow-1">Top Kills</span>
                         {{--                        <a href="#" data-toggle="card-expand" class="text-inverse text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>--}}
                     </div>
                     <!-- END title -->
@@ -26,8 +26,8 @@
                     <div class="row align-items-center mb-2">
                         <div class="col-12">
                             <p>
-                                @foreach ($topPlayerDeaths as $player)
-                                    <strong>{{ $player['username'] }}</strong> - {{ $player['death_count'] }} <br>
+                                @foreach ($topPlayerKills as $player)
+                                    <strong>{{ $player['username'] }}</strong> - {{ $player['kill_count'] }} <br>
                                 @endforeach
                             </p>
                         </div>
@@ -52,7 +52,7 @@
                 <div class="card-body">
                     <!-- BEGIN title -->
                     <div class="d-flex fw-bold mb-3">
-                        <span class="flex-grow-1">Top Cause Of Death</span>
+                        <span class="flex-grow-1">Top Weapons Used</span>
                         {{--                        <a href="#" data-toggle="card-expand" class="text-inverse text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>--}}
                     </div>
                     <!-- END title -->
@@ -60,8 +60,8 @@
                     <div class="row align-items-center mb-2">
                         <div class="col-12">
                             <p>
-                                @foreach ($topPlayerDeathsCause as $death)
-                                    <strong>{{ $death['cause'] }}</strong> - {{ $death['count'] }} <br>
+                                @foreach ($topPlayerKillsWeapons as $weapon)
+                                    <strong>{{ $weapon['weapon'] }}</strong> - {{ $weapon['count'] }} <br>
                                 @endforeach
                             </p>
                         </div>
@@ -86,7 +86,7 @@
                 <div class="card-body">
                     <!-- BEGIN title -->
                     <div class="d-flex fw-bold mb-3">
-                        <span class="flex-grow-1">Top Death Locations By Grid</span>
+                        <span class="flex-grow-1">Top 10 Longest Distances</span>
                         {{--                        <a href="#" data-toggle="card-expand" class="text-inverse text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>--}}
                     </div>
                     <!-- END title -->
@@ -94,8 +94,8 @@
                     <div class="row align-items-center mb-2">
                         <div class="col-12">
                             <p>
-                                @foreach ($topPlayerDeathGrid as $grid)
-                                    <strong>{{ $grid['grid'] }}</strong> - {{ $grid['count'] }} <br>
+                                @foreach ($topPlayerKillDistances as $kill)
+                                    <strong>{{ $kill['username'] }}</strong> - {{ $kill['distance'] }} meters <br>
                                 @endforeach
                             </p>
                         </div>
@@ -123,50 +123,36 @@
             <table class="table table-sm table-hover table-borderless">
                 <thead>
                 <tr>
-                    <th>Steam ID</th>
-                    <th>Username</th>
-                    <th>Cause</th>
-                    <th>X/Y/Z</th>
-                    <th>Grid</th>
+                    <th>Kill ID</th>
+                    <th>Killer Steam ID</th>
+                    <th>Killer</th>
+                    <th>Victim</th>
+                    <th>Weapon</th>
+                    <th>Body Part</th>
+                    <th>Distance</th>
                     <th>Time</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($playerDeaths as $death)
+                @foreach($playerKills as $kill)
                     <tr>
+                        <th>{{ $kill->kill_id }}</th>
                         <th>
-                            <a href="https://www.steamidfinder.com/lookup/{{ $death->steam_id }}/" target="_blank"><strong>{{ $death->steam_id }}</strong></a>
+                            <a href="https://www.steamidfinder.com/lookup/{{ $kill->steam_id }}/" target="_blank"><strong>{{ $kill->steam_id }}</strong></a>
                         </th>
-                        <td>{{ $death->username }}</td>
-                        <td>{{ $death->cause }}</td>
-                        @if(!$death->x || !$death->y || !$death->z)
-                            <td>No Data</td>
-                        @else
-                            <td class="copyCoordinates" id="playerDeathCoordinates{{ str_replace('.', '', $death->x).str_replace('.', '', $death->y).str_replace('.', '', $death->z) }}">
-                                {{ number_format($death->x, 2, '.', '') }}, {{ number_format($death->y, 2, '.', '') }}, {{ number_format($death->z, 2, '.', '') }} <i class="fa-regular fa-copy" style="color: #c0392b; font-size: 1.1em;"></i>
-                            </td>
-                            <script>
-                                document.getElementById("playerDeathCoordinates{{ str_replace('.', '', $death->x).str_replace('.', '', $death->y).str_replace('.', '', $death->z) }}").addEventListener('click', function() {
-                                    const textToCopy = 'teleportpos ({{ $death->x }},{{ $death->y }},{{ $death->z }})';
-                                    navigator.clipboard.writeText(textToCopy).then(() => {
-                                        toastify().success('Command Copied Successfully!');
-                                        console.log('Text copied to clipboard');
-                                    }).catch(err => {
-                                        console.error('Error in copying text: ', err);
-                                        console.error("placedStructuresCoordinates{{ str_replace('.', '', $death->x).str_replace('.', '', $death->y).str_replace('.', '', $death->z) }}");
-                                    });
-                                });
-                            </script>
-                        @endif
-                        <td>{{ $death->grid }}</td>
-                        <td>{{ $death->created_at->format('H:i:s | m-d-y') }}</td>
+                        <td>{{ $kill->username }}</td>
+                        <td>{{ $kill->victim }}</td>
+                        <td>{{ $kill->weapon }}</td>
+                        <td>{{ $kill->body_part }}</td>
+                        <td>{{ $kill->distance }} m</td>
+                        <td>{{ $kill->created_at->format('H:i:s | m-d-y') }}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
             <div class="d-flex justify-content-center">
                 <!-- Pagination Links -->
-                {{ $playerDeaths->links('pagination::bootstrap-4') }}
+                {{ $playerKills->links('pagination::bootstrap-4') }}
             </div>
         </div>
 
