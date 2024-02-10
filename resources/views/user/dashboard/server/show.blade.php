@@ -206,7 +206,7 @@
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">Player Gathering</h5>
-                    <a href="#" class="btn btn-primary">View</a>
+                    <a href="#" class="btn btn-secondary">Coming Soon</a>
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
@@ -223,7 +223,7 @@
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">Player Kills</h5>
-                    <a href="#" class="btn btn-primary">View</a>
+                    <a href="#" class="btn btn-secondary">Coming Soon</a>
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
@@ -240,7 +240,7 @@
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">Weapon Fire</h5>
-                    <a href="#" class="btn btn-primary">View</a>
+                    <a href="#" class="btn btn-secondary">Coming Soon</a>
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
