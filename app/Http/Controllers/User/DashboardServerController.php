@@ -265,6 +265,30 @@ class DashboardServerController extends Controller
         return abort(404);
     }
 
+    public function weaponfire(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+
+            // Get the player weapon Fire
+            $weaponFire = $server->weaponfire()->orderBy('created_at', 'desc')->paginate(25, ['*'], 'weaponFirePage');
+
+            // Get the top players base on number of bullets fired
+            $topBulletsFired = $this->getTopBulletsFired($server);
+
+            // get the top weapons based on the number of bullets fired
+            $topWeaponBulletsFired = $this->getTopWeaponBulletsFired($server);
+
+            return view('user.dashboard.server.weaponfire')
+                ->withServer($server)
+                ->withWeaponFire($weaponFire)
+                ->withTopBulletsFired($topBulletsFired)
+                ->withTopWeaponBulletsFired($topWeaponBulletsFired);
+        }
+
+        return abort(404);
+    }
+
     // Helper Functions
 
     private function getPlayerGatherData(Request $request, $playerGatherAll)

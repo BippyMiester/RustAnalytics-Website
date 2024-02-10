@@ -240,7 +240,7 @@
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">Weapon Fire</h5>
-                    <a href="#" class="btn btn-secondary">Coming Soon</a>
+                    <a href="{{ route('user.dashboard.server.weaponfire', $server->slug) }}" class="btn btn-primary">View</a>
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
