@@ -289,6 +289,33 @@ class DashboardServerController extends Controller
         return abort(404);
     }
 
+    public function playergathering(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+
+            // Get the player Gather Data
+            $playerGatherAll = $server->playergather()->get();
+
+            // Get The Player Raw Gather Data
+            $playerGather = $this->getPlayerGatherData($request, $playerGatherAll);
+
+            // Get the total amount of collected resources across all players
+            $totalAmountsByResource = $this->getTotalAmountsByResource($playerGatherAll);
+
+            // Get the top collectors for each resource
+            $topCollectors = $this->getTopCollectors($playerGatherAll);
+
+            return view('user.dashboard.server.playergathering')
+                ->withServer($server)
+                ->withPlayerGather($playerGather)
+                ->withTotalAmountsByResource($totalAmountsByResource)
+                ->withTopCollectors($topCollectors);
+        }
+
+        return abort(404);
+    }
+
     // Helper Functions
 
     private function getPlayerGatherData(Request $request, $playerGatherAll)
@@ -311,7 +338,7 @@ class DashboardServerController extends Controller
             });
 
         // Manual pagination
-        $perPage = 5;
+        $perPage = 25;
         $page = $request->input('gatherPage', 1); // Get the current page from 'gatherPage' parameter
         $total = $items->count();
         $results = $items->forPage($page, $perPage)->values();

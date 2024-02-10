@@ -206,7 +206,7 @@
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">Player Gathering</h5>
-                    <a href="#" class="btn btn-secondary">Coming Soon</a>
+                    <a href="{{ route('user.dashboard.server.playergathering', $server->slug) }}" class="btn btn-primary">View</a>
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
