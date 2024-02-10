@@ -25,3 +25,13 @@
 <!-- ================== BEGIN page-css ================== -->
 <link href="{{ asset('src/dashboard2/jvectormap-next/jquery-jvectormap.css') }}" rel="stylesheet">
 <!-- ================== END page-css ================== -->
+
+<!-- Background Image -->
+<style>
+    html:after {
+        background-image: url({{ asset('imgs/dashboard2/background.png') }})
+    }
+    [data-bs-theme=dark] {
+        --bs-body-bg-gradient: linear-gradient(180deg, rgba(50, 70, 80, 0.7) 0%, rgb(13, 16, 27) 100%);
+    }
+</style>

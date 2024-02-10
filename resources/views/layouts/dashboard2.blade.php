@@ -5,7 +5,7 @@
 
     @yield('stylesheets')
 </head>
-<body>
+<body class="theme-warning">
 <!-- BEGIN #app -->
 <div id="app" class="app">
 
