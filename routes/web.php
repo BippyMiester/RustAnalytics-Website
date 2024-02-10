@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\DashboardServerController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,7 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
 
         // Server Routes
         Route::prefix('server')->name('server.')->group(function () {
+            // Specific Server Routes
             Route::prefix('{slug}')->group(function () {
                 Route::get('/', [DashboardServerController::class, 'show'])->name('show');
                 Route::get('animalkills', [DashboardServerController::class, 'animalkills'])->name('animalkills');
@@ -47,8 +49,15 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
                 Route::get('playerconnections', [DashboardServerController::class, 'playerconnections'])->name('playerconnections');
                 Route::get('playercrafting', [DashboardServerController::class, 'playercrafting'])->name('playercrafting');
                 Route::get('playerdeaths', [DashboardServerController::class, 'playerdeaths'])->name('playerdeaths');
-            });
+            }); // End Specific Server
+        }); // End server
 
-        });
+    }); // End Dashboard
+
+    // User Profile
+    Route::prefix('profile')->name('profile.')->group(function () {
+       Route::get('/', [ProfileController::class, 'index'])->name('index');
+       Route::get('settings', [ProfileController::class, 'settings'])->name('settings');
+       Route::get('apikeys', [ProfileController::class, 'apikeys'])->name('apikeys');
     });
 });

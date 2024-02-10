@@ -59,24 +59,30 @@
             <div class="menu-divider"></div>
             <div class="menu-header">Settings</div>
             <div class="menu-item">
-                <a href="profile.html" class="menu-link">
+                <a href="{{ route('user.profile.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="bi bi-people"></i></span>
                     <span class="menu-text">Profile</span>
                 </a>
             </div>
             <div class="menu-item">
-                <a href="settings.html" class="menu-link">
+                <a href="{{ route('user.profile.settings') }}" class="menu-link">
                     <span class="menu-icon"><i class="bi bi-gear"></i></span>
                     <span class="menu-text">Settings</span>
                 </a>
             </div>
+            <div class="menu-item">
+                <a href="{{ route('user.profile.apikeys') }}" class="menu-link">
+                    <span class="menu-icon"><i class="fa-solid fa-key"></i></span>
+                    <span class="menu-text">API Keys</span>
+                </a>
+            </div>
         </div>
         <!-- END menu -->
-        <div class="p-3 px-4 mt-auto">
-            <a href="../../documentation/index.html" class="btn d-block btn-outline-theme">
-                <i class="fa fa-code-branch me-2 ms-n2 opacity-5"></i> Documentation
-            </a>
-        </div>
+{{--        <div class="p-3 px-4 mt-auto">--}}
+{{--            <a href="#" class="btn d-block btn-outline-theme">--}}
+{{--                <i class="fa fa-code-branch me-2 ms-n2 opacity-5"></i> Documentation--}}
+{{--            </a>--}}
+{{--        </div>--}}
     </div>
     <!-- END scrollbar -->
 </div>
