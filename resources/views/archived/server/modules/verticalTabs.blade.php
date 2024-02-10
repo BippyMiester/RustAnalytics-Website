@@ -15,25 +15,25 @@
 
     <div class="tab-content">
 
-        @include('user.server.modules.information')
+        @include('archived.server.modules.information')
 
-        @include('user.server.modules.players')
+        @include('archived.server.modules.players')
 
-        @include('user.server.modules.playerGather')
+        @include('archived.server.modules.playerGather')
 
-        @include('user.server.modules.playerKills')
+        @include('archived.server.modules.playerKills')
 
-        @include('user.server.modules.playerWeaponFire')
+        @include('archived.server.modules.playerWeaponFire')
 
-        @include('user.server.modules.destroyedBuildings')
+        @include('archived.server.modules.destroyedBuildings')
 
-        @include('user.server.modules.destroyedContainers')
+        @include('archived.server.modules.destroyedContainers')
 
-        @include('user.server.modules.placedBuildings')
+        @include('archived.server.modules.placedBuildings')
 
-        @include('user.server.modules.placedDeployables')
+        @include('archived.server.modules.placedDeployables')
 
-        @include('user.server.modules.animalKills')
+        @include('archived.server.modules.animalKills')
 
     </div>
 

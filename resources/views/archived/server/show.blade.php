@@ -14,10 +14,10 @@
 
     <h1>{{ $server->name }}</h1>
 
-    @include('user.server.modules.panels')
+    @include('archived.server.modules.panels')
 
     <hr>
 
-    @include('user.server.modules.verticalTabs')
+    @include('archived.server.modules.verticalTabs')
 
 @endsection
