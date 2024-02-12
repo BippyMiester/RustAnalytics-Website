@@ -12,7 +12,7 @@ class PlayerBan extends Model
     protected $table = 'player_bans';
 
     public function server() {
-        return $this->belongsTo(Server::class, 'id','server_id');
+        return $this->belongsTo(Server::class, 'server_id','id');
     }
 
     public function player() {

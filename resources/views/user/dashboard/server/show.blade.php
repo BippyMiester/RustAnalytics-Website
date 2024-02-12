@@ -131,23 +131,23 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body pb-0 text-center">
-                    <img src="{{ asset('imgs/dashboard2/icons/player_bans.png') }}" alt="" class="card-img-top w-50">
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="card-title">Player Bans</h5>
-                    <a href="#" class="btn btn-secondary">Coming Soon</a>
-                </div>
-                <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-            </div>
-        </div>
+{{--        <div class="col-sm-3">--}}
+{{--            <div class="card mb-3">--}}
+{{--                <div class="card-body pb-0 text-center">--}}
+{{--                    <img src="{{ asset('imgs/dashboard2/icons/player_bans.png') }}" alt="" class="card-img-top w-50">--}}
+{{--                </div>--}}
+{{--                <div class="card-body text-center">--}}
+{{--                    <h5 class="card-title">Player Bans</h5>--}}
+{{--                    <a href="#" class="btn btn-secondary">Coming Soon</a>--}}
+{{--                </div>--}}
+{{--                <div class="card-arrow">--}}
+{{--                    <div class="card-arrow-top-left"></div>--}}
+{{--                    <div class="card-arrow-top-right"></div>--}}
+{{--                    <div class="card-arrow-bottom-left"></div>--}}
+{{--                    <div class="card-arrow-bottom-right"></div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="col-sm-3">
             <div class="card mb-3">
                 <div class="card-body pb-0 text-center">

@@ -17,44 +17,34 @@
 {{--                    <span class="menu-text">Analytics</span>--}}
 {{--                </a>--}}
 {{--            </div>--}}
-{{--            <div class="menu-item has-sub">--}}
-{{--                <a href="#" class="menu-link">--}}
-{{--							<span class="menu-icon">--}}
-{{--								<i class="bi bi-envelope"></i>--}}
-{{--							</span>--}}
-{{--                    <span class="menu-text">Email</span>--}}
-{{--                    <span class="menu-caret"><b class="caret"></b></span>--}}
-{{--                </a>--}}
-{{--                <div class="menu-submenu">--}}
-{{--                    <div class="menu-item">--}}
-{{--                        <a href="email_inbox.html" class="menu-link">--}}
-{{--                            <span class="menu-text">Inbox</span>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                    <div class="menu-item">--}}
-{{--                        <a href="email_compose.html" class="menu-link">--}}
-{{--                            <span class="menu-text">Compose</span>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                    <div class="menu-item">--}}
-{{--                        <a href="email_detail.html" class="menu-link">--}}
-{{--                            <span class="menu-text">Detail</span>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-            <div class="menu-header">Servers</div>
-            @foreach($servers as $server)
-                <div class="menu-item">
-                    <a href="{{ route('user.dashboard.server.show', $server->slug) }}" class="menu-link">
-                        <span class="menu-icon">
-                            <i class="fa-solid fa-server"></i>
-                        </span>
-                        <span class="menu-text">{{ \Illuminate\Support\Str::limit($server->name, 30) }}</span>
-                    </a>
-                </div>
-            @endforeach
 
+            <div class="menu-header">Servers</div>
+            <div class="menu-item">
+                <a href="{{ route('user.dashboard.server.bans.index') }}" class="menu-link">
+                        <span class="menu-icon">
+                            <i class="fa-solid fa-gavel"></i>
+                        </span>
+                    <span class="menu-text">Player Bans</span>
+                </a>
+            </div>
+            <div class="menu-item has-sub">
+                @foreach($servers as $server)
+                    <a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="fa-solid fa-server"></i>
+							</span>
+                        <span class="menu-text">{{ $server->name }}</span>
+                        <span class="menu-caret"><b class="caret"></b></span>
+                    </a>
+                    <div class="menu-submenu">
+                        <div class="menu-item">
+                            <a href="{{ route('user.dashboard.server.show', $server->slug) }}" class="menu-link">
+                                <span class="menu-text"><i class="fa-solid fa-gauge"></i> Dashboard</span>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
             <div class="menu-divider"></div>
             <div class="menu-header">Settings</div>

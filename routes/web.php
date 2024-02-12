@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ServerController;
+use App\Http\Controllers\User\DashboardBansController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\DashboardServerController;
 use App\Http\Controllers\User\ProfileController;
@@ -38,6 +39,11 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
 
         // Server Routes
         Route::prefix('server')->name('server.')->group(function () {
+            // Player Bans
+            Route::prefix('bans')->name('bans.')->group(function () {
+               Route::get('/', [DashboardBansController::class, 'index'])->name('index');
+            });
+
             // Specific Server Routes
             Route::prefix('{slug}')->group(function () {
                 Route::get('/', [DashboardServerController::class, 'show'])->name('show');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AnimalKillsController;
+use App\Http\Controllers\Api\V1\BanCheckController;
 use App\Http\Controllers\Api\V1\PlayerBansController;
 use App\Http\Controllers\Api\V1\PlayerCraftingController;
 use App\Http\Controllers\Api\V1\DestroyedBuildingsController;
@@ -43,6 +44,15 @@ Route::prefix('v1')->group(function () {
     Route::middleware('requiredVersionCheck')->prefix('server')->group(function () {
         Route::post('update', [ServerController::class, 'update']);
         Route::post('getRefreshRates', [ServerController::class, 'getRefreshRate']);
+
+        // Bans
+        Route::prefix('bans')->group(function () {
+            Route::prefix('check')->group(function () {
+               Route::post('username', [BanCheckController::class, 'username']);
+               Route::post('steamid', [BanCheckController::class, 'steamid']);
+               Route::post('ipaddress', [BanCheckController::class, 'ipaddress']);
+            });
+        });
 
         // Server Data
         Route::prefix('data')->group(function () {
