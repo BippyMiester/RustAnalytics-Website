@@ -68,11 +68,14 @@
             </div>
         </div>
         <!-- END menu -->
-{{--        <div class="p-3 px-4 mt-auto">--}}
-{{--            <a href="#" class="btn d-block btn-outline-theme">--}}
-{{--                <i class="fa fa-code-branch me-2 ms-n2 opacity-5"></i> Documentation--}}
-{{--            </a>--}}
-{{--        </div>--}}
+        <div class="p-3 px-4 mt-auto">
+            <a href="https://github.com/BippyMiester/RustAnalytics-Plugin/releases" target="_blank" class="btn d-block btn-outline-theme mb-1">
+                <i class="fa-solid fa-download me-2 ms-n2 opacity-5"></i> Download Plugin
+            </a>
+            <a href="https://codefling.com/plugins/rustanalytics" target="_blank" class="btn d-block btn-outline-theme">
+                <i class="fa fa-code-branch me-2 ms-n2 opacity-5"></i> Documentation
+            </a>
+        </div>
     </div>
     <!-- END scrollbar -->
 </div>
