@@ -16,6 +16,7 @@
         "laravel/ui": "^4.2",
         "laravelcollective/html": "^6.4",
         "mews/purifier": "^3.4",
+        "opcodesio/log-viewer": "^3.1",
         "pusher/pusher-php-server": "^7.2",
         "redot/laravel-toastify": "^1.0",
         "socialiteproviders/discord": "^4.2"

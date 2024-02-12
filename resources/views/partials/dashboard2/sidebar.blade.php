@@ -66,6 +66,18 @@
                     <span class="menu-text">API Keys</span>
                 </a>
             </div>
+
+            @if(Auth::user()->admin)
+                <div class="menu-divider"></div>
+                <div class="menu-header">Admin</div>
+                <div class="menu-item">
+                    <a href="/admin/log-viewer" class="menu-link">
+                        <span class="menu-icon"><i class="fa-regular fa-file"></i></span>
+                        <span class="menu-text">Log Viewer</span>
+                    </a>
+                </div>
+            @endif
+
         </div>
         <!-- END menu -->
         <div class="p-3 px-4 mt-auto">
