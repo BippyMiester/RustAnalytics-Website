@@ -120,7 +120,7 @@ class LoginController extends Controller
 
     }
 
-    /**
+        /**
      * Checks to see if the user is added to the staff list
      *
      * @param $user

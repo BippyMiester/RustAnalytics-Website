@@ -76,6 +76,12 @@
                         <span class="menu-text">Log Viewer</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a href="{{ route('admin.forcelogin') }}" class="menu-link">
+                        <span class="menu-icon"><i class="fa-solid fa-jedi"></i></span>
+                        <span class="menu-text">Force Login</span>
+                    </a>
+                </div>
             @endif
 
         </div>

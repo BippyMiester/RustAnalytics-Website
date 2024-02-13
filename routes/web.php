@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ServerController;
@@ -69,4 +70,11 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
        Route::get('settings', [ProfileController::class, 'settings'])->name('settings');
        Route::get('apikeys', [ProfileController::class, 'apikeys'])->name('apikeys');
     });
+});
+
+// Admin Routes
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'auth.admin'])->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('index');
+    Route::get('forcelogin', [AdminDashboardController::class, 'forcelogin'])->name('forcelogin');
+    Route::post('forcelogin', [AdminDashboardController::class, 'forceloginpost'])->name('forcelogin.login');
 });
