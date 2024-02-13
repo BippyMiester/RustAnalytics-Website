@@ -36,7 +36,7 @@
                         <span class="menu-text">{{ $server->name }}</span>
                         <span class="menu-caret"><b class="caret"></b></span>
                     </a>
-                    <div class="menu-submenu">
+                    <div class="menu-submenu" style="display: block;">
                         <div class="menu-item">
                             <a href="{{ route('user.dashboard.server.show', $server->slug) }}" class="menu-link">
                                 <span class="menu-text"><i class="fa-solid fa-gauge"></i> Dashboard</span>
