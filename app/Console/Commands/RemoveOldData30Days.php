@@ -12,6 +12,7 @@ use App\Models\PlayerDeaths;
 use App\Models\PlayerKills;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class RemoveOldData30Days extends Command
 {
@@ -37,64 +38,65 @@ class RemoveOldData30Days extends Command
         $days = 30;
         // Calculate the date for the comparison
         $cutOffDate = Carbon::now()->subDays($days);
+        $log = Log::channel('commands');
+        $logMsg = "";
 
-        $this->info("Deleting old data thats more then {$days} days old.");
+        $logMsg .= "Command: ra.removedolddata30days\n";
+        $logMsg .= "Deleting old data thats more then {$days} days old.\n";
+        $logMsg .= "Date Time: " . Carbon::now()->format('H:i:s | m-d-y') . "\n";
+        $logMsg .= "==========================\n";
 
-        $this->info("Clearing Animal Kills...");
+        $logMsg .= "Clearing Animal Kills...\n";
         $count = AnimalKills::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         AnimalKills::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Animal Kills Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Animal Kills Table has been trimmed.\n";
 
-        $this->info("Clearing Destroyed Buildings...");
+        $logMsg .= "Clearing Destroyed Buildings...\n";
         $count = DestroyedBuildings::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         DestroyedBuildings::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Destroyed Buildings Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Destroyed Buildings Table has been trimmed.\n";
 
-        $this->info("Clearing Destroyed Containers...");
+        $logMsg .= "Clearing Destroyed Containers...\n";
         $count = DestroyedContainers::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         DestroyedContainers::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Destroyed Containers Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Destroyed Containers Table has been trimmed.\n";
 
-        $this->info("Clearing Placed Deployables...");
+        $logMsg .= "Clearing Placed Deployables...\n";
         $count = PlacedDeployables::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         PlacedDeployables::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Placed Deployables Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Placed Deployables Table has been trimmed.\n";
 
-        $this->info("Clearing Placed Structures...");
+        $logMsg .= "Clearing Placed Structures...\n";
         $count = PlacedStructures::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         PlacedStructures::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Placed Structures Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Placed Structures Table has been trimmed.\n";
 
-        $this->info("Clearing Player Crafting...");
+        $logMsg .= "Clearing Player Crafting...\n";
         $count = PlayerCrafting::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         PlayerCrafting::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Player Crafting Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Player Crafting Table has been trimmed.\n";
 
-        $this->info("Clearing Player Deaths...");
+        $logMsg .= "Clearing Player Deaths...\n";
         $count = PlayerDeaths::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         PlayerDeaths::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Player Deaths Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Player Deaths Table has been trimmed.\n";
 
-        $this->info("Clearing Player Kills...");
+        $logMsg .= "Clearing Player Kills...\n";
         $count = PlayerKills::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         PlayerKills::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Player Kills Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Player Kills Table has been trimmed.\n";
+
+        $logMsg .= "==========================\n";
+
+        $log->info($logMsg);
 
     }
 }

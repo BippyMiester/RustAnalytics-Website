@@ -58,6 +58,13 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'commands' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/schedule/commands.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

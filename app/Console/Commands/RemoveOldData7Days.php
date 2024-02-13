@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\WeaponFire;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class RemoveOldData7Days extends Command
 {
@@ -30,16 +31,22 @@ class RemoveOldData7Days extends Command
         $days = 7;
         // Calculate the date for the comparison
         $cutOffDate = Carbon::now()->subDays($days);
+        $log = Log::channel('commands');
+        $logMsg = "";
 
-        $this->info("Deleting old data thats more then {$days} days old.");
+        $logMsg .= "Command: ra.removeolddata7days\n";
+        $logMsg .= "Deleting old data thats more then {$days} days old.\n";
+        $logMsg .= "Date Time: " . Carbon::now()->format('H:i:s | m-d-y') . "\n";
+        $logMsg .= "==========================\n";
 
-        $this->info("Clearing Weapon Fire...");
+        $logMsg .= "Clearing Weapon Fire...\n";
         $count = WeaponFire::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         WeaponFire::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Weapon Fire Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Weapon Fire Table has been trimmed.\n";
+        $logMsg .= "==========================\n";
 
+        $log->info($logMsg);
 
     }
 }

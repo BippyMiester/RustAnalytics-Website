@@ -6,6 +6,7 @@ use App\Models\PlayerData;
 use App\Models\ServerData;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class RemoveOldData1Days extends Command
 {
@@ -31,21 +32,28 @@ class RemoveOldData1Days extends Command
         $days = 1;
         // Calculate the date for the comparison
         $cutOffDate = Carbon::now()->subDays($days);
+        $log = Log::channel('commands');
+        $logMsg = "";
 
-        $this->info("Deleting old data thats more then {$days} days old.");
+        $logMsg .= "Command: ra.removeolddata1days\n";
+        $logMsg .= "Deleting old data thats more then {$days} days old.\n";
+        $logMsg .= "Date Time: " . Carbon::now()->format('H:i:s | m-d-y') . "\n";
+        $logMsg .= "==========================\n";
 
-        $this->info("Clearing Server Data...");
+        $logMsg .= "Clearing Server Data...\n";
         $count = ServerData::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         ServerData::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Server Data Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Server Data Table has been trimmed.\n";
+        $logMsg .= "==========================\n";
 
-        $this->info("Clearing Player Data...");
+        $logMsg .= "Clearing Player Data...\n";
         $count = PlayerData::where('created_at', '<', $cutOffDate)->count();
-        $this->info("Removing {$count} entries!");
+        $logMsg .= "Removing {$count} entries!\n";
         PlayerData::where('created_at', '<', $cutOffDate)->delete();
-        $this->info("Player Data Table has been trimmed.");
-        $this->info("==========================");
+        $logMsg .= "Player Data Table has been trimmed.\n";
+        $logMsg .= "==========================\n";
+
+        $log->info($logMsg);
     }
 }
