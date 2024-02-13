@@ -50,7 +50,8 @@ class WeaponFireFactory extends Factory
             'steam_id' => $randomPlayer->steam_id,
             'bullet' => $this->faker->randomElement($rustBullets),
             'weapon' => $this->faker->randomElement($rustWeapons),
-            'amount' => $this->faker->randomNumber(3)
+            'amount' => $this->faker->randomNumber(3),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

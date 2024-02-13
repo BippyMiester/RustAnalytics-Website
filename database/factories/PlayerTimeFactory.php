@@ -27,7 +27,8 @@ class PlayerTimeFactory extends Factory
         return [
             'server_id' => Server::factory(),
             'steam_id' => $randomPlayer->steam_id,
-            'time' => $this->faker->numberBetween(1,5000)
+            'time' => $this->faker->numberBetween(1,5000),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

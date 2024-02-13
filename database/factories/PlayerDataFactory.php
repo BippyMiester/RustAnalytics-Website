@@ -26,7 +26,8 @@ class PlayerDataFactory extends Factory
             'server_id' => Server::factory(),
             'frame_rate' => $this->faker->numberBetween(16, 240),
             'ping' => $this->faker->numberBetween(1, 1000),
-            'steam_id' => $randomPlayer->steam_id
+            'steam_id' => $randomPlayer->steam_id,
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

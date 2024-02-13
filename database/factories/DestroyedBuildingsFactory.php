@@ -80,7 +80,8 @@ class DestroyedBuildingsFactory extends Factory
             'type' => $this->faker->randomElement($rustBuildingTypes),
             'tier' => $this->faker->numberBetween(0, 4),
             'weapon' => $this->faker->randomElement($rustWeapons),
-            'grid' => $this->faker->randomElement($gridList)
+            'grid' => $this->faker->randomElement($gridList),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

@@ -41,7 +41,8 @@ class PlacedDeployablesFactory extends Factory
             'username' => $randomPlayer->username,
             'steam_id' => $randomPlayer->steam_id,
             'type' => $this->faker->randomElement($rustBuildingTypes),
-            'amount' => $this->faker->numberBetween(1, 250)
+            'amount' => $this->faker->numberBetween(1, 250),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

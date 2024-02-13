@@ -70,7 +70,8 @@ class DestroyedContainersFactory extends Factory
             'weapon' => $this->faker->randomElement($rustWeapons),
             'grid' => $this->faker->randomElement($gridList),
             'x' => $this->faker->numberBetween(-5000, 5000),
-            'y' => $this->faker->numberBetween(-5000, 5000)
+            'y' => $this->faker->numberBetween(-5000, 5000),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

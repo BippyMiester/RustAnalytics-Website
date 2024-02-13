@@ -41,7 +41,8 @@ class PlayerCraftingFactory extends Factory
             'username' => $randomPlayer->username,
             'steam_id' => $randomPlayer->steam_id,
             'item_crafted' => $this->faker->randomElement($rustCraftableItems),
-            'amount' => $this->faker->numberBetween(1, 150)
+            'amount' => $this->faker->numberBetween(1, 150),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

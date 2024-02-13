@@ -28,7 +28,8 @@ class PlayerGatherFactory extends Factory
             'username' => $randomPlayer->username,
             'steam_id' => $randomPlayer->steam_id,
             'resource' => $this->faker->randomElement(['Sulfur Ore', 'Metal Ore', 'Stone', 'Cloth', 'Animal Fat']),
-            'amount' => $this->faker->numberBetween(1,250)
+            'amount' => $this->faker->numberBetween(1,250),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

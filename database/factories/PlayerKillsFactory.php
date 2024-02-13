@@ -48,7 +48,8 @@ class PlayerKillsFactory extends Factory
             'victim' => $victimPlayer->username,
             'weapon' => $this->faker->randomElement($rustWeapons),
             'body_part' => $this->faker->randomElement(['arm', 'head', 'torso', 'leg']),
-            'distance' => $this->faker->numberBetween(1,250)
+            'distance' => $this->faker->numberBetween(1,250),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

@@ -46,7 +46,8 @@ class PlayerDeathsFactory extends Factory
             'cause' => 'Being a Retard',
             'x' => $this->faker->numberBetween(-5000, 5000),
             'y' => $this->faker->numberBetween(-5000, 5000),
-            'grid' => $this->faker->randomElement($gridList)
+            'grid' => $this->faker->randomElement($gridList),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

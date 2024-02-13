@@ -32,6 +32,7 @@ class ServerDataFactory extends Factory
             'max_memory' => $maxMemory,
             'network_in' => $this->faker->randomFloat(2,1, 50),
             'network_out' => $this->faker->randomFloat(2,1, 50),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }

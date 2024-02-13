@@ -42,7 +42,8 @@ class AnimalKillsFactory extends Factory
             'steam_id' => $randomPlayer->steam_id,
             'animal_type' => $this->faker->randomElement(['horse', 'boar', 'chicken', 'wolf', 'shark', 'bear', 'polar_bear']),
             'distance' => $this->faker->randomFloat(1, 1, 150),
-            'weapon' => $this->faker->randomElement($rustWeapons)
+            'weapon' => $this->faker->randomElement($rustWeapons),
+            'created_at' => $this->faker->dateTimeThisMonth()
         ];
     }
 }
