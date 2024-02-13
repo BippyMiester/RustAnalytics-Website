@@ -56,7 +56,7 @@
                         </td>
                         <td>
                             @php
-                                $seconds = $player->online_seconds;
+                                $seconds = $player->afk_seconds;
                                 $zero = Carbon\Carbon::now()->startOfDay(); // Get a Carbon instance at 00:00:00 today
                                 $duration = Carbon\Carbon::now()->startOfDay()->addSeconds($seconds); // Add the online seconds to another Carbon instance at 00:00:00
 
