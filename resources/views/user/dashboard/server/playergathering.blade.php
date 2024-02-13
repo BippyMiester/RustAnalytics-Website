@@ -93,7 +93,6 @@
                     <th>Username</th>
                     <th>Resource</th>
                     <th>Total</th>
-                    <th>Time</th>
                 </tr>
                 </thead>
                 <tbody>
