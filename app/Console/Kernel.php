@@ -12,7 +12,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+         $schedule->command('ra:removeolddata30days')->hourly();
+         $schedule->command('ra:removeolddata7days')->hourly();
+         $schedule->command('ra:removeolddata1days')->hourly();
     }
 
     /**
