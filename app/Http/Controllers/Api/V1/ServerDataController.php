@@ -56,12 +56,12 @@ class ServerDataController extends Controller
         $serverData->network_out = $request->network_out;
         $serverData->save();
 
-        $timeout = PusherTimeout::where('api_key', $server->api_key)->first();
-        if($timeout->server_data_count < 10) {
-            event(new ServerDataUpdateEvent($server));
-            $timeout->server_data_count = $timeout->server_data_count + 1;
-            $timeout->save();
-        }
+//        $timeout = PusherTimeout::where('api_key', $server->api_key)->first();
+//        if($timeout->server_data_count < 10) {
+//            event(new ServerDataUpdateEvent($server));
+//            $timeout->server_data_count = $timeout->server_data_count + 1;
+//            $timeout->save();
+//        }
 
         print($serverData);
     }
