@@ -59,6 +59,7 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
                 Route::get('playerkills', [DashboardServerController::class, 'playerkills'])->name('playerkills');
                 Route::get('weaponfire', [DashboardServerController::class, 'weaponfire'])->name('weaponfire');
                 Route::get('playergathering', [DashboardServerController::class, 'playergathering'])->name('playergathering');
+                Route::get('information', [DashboardServerController::class, 'information'])->name('information');
             }); // End Specific Server
         }); // End server
 

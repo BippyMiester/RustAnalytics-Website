@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\PusherTimeout;
 use App\Models\Server;
+use App\Models\ServerData;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -30,6 +31,22 @@ class DashboardServerController extends Controller
             return view('user.dashboard.server.show')
                 ->withServer($server)
                 ->withUniquePlayerCount($uniquePlayerCount);
+        }
+
+        return abort(404);
+    }
+
+    public function information(Request $request, string $slug) {
+        $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
+
+        if($server) {
+            $serverData = ServerData::where('server_id', $server->id)
+                ->orderBy('created_at', 'desc') // Order by creation time, most recent first
+                ->first();
+
+            return view('user.dashboard.server.information')
+                ->withServer($server)
+                ->withServerData($serverData);
         }
 
         return abort(404);

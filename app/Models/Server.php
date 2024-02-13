@@ -12,6 +12,11 @@ class Server extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'last_wiped' => 'datetime',
+        'blueprint_last_wiped' => 'datetime',
+    ];
+
     public function user() {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }

@@ -42,6 +42,11 @@
                                 <span class="menu-text"><i class="fa-solid fa-gauge"></i> Dashboard</span>
                             </a>
                         </div>
+                        <div class="menu-item">
+                            <a href="{{ route('user.dashboard.server.information', $server->slug) }}" class="menu-link">
+                                <span class="menu-text"><i class="fa-solid fa-circle-info"></i> Information</span>
+                            </a>
+                        </div>
                     </div>
                 @endforeach
             </div>
