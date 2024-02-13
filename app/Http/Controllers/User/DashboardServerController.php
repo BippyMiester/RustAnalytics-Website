@@ -19,10 +19,10 @@ class DashboardServerController extends Controller
         $server = Server::where('slug', $slug)->where('user_id', Auth::id())->first();
 
         if($server) {
-            // Reset the timeout
-            $timeout = PusherTimeout::where('api_key', $server->api_key)->first();
-            $timeout->server_data_count = 0;
-            $timeout->save();
+//            // Reset the timeout
+//            $timeout = PusherTimeout::where('api_key', $server->api_key)->first();
+//            $timeout->server_data_count = 0;
+//            $timeout->save();
 
             // Get the player count total for the server
             $uniquePlayerCount = $this->getUniquePlayerCount($server);
