@@ -22,7 +22,7 @@ class RateLimitingMiddleware
         $rateLimitKey = 'rate_limit:' . $apiKey;
 
         // Specify the maximum attempts and decay time in seconds
-        $maxAttempts = 3;
+        $maxAttempts = 100;
         $decaySeconds = 60;
 
         if (RateLimiter::tooManyAttempts($rateLimitKey, $maxAttempts)) {
