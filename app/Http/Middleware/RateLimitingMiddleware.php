@@ -23,7 +23,7 @@ class RateLimitingMiddleware
 
         // Specify the maximum attempts and decay time in seconds
         $maxAttempts = 100;
-        $decaySeconds = 60;
+        $decaySeconds = 120;
 
         if (RateLimiter::tooManyAttempts($rateLimitKey, $maxAttempts)) {
             $retryAfter = RateLimiter::availableIn($rateLimitKey);
