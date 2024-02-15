@@ -23,7 +23,7 @@ class DashboardBansController extends Controller
             $allBans = $allBans->merge($serverBans); // Merge current server bans into the allBans collection
         }
 
-        $page = $request->input('page', 1);
+        $page = $request->input('page', 25);
         $perPage = 1;
         $offset = ($page - 1) * $perPage;
         $currentPageBans = $allBans->slice($offset, $perPage)->all();
