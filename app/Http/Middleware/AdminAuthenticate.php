@@ -16,6 +16,9 @@ class AdminAuthenticate
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if($request->is('admin/logviewer')) {
+            dd(Auth::user());
+        }
         if(Auth::user()->admin) {
             return $next($request);
         }
