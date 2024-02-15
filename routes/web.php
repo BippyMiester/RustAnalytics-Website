@@ -84,4 +84,5 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'auth.admin'])->grou
     Route::get('/', [AdminDashboardController::class, 'index'])->name('index');
     Route::get('forcelogin', [AdminDashboardController::class, 'forcelogin'])->name('forcelogin');
     Route::post('forcelogin', [AdminDashboardController::class, 'forceloginpost'])->name('forcelogin.login');
+    Route::get('servers', [AdminDashboardController::class, 'servers'])->name('servers');
 });

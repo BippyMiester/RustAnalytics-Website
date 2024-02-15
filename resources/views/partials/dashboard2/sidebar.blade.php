@@ -92,6 +92,12 @@
                         <span class="menu-text">Force Login</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a href="{{ route('admin.servers') }}" class="menu-link">
+                        <span class="menu-icon"><i class="fa-solid fa-server"></i></span>
+                        <span class="menu-text">Servers</span>
+                    </a>
+                </div>
             @endif
 
         </div>
