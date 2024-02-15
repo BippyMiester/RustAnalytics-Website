@@ -47,6 +47,11 @@
                                 <span class="menu-text"><i class="fa-solid fa-circle-info"></i> Information</span>
                             </a>
                         </div>
+                        <div class="menu-item">
+                            <a href="{{ route('user.dashboard.server.players.index', $server->slug) }}" class="menu-link">
+                                <span class="menu-text"><i class="fa-solid fa-users"></i> Players</span>
+                            </a>
+                        </div>
                     </div>
                 @endforeach
             </div>

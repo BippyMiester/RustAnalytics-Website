@@ -7,6 +7,7 @@ use App\Http\Controllers\ServerController;
 use App\Http\Controllers\User\DashboardBansController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\DashboardServerController;
+use App\Http\Controllers\User\DashboardServerPlayersController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,11 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
                 Route::get('weaponfire', [DashboardServerController::class, 'weaponfire'])->name('weaponfire');
                 Route::get('playergathering', [DashboardServerController::class, 'playergathering'])->name('playergathering');
                 Route::get('information', [DashboardServerController::class, 'information'])->name('information');
+
+                Route::prefix('players')->name('players.')->group(function () {
+                   Route::get('/', [DashboardServerPlayersController::class, 'index'])->name('index');
+                   Route::get('{steam_id}', [DashboardServerPlayersController::class, 'show'])->name('show');
+                });
             }); // End Specific Server
         }); // End server
 
