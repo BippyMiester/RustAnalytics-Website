@@ -227,7 +227,7 @@
                             </tbody>
                         </table>
                     @else
-                        <p>No Information Returned from Battlemetrics API</p>
+                        <p>No Information from BattleMetrics or their profile is private</p>
                     @endif
                 </div>
                 <div class="card-arrow">
@@ -288,7 +288,7 @@
                             </tbody>
                         </table>
                     @else
-                        <p>No Information from BattleMetrics</p>
+                        <p>No Information from BattleMetrics or their profile is private</p>
                     @endif
                 </div>
                 <div class="card-arrow">
