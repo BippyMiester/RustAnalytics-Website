@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminAuthenticate;
+use App\Http\Middleware\AuthGlobalVariablesMiddleware;
 use App\Http\Middleware\RequiredVersionCheckMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 

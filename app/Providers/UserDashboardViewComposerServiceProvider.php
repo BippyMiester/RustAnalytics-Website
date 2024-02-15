@@ -16,12 +16,18 @@ class UserDashboardViewComposerServiceProvider extends ServiceProvider
     {
         View::composer('*', function ($view) {
             $servers = collect(); // Default to an empty collection
+            $user = null; // Default to null if not authenticated
 
             if (auth()->check()) {
-                $servers = Server::where('user_id', Auth::id())->get();
+                $user = auth()->user(); // Get the authenticated user
+                $servers = Server::where('user_id', $user->id)->get(); // Retrieve servers for the authenticated user
             }
 
-            $view->with('servers', $servers);
+            // Share $servers and $user with all views
+            $view->with([
+                'servers' => $servers,
+                'user' => $user
+            ]);
         });
     }
 }
