@@ -32,7 +32,11 @@
                             <a href="https://www.steamidfinder.com/lookup/{{ $player->steam_id }}/" target="_blank"><strong>{{ $player->steam_id }}</strong></a>
                         </th>
                         <td>{{ $player->username }}</td>
-                        <td>{{ $player->ip_address }}</td>
+                        <td>
+                            <a href="{{ route('user.dashboard.server.players.show', [$server->slug, $player->steam_id]) }}" class="menu-link">
+                                <span class="menu-text">{{ $player->ip_address }}</span>
+                            </a>
+                        </td>
                         <td>
                             @if($player->type == "connect")
                                 <span class="badge bg-success">Login</span>
