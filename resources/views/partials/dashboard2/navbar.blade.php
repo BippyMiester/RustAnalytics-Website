@@ -171,7 +171,7 @@
         <div class="menu-item dropdown dropdown-mobile-full">
             <a href="{{ route('user.profile.index') }}" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
                 <div class="menu-img online">
-                    <img src="{{ Auth::user()->avatar }}" alt="Profile" height="60">
+                    <img src="#" alt="Profile" height="60">
                 </div>
                 <div class="menu-text d-sm-block d-none w-170px">{{ Auth::user()->username }}</div>
             </a>
