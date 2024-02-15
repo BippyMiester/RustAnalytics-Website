@@ -185,46 +185,50 @@
                     General Info (Battlemetrics)
                 </div>
                 <div class="card-body">
-                    <table class="table table-borderless table-sm m-0">
-                        <tbody>
-                        <tr>
-                            <td class="w-150px">Battlemetrics ID</td>
-                            <td>
-                                <a href="https://www.battlemetrics.com/players/{{ $battlemetricsPlayer->battlemetrics_id }}" target="_blank">
-                                    {{ $battlemetricsPlayer->battlemetrics_id }}
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-150px">Profile Status</td>
-                            <td>
-                                @if($battlemetricsPlayer->profile_status == "public")
-                                    <span class="badge bg-success">Public</span>
-                                @else
-                                    <span class="badge bg-danger">Private</span>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-150px">Username</td>
-                            <td>
-                                {{ $battlemetricsPlayer->username }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-150px">Steam Profile Page</td>
-                            <td>
-                                <a href="{{ $battlemetricsPlayer->profile_url }}">{{ $battlemetricsPlayer->username }}'s Profile</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-150px">Profile Image</td>
-                            <td>
-                                <img src="{{ $battlemetricsPlayer->steam_avatar }}" class="w-25" alt="{{ $battlemetricsPlayer->username }}'s Steam Profile Picture">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    @if($battlemetricsPlayer != null)
+                        <table class="table table-borderless table-sm m-0">
+                            <tbody>
+                            <tr>
+                                <td class="w-150px">Battlemetrics ID</td>
+                                <td>
+                                    <a href="https://www.battlemetrics.com/players/{{ $battlemetricsPlayer->battlemetrics_id }}" target="_blank">
+                                        {{ $battlemetricsPlayer->battlemetrics_id }}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-150px">Profile Status</td>
+                                <td>
+                                    @if($battlemetricsPlayer->profile_status == "public")
+                                        <span class="badge bg-success">Public</span>
+                                    @else
+                                        <span class="badge bg-danger">Private</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-150px">Username</td>
+                                <td>
+                                    {{ $battlemetricsPlayer->username }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-150px">Steam Profile Page</td>
+                                <td>
+                                    <a href="{{ $battlemetricsPlayer->profile_url }}">{{ $battlemetricsPlayer->username }}'s Profile</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-150px">Profile Image</td>
+                                <td>
+                                    <img src="{{ $battlemetricsPlayer->steam_avatar }}" class="w-25" alt="{{ $battlemetricsPlayer->username }}'s Steam Profile Picture">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    @else
+                        <p>No Information Returned from Battlemetrics API</p>
+                    @endif
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
@@ -240,48 +244,52 @@
                     Ban Info (Battlemetrics)
                 </div>
                 <div class="card-body">
-                    <table class="table table-borderless table-sm m-0">
-                        <tbody>
-                        <tr>
-                            <td class="w-200px">VAC Banned</td>
-                            <td>
-                                @if($battlemetricsPlayer->vac_banned == false)
-                                    <span class="badge bg-success">Not Banned</span>
-                                @else
-                                    <span class="badge bg-danger">Banned</span>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-200px">VAC Ban Count</td>
-                            <td>
-                                {{ $battlemetricsPlayer->vac_ban_count }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-200px">Community Banned</td>
-                            <td>
-                                @if($battlemetricsPlayer->community_banned == false)
-                                    <span class="badge bg-success">Not Banned</span>
-                                @else
-                                    <span class="badge bg-danger">Banned</span>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-200px">Days Since Last Ban</td>
-                            <td>
-                                {{ $battlemetricsPlayer->days_since_last_ban }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="w-200px">Game Bans Count</td>
-                            <td>
-                                {{ $battlemetricsPlayer->game_bans_count }}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    @if($battlemetricsPlayer != null)
+                        <table class="table table-borderless table-sm m-0">
+                            <tbody>
+                            <tr>
+                                <td class="w-200px">VAC Banned</td>
+                                <td>
+                                    @if($battlemetricsPlayer->vac_banned == false)
+                                        <span class="badge bg-success">Not Banned</span>
+                                    @else
+                                        <span class="badge bg-danger">Banned</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-200px">VAC Ban Count</td>
+                                <td>
+                                    {{ $battlemetricsPlayer->vac_ban_count }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-200px">Community Banned</td>
+                                <td>
+                                    @if($battlemetricsPlayer->community_banned == false)
+                                        <span class="badge bg-success">Not Banned</span>
+                                    @else
+                                        <span class="badge bg-danger">Banned</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-200px">Days Since Last Ban</td>
+                                <td>
+                                    {{ $battlemetricsPlayer->days_since_last_ban }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="w-200px">Game Bans Count</td>
+                                <td>
+                                    {{ $battlemetricsPlayer->game_bans_count }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    @else
+                        <p>No Information from BattleMetrics</p>
+                    @endif
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>

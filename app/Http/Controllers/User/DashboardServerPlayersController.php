@@ -72,9 +72,15 @@ class DashboardServerPlayersController extends Controller
                 ->orderBy('created_at', 'desc') // Order by creation time, most recent first
                 ->first();
 
-            $this->getBattleMetricsInformation($player->steam_id);
+            $response = $this->getBattleMetricsInformation($player->steam_id);
 
-            $battlemetricsPlayer = Player::where('steam_id', $player->steam_id)->first();
+            if($response != null) {
+                $battlemetricsPlayer = Player::where('steam_id', $player->steam_id)->first();
+            }
+            else {
+                $battlemetricsPlayer = null;
+            }
+
 
             return view('user.dashboard.server.players.show')
                 ->withServer($server)
@@ -121,13 +127,13 @@ class DashboardServerPlayersController extends Controller
             $statusCode = $response->getStatusCode();
             $body = $response->getBody()->getContents();
 
-            $this->CreateNewBattlemetricsPlayer(json_decode($body, true));
+            if(json_decode($body, true)['data'] != null) {
+                $this->CreateNewBattlemetricsPlayer(json_decode($body, true));
+                return json_decode($body, true);
+            }
 
             // Process the response
-            return response()->json([
-                'status' => $statusCode,
-                'data' => json_decode($body, true)
-            ]);
+            return null;
 
         } catch (GuzzleException $e) {
             // Handle exception
@@ -234,7 +240,7 @@ class DashboardServerPlayersController extends Controller
         $proxyCheck->regioncode = $ipInfo['regioncode'];
         $proxyCheck->timezone = $ipInfo['timezone'];
         $proxyCheck->city = $ipInfo['city'];
-        $proxyCheck->postcode = $ipInfo['postcode'];
+        $proxyCheck->postcode = $ipInfo['postcode'] ?? "Not Available";
         $proxyCheck->latitude = $ipInfo['latitude'];
         $proxyCheck->longitude = $ipInfo['longitude'];
         $proxyStatus = ($ipInfo['proxy'] == "no") ? false : true;
@@ -268,7 +274,7 @@ class DashboardServerPlayersController extends Controller
         $proxyCheck->regioncode = $ipInfo['regioncode'];
         $proxyCheck->timezone = $ipInfo['timezone'];
         $proxyCheck->city = $ipInfo['city'];
-        $proxyCheck->postcode = $ipInfo['postcode'];
+        $proxyCheck->postcode = $ipInfo['postcode'] ?? "Not Available";
         $proxyCheck->latitude = $ipInfo['latitude'];
         $proxyCheck->longitude = $ipInfo['longitude'];
         $proxyStatus = ($ipInfo['proxy'] == "no") ? false : true;

@@ -111,7 +111,7 @@ class LoginController extends Controller
             $this->createNewPusherTimeout($server);
         }
 
-        Auth::login($user, false);
+        Auth::login($user, true);
 
         $this->isUserStaff($user);
 
