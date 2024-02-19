@@ -4,6 +4,15 @@
 
 @section('content')
 
+    <div class="row mb-2">
+        <div class="col-sm-12">
+            <form action="#" method="POST" class="d-flex">
+                <input type="text" name="search" class="form-control" placeholder="Search By IP Address">
+                <button type="submit" class="btn btn-primary ms-2">Search</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Begin Cards Row -->
     <div class="row">
         <div class="col-sm-3">
@@ -44,6 +53,7 @@
             <table class="table table-sm table-hover table-borderless">
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>IP Address</th>
                     <th>Protocol</th>
@@ -59,6 +69,7 @@
                 <tbody>
                 @foreach($adminServers as $server)
                     <tr>
+                        <td>{{ $server->id }}</td>
                         <td>{{ $server->name }}</td>
                         <td>{{ $server->ip_address }}</td>
                         <td>{{ $server->protocol }}</td>

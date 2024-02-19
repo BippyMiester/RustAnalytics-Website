@@ -32,7 +32,7 @@ class AdminDashboardController extends Controller
     }
 
     public function servers() {
-        $servers = Server::paginate(15);
+        $servers = Server::orderByDesc('created_at')->paginate(15);
         $serversCount = Server::all()->count();
 
         return view('admin.servers')
