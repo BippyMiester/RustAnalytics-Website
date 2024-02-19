@@ -10,7 +10,7 @@
 
 @section('content')
 
-    @if($server)
+    @if($server->last_wiped != null)
         <div class="row justify-content-center">
             <div class="col-sm-6">
                 <div class="mb-5">
@@ -158,8 +158,12 @@
             </div>
         </div>
     @else
-        <h1>No Information Yet</h1>
-        <p>Theres no information here yet. Please upload your plugin to your server and configure it appropriately to start gathering this data on this page.</p>
+        <div class="row justify-content-center">
+            <div class="col-sm-6 text-center">
+                <h1>No Information Yet</h1>
+                <p>Theres no information here yet. Please upload your plugin to your server and configure it appropriately to start gathering this data on this page.</p>
+            </div>
+        </div>
     @endif
-    
+
 @endsection
