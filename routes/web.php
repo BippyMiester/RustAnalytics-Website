@@ -75,6 +75,7 @@ Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
        Route::get('/', [ProfileController::class, 'index'])->name('index');
        Route::get('settings', [ProfileController::class, 'settings'])->name('settings');
+       Route::post('settings', [ProfileController::class, 'settingsPOST'])->name('settingsPOST');
        Route::get('apikeys', [ProfileController::class, 'apikeys'])->name('apikeys');
     });
 });

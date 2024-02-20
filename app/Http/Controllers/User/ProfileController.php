@@ -13,7 +13,27 @@ class ProfileController extends Controller
     }
 
     public function settings() {
-        return abort(404);
+        $user = Auth::user();
+
+        return view('user.dashboard.settings')
+            ->withUser($user);
+    }
+
+    public function settingsPOST(Request $request) {
+        $user = Auth::user();
+
+        $this->validate($request, [
+           'email' => 'required|email',
+           'news_notifications' => 'required|boolean'
+        ]);
+
+        $user->email = $request->email;
+        $user->news_notifications = $request->news_notifications;
+        $user->save();
+
+        toastify()->success('Profile Settings Saved!');
+
+        return back();
     }
 
     public function apikeys() {
