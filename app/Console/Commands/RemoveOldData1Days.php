@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\PlacedStructures;
 use App\Models\PlayerData;
 use App\Models\ServerData;
 use Carbon\Carbon;
@@ -53,6 +54,12 @@ class RemoveOldData1Days extends Command
         PlayerData::where('created_at', '<', $cutOffDate)->delete();
         $logMsg .= "Player Data Table has been trimmed.\n";
         $logMsg .= "==========================\n";
+
+        $logMsg .= "Clearing Placed Structures...\n";
+        $count = PlacedStructures::where('created_at', '<', $cutOffDate)->count();
+        $logMsg .= "Removing {$count} entries!\n";
+        PlacedStructures::where('created_at', '<', $cutOffDate)->delete();
+        $logMsg .= "Placed Structures Table has been trimmed.\n";
 
         $log->info($logMsg);
     }

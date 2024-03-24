@@ -68,11 +68,7 @@ class RemoveOldData7Days extends Command
         PlacedDeployables::where('created_at', '<', $cutOffDate)->delete();
         $logMsg .= "Placed Deployables Table has been trimmed.\n";
 
-        $logMsg .= "Clearing Placed Structures...\n";
-        $count = PlacedStructures::where('created_at', '<', $cutOffDate)->count();
-        $logMsg .= "Removing {$count} entries!\n";
-        PlacedStructures::where('created_at', '<', $cutOffDate)->delete();
-        $logMsg .= "Placed Structures Table has been trimmed.\n";
+
 
         $log->info($logMsg);
 
