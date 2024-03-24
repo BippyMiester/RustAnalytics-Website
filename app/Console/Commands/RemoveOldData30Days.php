@@ -52,30 +52,6 @@ class RemoveOldData30Days extends Command
         AnimalKills::where('created_at', '<', $cutOffDate)->delete();
         $logMsg .= "Animal Kills Table has been trimmed.\n";
 
-        $logMsg .= "Clearing Destroyed Buildings...\n";
-        $count = DestroyedBuildings::where('created_at', '<', $cutOffDate)->count();
-        $logMsg .= "Removing {$count} entries!\n";
-        DestroyedBuildings::where('created_at', '<', $cutOffDate)->delete();
-        $logMsg .= "Destroyed Buildings Table has been trimmed.\n";
-
-        $logMsg .= "Clearing Destroyed Containers...\n";
-        $count = DestroyedContainers::where('created_at', '<', $cutOffDate)->count();
-        $logMsg .= "Removing {$count} entries!\n";
-        DestroyedContainers::where('created_at', '<', $cutOffDate)->delete();
-        $logMsg .= "Destroyed Containers Table has been trimmed.\n";
-
-        $logMsg .= "Clearing Placed Deployables...\n";
-        $count = PlacedDeployables::where('created_at', '<', $cutOffDate)->count();
-        $logMsg .= "Removing {$count} entries!\n";
-        PlacedDeployables::where('created_at', '<', $cutOffDate)->delete();
-        $logMsg .= "Placed Deployables Table has been trimmed.\n";
-
-        $logMsg .= "Clearing Placed Structures...\n";
-        $count = PlacedStructures::where('created_at', '<', $cutOffDate)->count();
-        $logMsg .= "Removing {$count} entries!\n";
-        PlacedStructures::where('created_at', '<', $cutOffDate)->delete();
-        $logMsg .= "Placed Structures Table has been trimmed.\n";
-
         $logMsg .= "Clearing Player Crafting...\n";
         $count = PlayerCrafting::where('created_at', '<', $cutOffDate)->count();
         $logMsg .= "Removing {$count} entries!\n";
